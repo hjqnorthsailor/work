@@ -1,0 +1,23 @@
+
+# 配置数据连接
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://northsailor.mysql.rds.aliyuncs.com:3306/tmooc_work?useUnicode=true&characterEncoding=utf8&useSSL=false
+    platform: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: Hjq910314
+    show-sql: true
+    database: mysql
+  mvc:
+    static-path-pattern: /static/**/**
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    open-in-view: true
+server:
+  port: 8081
