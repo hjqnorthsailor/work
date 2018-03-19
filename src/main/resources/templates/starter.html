@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <title>AdminLTE 2 | Starter</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
   <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/bootstrap/dist/css/bootstrap.css}" />
   <!-- Font Awesome -->
   <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/font-awesome/css/font-awesome.min.css}" />
@@ -44,7 +44,7 @@
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success}" />4</span>
+              <span class="label label-success">4</span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
@@ -55,7 +55,7 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                        <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image"/>
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -118,7 +118,7 @@
                         <small class="pull-right">20%</small>
                       </h3>
                       <!-- The progress bar -->
-                      <div class="progress xs}" />
+                      <div class="progress xs">
                         <!-- Change the css width attribute to simulate progress -->
                         <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
@@ -140,14 +140,14 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="user-image" alt="User Image">
+              <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="user-image" alt="User Image"/>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs}" />黄建清</span>
+              <span class="hidden-xs">黄建清</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image"/>
 
                 <p>
                   黄建清 - Web Developer
@@ -182,7 +182,7 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears}" /></i></a>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
@@ -197,19 +197,19 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
+          <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image"/>
         </div>
         <div class="pull-left info">
           <p>黄建清</p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success}" /></i> Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Search..."/>
           <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
@@ -219,15 +219,14 @@
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree" th:each="tab,tabStatus:${tabList}">
-        <li class="active"><a th:href="${tab.href}" th:data-url="${tab.dataUrl}" data-toggle="tab"><i class="fa fa-link"></i> <span th:text="${tab.tabName}"></span></a></li>li><a href="#home" data-url="/teacher/list" data-toggle="tab"><i class="fa fa-link"></i> <span>成员管理</span></a> </li>
-        <!--<li class="treeview">-->
-          <!--<a href="#"><i class="fa fa-link"></i> <span>成员管理</span>-->
-            <!--<span class="pull-right-container">-->
-                <!--<i class="fa fa-angle-left pull-right"></i>-->
-              <!--</span>-->
-          <!--</a>-->
-          <!--<ul class="treeview-menu">-->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="active"><a href="#">首页</a></li>
+        <th:block th:each="tab,tabStatus:${tabList}">
+        <li><a th:href="${tab.href}"
+               th:attr="data-url=${tab.dataUrl}"  isLoaded="true" data-toggle="tab"><i class="fa fa-link"></i>
+          <span th:text="${tab.tabName}"> </span></a></li>
+        </th:block>
+        <!--<ul class="treeview-menu">-->
             <!--<li><a href="#">Link in level 2</a></li>-->
             <!--<li><a href="#">Link in level 2</a></li>-->
           <!--</ul>-->
@@ -242,7 +241,7 @@
   <div class="content-wrapper">
     <!-- 头部标签栏 -->
     <section class="content-header">
-      <ul id="myTab" class="nav nav-tabs}" />
+      <ul id="myTab" class="nav nav-tabs">
         <li class="active">
             <a href="home" data-toggle="tab" class="Success glyphicon glyphicon-home">首页</a>
         </li>
@@ -252,9 +251,7 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | 页面主体部分|
-        -------------------------->
+      <!-- 页面主体部分-->
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="home"></div>
         </div>
@@ -269,7 +266,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
-    <div class="pull-right hidden-xs}" />
+    <div class="pull-right hidden-xs">
       Anything you want
     </div>
     <!-- Default to the left -->
@@ -279,9 +276,9 @@
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs}" />
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears}" /></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -314,7 +311,7 @@
                   </span>
               </h4>
 
-              <div class="progress progress-xxs}" />
+              <div class="progress progress-xxs">
                 <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
               </div>
             </a>
@@ -335,7 +332,7 @@
           <div class="form-group">
             <label class="control-sidebar-subheading">
               Report panel usage
-              <input type="checkbox" class="pull-right" checked>
+              <input type="checkbox" class="pull-right" checked="true"/>
             </label>
 
             <p>
@@ -365,42 +362,44 @@
 <script>
 
    $(function() {
-            var isLoaded=false;
-           $("a[data-toggle]").click(function () {
+           $("a[data-toggle]").unbind().bind('click',function (event) {
                var container = $(this).attr("href");
+               console.log(container);
                var url = $(this).attr("data-url");
+               console.log(url);
                var tagName=$(this).children('span').html();
                console.log(tagName);
+               var isLoaded=$(this).attr("isLoaded");
                if(!isLoaded){
+                  event.preventDefault();
+                   $(this).removeClass("onClick");
+               }else {
                    loadPage(url, container);
-                   $("ul.treeview-menu li").removeClass("active");
+                   $("ul.sidebar-menu li").removeClass("active");
                    $(this).parent().addClass("active");
                    addTab(container,tagName);
                    addTabContent(container);
-                   isLoaded=true;
+                   $(this).attr("isLoaded",false);
                }
-
+               console.log(isLoaded);
            });
        });
         function addTab(container,tagName){
             $('#myTab li').removeClass("active");
-            var $li=$('<li class="active text-success" /><a href="'+container+'" data-toggle="tab">'+tagName+'</a> </li>)');
+            var $li=$('<li class="text-success"><a href="'+container+'" data-toggle="tab">'+tagName+'</a> </li>)');
             var $myTab=$('#myTab');
             $myTab.append($li);
         }
         function addTabContent(container){
-            var ID=container.substring(0);
-            var $content=$('<div class="tab-pane fade in active" id=""'+ID+'"></div>');
+            var ID=container.substring(1);
+            console.log(ID);
+            var $content=$('<div class="tab-pane fade in active" id="'+ID+'" ></div>');
             var $myTabContent=$('#myTabContent');
             $myTabContent.append($content);
         }
 
         function loadPage(url, container) {
-            $(container).load(url, function (response, status, xhr) {
-                if (status != "success") {
-                    alert("error");
-                }
-            });
+            $(container).load(url);
     }
 </script>
 </body>

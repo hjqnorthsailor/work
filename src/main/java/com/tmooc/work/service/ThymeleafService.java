@@ -18,6 +18,7 @@ public class ThymeleafService {
         SpringWebContext ctx = new SpringWebContext(request.getRequest(), request.getResponse(),
                 request.getRequest().getServletContext(), request.getLocale(), model.asMap(), applicationContext);
         //手动渲染
+        System.out.println(ctx.getApplicationContext());
         return thymeleafViewResolver.getTemplateEngine().process(key, ctx);
     }
 }

@@ -31,19 +31,32 @@ public class HomeController {
     public String toPage(@PathVariable String root,@PathVariable String index){
         return "/"+root+"/"+index;
     }
-    @RequestMapping(value = "/starter",produces = "text/html")
+    @RequestMapping(value = "/to_starter",produces = "text/html")
     @ResponseBody
     public String showAllTab(ServletWebRequest request,Model model){
-        if (redisService.exists(TabKey.tabListKey,"")){
-            final String html = redisService.get(TabKey.tabListKey, "", new TypeReference<String>() {
-            });
-            if (!StringUtils.isEmpty(html)) {
-                return html;
-            }
-        }
+//        if (redisService.exists(TabKey.tabListKey,"")){
+//            System.out.println("存在");
+//            final String html = redisService.get(TabKey.tabListKey, "", new TypeReference<String>() {
+//            });
+//            if (!StringUtils.isEmpty(html)) {
+//                return html;
+//            }
+//        }
+        System.out.println("不存在");
         final List<Tab> tabList = tabService.findAll();
         model.addAttribute("tabList",tabList);
         final String html = thymeleafService.process(request, model, "starter");
+        System.out.println(html);
+//        redisService.set(TabKey.tabListKey,"",html);
         return html;
+    }
+    @RequestMapping(value = "/tab/list")
+    @ResponseBody
+    public TmoocResult findAllTab(){
+
+        final List<Tab> tabList = tabService.findAll();
+        System.out.println(tabList.size());
+
+        return TmoocResult.ok(tabList);
     }
 }

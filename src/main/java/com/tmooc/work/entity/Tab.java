@@ -14,7 +14,7 @@ import java.util.*;
 public class Tab extends BaseEntity {
     private String href;
     private String dataUrl;
-    private String tagName;
+    private String tabName;
     private Integer parentId;
     @ManyToOne
     @Transient
