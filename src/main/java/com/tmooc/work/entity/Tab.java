@@ -1,6 +1,7 @@
 package com.tmooc.work.entity;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Parent;
 
 import javax.persistence.*;
 import java.util.*;
@@ -14,8 +15,10 @@ public class Tab extends BaseEntity {
     private String href;
     private String dataUrl;
     private String tagName;
+    private Integer parentId;
     @ManyToOne
-    private Tab parent;
+    @Transient
+    private Parent parent;
     @OneToMany
     private List<Tab> children;
 

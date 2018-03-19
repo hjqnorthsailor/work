@@ -4,7 +4,6 @@ import lombok.Setter;
 import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.List;
 public class Teacher extends BaseEntity {
 
     private String teacherName;
-    @Email
     //@Column(name = "email",columnDefinition = "账号，邮箱")
     private String email;
     //@Column(name = "phone",columnDefinition = "联系电话")
