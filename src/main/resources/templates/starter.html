@@ -362,37 +362,33 @@
 <script>
 
    $(function() {
-           $("a[data-toggle]").unbind().bind('click',function (event) {
+       $("a[data-toggle]").each(function () {
+           $(this).bind('click',function (event) {
                var container = $(this).attr("href");
-               console.log(container);
                var url = $(this).attr("data-url");
-               console.log(url);
                var tagName=$(this).children('span').html();
-               console.log(tagName);
-               var isLoaded=$(this).attr("isLoaded");
-               if(!isLoaded){
-                  event.preventDefault();
-                   $(this).removeClass("onClick");
-               }else {
-                   loadPage(url, container);
-                   $("ul.sidebar-menu li").removeClass("active");
-                   $(this).parent().addClass("active");
-                   addTab(container,tagName);
-                   addTabContent(container);
-                   $(this).attr("isLoaded",false);
-               }
-               console.log(isLoaded);
+               loadPage(url, container);
+               $("ul.sidebar-menu li").removeClass("active");
+               $(this).parent().addClass("active");
+               addTab(container,tagName);
+               addTabContent(container);
+               $(this).unbind('click');
            });
        });
+
+           
+       });
+
+
         function addTab(container,tagName){
             $('#myTab li').removeClass("active");
             var $li=$('<li class="text-success"><a href="'+container+'" data-toggle="tab">'+tagName+'</a> </li>)');
             var $myTab=$('#myTab');
+            $li.addClass("active");
             $myTab.append($li);
         }
         function addTabContent(container){
             var ID=container.substring(1);
-            console.log(ID);
             var $content=$('<div class="tab-pane fade in active" id="'+ID+'" ></div>');
             var $myTabContent=$('#myTabContent');
             $myTabContent.append($content);
