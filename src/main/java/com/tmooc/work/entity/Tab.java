@@ -15,6 +15,7 @@ public class Tab extends BaseEntity {
     private String href;
     private String dataUrl;
     private String tabName;
+    private String icon;
     private Integer parentId;
     @ManyToOne
     @Transient

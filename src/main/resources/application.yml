@@ -10,7 +10,7 @@ spring:
     show-sql: true
     database: mysql
   mvc:
-    static-path-pattern: /static/**/**
+    static-path-pattern: /static/**
   jpa:
     hibernate:
       ddl-auto: update

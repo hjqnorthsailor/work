@@ -46,11 +46,10 @@ public class HomeController {
         final List<Tab> tabList = tabService.findAll();
         model.addAttribute("tabList",tabList);
         final String html = thymeleafService.process(request, model, "starter");
-        System.out.println(html);
 //        redisService.set(TabKey.tabListKey,"",html);
         return html;
     }
-    @RequestMapping(value = "/tab/list")
+    @RequestMapping(value = "/tab/findAll")
     @ResponseBody
     public TmoocResult findAllTab(){
 

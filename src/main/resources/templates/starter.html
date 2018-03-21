@@ -223,7 +223,7 @@
         <li class="active"><a href="#">首页</a></li>
         <th:block th:each="tab,tabStatus:${tabList}">
         <li><a th:href="${tab.href}"
-               th:attr="data-url=${tab.dataUrl}"  isLoaded="true" data-toggle="tab"><i class="fa fa-link"></i>
+               th:attr="data-url=${tab.dataUrl}"  isLoaded="true" data-toggle="tab"><i th:class="${tab.icon}"></i>
           <span th:text="${tab.tabName}"> </span></a></li>
         </th:block>
         <!--<ul class="treeview-menu">-->
@@ -241,9 +241,10 @@
   <div class="content-wrapper">
     <!-- 头部标签栏 -->
     <section class="content-header">
-      <ul id="myTab" class="nav nav-tabs">
+
+      <ul id="myTab" class="nav nav-tabs tab-list-ul"  style="float: left; margin-left: 0px;">
         <li class="active">
-            <a href="home" data-toggle="tab" class="Success glyphicon glyphicon-home">首页</a>
+            <a href="#home" data-toggle="tab" class="Success glyphicon glyphicon-home">首页</a>
         </li>
       </ul>
     </section>
@@ -362,29 +363,29 @@
 <script>
 
    $(function() {
-       $("a[data-toggle]").each(function () {
-           $(this).bind('click',function (event) {
-               var container = $(this).attr("href");
-               var url = $(this).attr("data-url");
-               var tagName=$(this).children('span').html();
-               loadPage(url, container);
-               $("ul.sidebar-menu li").removeClass("active");
-               $(this).parent().addClass("active");
-               addTab(container,tagName);
-               addTabContent(container);
-               $(this).unbind('click');
-           });
+       add();
+//       close();
        });
-
-           
-       });
-
+        function add(){
+            $("a[data-toggle]").each(function () {
+                $(this).bind('click',function (event) {
+                    var container = $(this).attr("href");
+                    var url = $(this).attr("data-url");
+                    var tagName=$(this).children('span').html();
+                    $("ul.sidebar-menu li").removeClass("active");
+                    $(this).parent().addClass("active");
+                    addTab(container,tagName);
+                    addTabContent(container);
+                    loadPage(url, container);
+                    $(this).unbind('click');
+                });
+            });
+        }
 
         function addTab(container,tagName){
             $('#myTab li').removeClass("active");
-            var $li=$('<li class="text-success"><a href="'+container+'" data-toggle="tab">'+tagName+'</a> </li>)');
+            var $li=$('<li class="active box-tools"><a href="'+container+'" data-toggle="tab"   data-widget="remove">'+tagName+'  <i class="fa fa-times-circle"></i></a> </li>)');
             var $myTab=$('#myTab');
-            $li.addClass("active");
             $myTab.append($li);
         }
         function addTabContent(container){
@@ -393,10 +394,32 @@
             var $myTabContent=$('#myTabContent');
             $myTabContent.append($content);
         }
-
         function loadPage(url, container) {
+            console.log(url);
             $(container).load(url);
     }
+    function close(){
+            $("i[class='fa fa-times-circle']").each(function(){
+                $(this).blind('click',function () {
+                    console.log('test')
+                    var container = $(this).parent().attr("href");
+                    console.log(container);
+                    removeTab(container);
+                    removeTabContent(container);
+                });
+            });
+    }
+    function removeTab(container){
+       var $li=$('li,a[href="'+container+'"]');
+       var $myTab=$('#myTab');
+       $myTab.remove($li);
+    }
+    function removeTabContent(container){
+       var ID=container.substring(1);
+       var $content=$('"'+ID+'"');
+       var $myTabContent=$('#myTabContent');
+       $myTabContent.remove($content);
+   }
 </script>
 </body>
 </html>
