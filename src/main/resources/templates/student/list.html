@@ -1,97 +1,312 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <title>AdminLTE 2 | Data Tables</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/font-awesome/css/font-awesome.min.css}"/>
-  <!-- Ionicons -->
-  <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/Ionicons/css/ionicons.min.css}"/>
-  <!-- DataTables -->
-  <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}"/>
-  <!-- Theme style -->
-  <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/dist/css/AdminLTE.min.css}"/>
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/dist/css/skins/_all-skins.min.css}"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>AdminLTE 2 | Data Tables</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/font-awesome/css/font-awesome.min.css}"/>
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/Ionicons/css/ionicons.min.css}"/>
+    <!-- DataTables -->
+    <link rel="stylesheet"
+          th:href="@{/webjars/datatables/1.10.16/css/dataTables.bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/datatables-plugins/1.10.16/integration/font-awesome/dataTables.fontAwesome.css}"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/dist/css/AdminLTE.min.css}"/>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/dist/css/skins/_all-skins.min.css}"/>
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
-  <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
-  <![endif]-->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}"/>
+    <link rel="stylesheet" th:href="@{/static/css/user-nanager.css}"/>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-  <div class="box-body">
-    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="dataTables_length" id="example1_length">
-            <label>Show
-              <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-              entries</label>
-          </div>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12" id="content">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="btn-toolbar">
+                        <div class="pull-right">
+                            <div class="input-append">
+                                <input type="text" placeholder="模糊查询" id="fuzzy-search"/>
+                                <div class="btn-group">
+                                    <button type="button" class="btn" id="btn-simple-search"><i
+                                            class="fa fa-search"></i></button>
+                                    <button type="button" class="btn" title="高级查询" id="toggle-advanced-search">
+                                        <i class="fa fa-angle-double-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="btn-add"><i class="fa fa-plus"></i> 添加
+                        </button>
+                        <button type="button" class="btn btn-danger" id="btn-del"><i class="fa fa-remove"></i> 批量删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid" style="display:none;" id="div-advanced-search">
+                <form class="form-inline well">
+                    <span>姓名:</span>
+                    <input type="text" class="input-medium" placeholder="姓名" id="name-search"/>
+                    <span>职位:</span>
+                    <input type="text" class="input-medium" placeholder="职位" id="position-search"/>
+                    <span>工作地点:</span>
+                    <input type="text" class="input-medium" placeholder="工作地点" id="office-search"/>
+                    <span>编号:</span>
+                    <input type="text" class="input-medium" placeholder="编号" id="extn-search"/>
+                    <span>在线状态:</span>
+                    <select class="input-small" id="status-search">
+                        <option value="">全部</option>
+                        <option value="1">在线</option>
+                        <option value="0">离线</option>
+                    </select>
+                    <select class="input-small" id="role-search">
+                        <option value="">全部</option>
+                        <option value="1">管理员</option>
+                        <option value="0">操作员</option>
+                    </select>
+                    <button type="button" class="btn" id="btn-advanced-search"><i class="fa fa-search"></i> 查询</button>
+                </form>
+            </div>
+            <div class="block info-block" id="user-view">
+                <div class="navbar navbar-inner block-header">
+                    <div class="block-title">用户详情</div>
+                    <div class="header-buttons">
+                        <button type="button" class="btn btn-primary" id="btn-view-edit">修改</button>
+                    </div>
+                </div>
+                <div class="block-content info-content clearfix">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <label class="prop-name">编号:</label>
+                            <div class="prop-value" id="extn-view"></div>
+                        </div>
+                        <div class="span4">
+                            <label class="prop-name">姓名:</label>
+                            <div class="prop-value" id="name-view"></div>
+                        </div>
+                        <div class="span4">
+                            <label class="prop-name">角色:</label>
+                            <div class="prop-value" id="role-view"></div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <label class="prop-name">职位:</label>
+                            <div class="prop-value" id="position-view"></div>
+                        </div>
+                        <div class="span4">
+                            <label class="prop-name">薪水:</label>
+                            <div class="prop-value" id="salary-view"></div>
+                        </div>
+                        <div class="span4">
+                            <label class="prop-name">状态:</label>
+                            <div class="prop-value" id="status-view"></div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <label class="prop-name">入职时间:</label>
+                            <div class="prop-value" id="start-date-view"></div>
+                        </div>
+                        <div class="span8">
+                            <label class="prop-name">办公地点:</label>
+                            <div class="prop-value" id="office-view"></div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <label class="prop-name">备注:</label>
+                            <div class="prop-value"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block info-block" id="user-add" style="display:none;">
+                <div class="navbar navbar-inner block-header">
+                    <div class="block-title">添加账户</div>
+                    <div class="header-buttons">
+                        <button type="button" class="btn btn-primary" id="btn-save-add">确定添加</button>
+                        <button type="button" class="btn btn-cancel">取消</button>
+                    </div>
+                </div>
+                <div class="block-content info-content clearfix">
+                    <form id="form-add">
+                        <div class="control-group">
+                            <label class="control-label" for="extn-add"><span
+                                    class="red-asterisk">*</span>编号:</label>
+                            <div class="controls">
+                                <input type="text" id="extn-add" name="extn-add"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name-add"><span
+                                    class="red-asterisk">*</span>姓名:</label>
+                            <div class="controls">
+                                <input type="text" id="name-add" name="name-add"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="role-add">角色:</label>
+                            <div class="controls">
+                                <select id="role-add" name="role-add">
+                                    <option value="1" selected="true">管理员</option>
+                                    <option value="0">操作员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="position-add">职位:</label>
+                            <div class="controls">
+                                <input type="text" id="position-add" name="position-add"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="salary-add">薪水:</label>
+                            <div class="controls">
+                                <input type="text" id="salary-add" name="salary-add"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="start-date-add">入职时间:</label>
+                            <div class="controls">
+                                <input type="text" id="start-date-add" name="start-date-add"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="office-add">办公地点:</label>
+                            <div class="controls">
+                                <input type="text" class="xlarge" id="office-add" name="office-add"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="remark-add">备注:</label>
+                            <div class="controls">
+                                <input type="text" class="xxxlarge" id="remark-add" name="remark-add"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="block info-block" id="user-edit" style="display:none;">
+                <div class="navbar navbar-inner block-header">
+                    <div class="block-title">修改账户:<span id="title-edit"></span></div>
+                    <div class="header-buttons">
+                        <button type="button" class="btn btn-primary" id="btn-save-edit">保存更改</button>
+                        <button type="button" class="btn btn-cancel">取消</button>
+                    </div>
+                </div>
+                <div class="block-content info-content clearfix">
+                    <form id="form-edit">
+                        <div class="control-group">
+                            <label class="control-label" for="extn-edit"><span
+                                    class="red-asterisk">*</span>编号:</label>
+                            <div class="controls">
+                                <input type="text" id="extn-edit" name="extn-edit"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name-edit"><span
+                                    class="red-asterisk">*</span>姓名:</label>
+                            <div class="controls">
+                                <input type="text" id="name-edit" name="name-edit"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="role-edit">角色:</label>
+                            <div class="controls">
+                                <select id="role-edit" name="role-edit">
+                                    <option value="1" selected="true">管理员</option>
+                                    <option value="0">操作员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="position-edit">职位:</label>
+                            <div class="controls">
+                                <input type="text" id="position-edit" name="position-edit"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="salary-edit">薪水:</label>
+                            <div class="controls">
+                                <input type="text" id="salary-edit" name="salary-edit"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="start-date-edit">入职时间:</label>
+                            <div class="controls">
+                                <input type="text" id="start-date-edit" name="start-date-edit"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="office-edit">办公地点:</label>
+                            <div class="controls">
+                                <input type="text" class="xlarge" id="office-edit" name="office-edit"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="remark-edit">备注:</label>
+                            <div class="controls">
+                                <input type="text" class="xxxlarge" id="remark-edit" name="remark-edit"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12" id="div-table-container">
+                    <table class="table table-striped table-bordered table-hover table-condensed" id="table-user"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" name="cb-check-all"/>
+                            </th>
+                            <th>姓名</th>
+                            <th>职位</th>
+                            <th>状态</th>
+                            <th>入职时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>
+                                <input type="checkbox" name="cb-check-all"/>
+                            </th>
+                            <th>姓名</th>
+                            <th>职位</th>
+                            <th>状态</th>
+                            <th>入职时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input class="form-control input-sm" placeholder="" aria-controls="example1" type="search"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-      <thead>
-      <tr role="row">
-        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 218.017px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Rendering engine</th>
-        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 267.433px;" aria-label="Browser: activate to sort column ascending">Browser</th>
-        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 236.9px;" aria-label="Platform(s): activate to sort column ascending">Platform(s)</th>
-        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 187.167px;" aria-label="Engine version: activate to sort column ascending">Engine version</th>
-        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 134.883px;" aria-label="CSS grade: activate to sort column ascending">CSS grade</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr role="row" class="odd">
-        <td class="sorting_1">Gecko</td>
-        <td>Firefox 1.0</td>
-        <td>Win 98+ / OSX.2+</td>
-        <td>1.7</td>
-        <td>A</td>
-      </tr>
-      </tbody>
-    </table>
     </div>
-    </div>
-      <div class="row">
-        <div class="col-sm-5">
-          <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-        </div>
-        <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-          <ul class="pagination">
-            <li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
-            <li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li
-            ><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li>
-            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li>
-            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li>
-            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li>
-            <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li>
-            <li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
+
 <!-- jQuery 3 -->
 <script th:src="@{/webjars/AdminLTE/2.4.2/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -109,17 +324,18 @@
 <script th:src="@{/webjars/AdminLTE/2.4.2/dist/js/demo.js}"></script>
 <!-- page script -->
 <script>
-  $(function () {
+    $(function () {
 
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true
+
+        })
     })
-  })
 </script>
 </body>
 </html>

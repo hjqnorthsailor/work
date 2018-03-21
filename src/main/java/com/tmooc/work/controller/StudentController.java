@@ -12,13 +12,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.ServletWebRequest;
 
 @Controller
 public class StudentController {
     @Autowired
     private StudentService studentService;
-
+    @RequestMapping("/teacher/list")
     public TmoocResult studentList(PageDTO pageDTO){
         Sort sort=new Sort(Sort.Direction.fromString(pageDTO.getDirection()), pageDTO.getProperties());
         PageRequest pageRequest = new PageRequest(pageDTO.getPageNo()-1, pageDTO.getSize(), sort);
