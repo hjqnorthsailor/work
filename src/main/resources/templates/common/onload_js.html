@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="onloadJS">
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script type="text/javascript"
+    th:src="@{/webjars/AdminLTE/2.4.2/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/webjars/AdminLTE/2.4.2/dist/js/adminlte.js}"></script>
+
+    <script th:src="@{/static/js/bootstrap-tab.js}"></script>
+</div>
+</body>
+</html>
