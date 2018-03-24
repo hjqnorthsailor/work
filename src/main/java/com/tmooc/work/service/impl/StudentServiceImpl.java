@@ -16,4 +16,9 @@ public class StudentServiceImpl implements StudentService {
     public Page<Student> findAll(PageRequest request) {
         return studentDao.findAll(request);
     }
+
+    @Override
+    public Long getTotal() {
+        return studentDao.count();
+    }
 }

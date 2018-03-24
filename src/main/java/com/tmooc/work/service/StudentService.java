@@ -7,4 +7,5 @@ import org.springframework.data.domain.PageRequest;
 public interface StudentService {
     /** 分页查询所有学生**/
     Page<Student> findAll(PageRequest request);
+    Long getTotal();
 }

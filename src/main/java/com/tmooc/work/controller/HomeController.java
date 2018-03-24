@@ -29,21 +29,16 @@ public class HomeController {
     public String toPage(@PathVariable String root,@PathVariable String index){
         return "/"+root+"/"+index;
     }
-    @RequestMapping(value = "/to_starter",produces = "text/html")
+
+    @RequestMapping(value = "/{index}",produces = "text/html")
     @ResponseBody
-    public String showAllTab(ServletWebRequest request,Model model){
-//        if (redisService.exists(TabKey.tabListKey,"")){
-//            System.out.println("存在");
-//            final String html = redisService.get(TabKey.tabListKey, "", new TypeReference<String>() {
-//            });
-//            if (!StringUtils.isEmpty(html)) {
-//                return html;
-//            }
-//        }
-        System.out.println("不存在");
+    public String showPage(@PathVariable String index, ServletWebRequest request,Model model){
         final List<Tab> tabList = tabService.findAll();
+        if (!StringUtils.isEmpty(index)){
+            model.addAttribute("title",index);
+        }
         model.addAttribute("tabList",tabList);
-        final String html = thymeleafService.process(request, model, "starter");
+        final String html = thymeleafService.process(request, model, "index");
 //        redisService.set(TabKey.tabListKey,"",html);
         return html;
     }

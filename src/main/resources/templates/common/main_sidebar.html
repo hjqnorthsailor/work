@@ -33,12 +33,9 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="active"><a href="#">首页</a></li>
+            <li class="active"><a href="index">首页</a></li>
             <th:block th:each="tab,tabStatus:${tabList}">
-                <li><a th:href="${tab.href}"
-                       th:attr="data-url=${tab.dataUrl}" isLoaded="true" data-toggle="tab"><i
-                        th:class="${tab.icon}"></i>
-                    <span th:text="${tab.tabName}"> </span></a></li>
+                <li><a th:href="${tab.href}"><i th:class="${tab.icon}"></i><span th:text="${tab.tabName}"> </span></a></li>
             </th:block>
             <!--<ul class="treeview-menu">-->
             <!--<li><a href="#">Link in level 2</a></li>-->
