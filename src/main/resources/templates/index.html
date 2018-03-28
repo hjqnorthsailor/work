@@ -37,43 +37,47 @@
 <!-- 加载页面-->
 <script>
     $(function () {
-
-      $('#student_table').DataTable({
-            lengthMenu: [ 10, 20, 30, 50, 100 ],
+        var table = $('#student_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ],
+            lengthMenu: [10, 20, 30, 50, 100],
             destroy: true,
-            paging:true,
+            paging: true,
             serverSide: true,
             autoWidth: true,
-            deferRender:true,
-            ordering:true,
+            deferRender: true,
+            ordering: true,
             orderCellsTop: true,
-            ajax:{
-                url:"/student/findAll",
+            ajax: {
+                url: "/student/findAll",
                 type: "POST",
                 data: function (data) {
                     return JSON.stringify(data);
                 },
                 dataType: "json",
                 processData: false,
-                async : false,
+                async: false,
                 contentType: 'application/json;charset=UTF-8'
 
             },
 
-              columns: [//对接收到的json格式数据进行处理，data为json中对应的key
-                {targets: 0, data: "id"},
-                {targets: 1, data: "studentName"},
-                {targets: 2, data: "studentQQ"},
-                {targets: 3, data: "qunName"},
-                {targets: 4, data: "qunNum"},
-                {targets: 5, data: "stage"},
-                {targets: 6, data: "remark"}
+            columns: [//对接收到的json格式数据进行处理，data为json中对应的key
+                {data: "id"},
+                {data: "studentName"},
+                {data: "studentQQ"},
+                {data: "qunName"},
+                {data: "qunNum"},
+                {data: "stage"},
+                {data: "remark"}
             ],
             language: { //中文支持
                 sUrl: "/webjars/datatables-plugins/1.10.16/i18n/Chinese.json"
             }
         });
     });
+
 </script>
 </body>
 </html>
