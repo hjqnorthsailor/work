@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Long getTotal() {
+    public Long getTotal(){
         return studentDao.count();
     }
 }

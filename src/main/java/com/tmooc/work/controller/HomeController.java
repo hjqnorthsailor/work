@@ -25,16 +25,14 @@ public class HomeController {
     private RedisService redisService;
     @Autowired
     private ThymeleafService thymeleafService;
-    @RequestMapping("/{root}/{index}")
-    public String toPage(@PathVariable String root,@PathVariable String index){
-        return "/"+root+"/"+index;
-    }
-
     @RequestMapping(value = "/{index}",produces = "text/html")
     @ResponseBody
     public String showPage(@PathVariable String index, ServletWebRequest request,Model model){
         final List<Tab> tabList = tabService.findAll();
         if (!StringUtils.isEmpty(index)){
+            if(index.equals("index")){
+                index="home";
+            }
             model.addAttribute("title",index);
         }
         model.addAttribute("tabList",tabList);
