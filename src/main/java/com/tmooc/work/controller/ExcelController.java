@@ -1,12 +1,13 @@
 package com.tmooc.work.controller;
 
+import java.io.IOException;
 import java.util.*;
 
 import com.tmooc.work.dao.StudentEntityDao;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.StudentEntity;
+import com.tmooc.work.util.FastDFSClientWrapper;
 import com.tmooc.work.util.MyExcelUtils;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,17 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RequestMapping("/excel")
 public class ExcelController {
     @Autowired
     private StudentEntityDao studentEntityDao;
-    public String upload(@RequestParam("file")MultipartFile file){
-
+    @Autowired
+    private FastDFSClientWrapper fastDFSClientWrapper;
+    @RequestMapping("/upload")
+    @ResponseBody
+    public TmoocResult upload(@RequestParam("file")MultipartFile file) throws IOException {
+        final String filePath = fastDFSClientWrapper.uploadFile(file);
+        return TmoocResult.ok(filePath);
     }
     @RequestMapping("export")
     public void export(HttpServletResponse response) {
@@ -43,7 +50,7 @@ public class ExcelController {
         MyExcelUtils.exportExcel(studentEntities, "", "", StudentEntity.class, "students.xls", response);
     }
 
-    @RequestMapping("importExcel")
+    @RequestMapping("import")
     @ResponseBody
     public TmoocResult importExcel() {
         String filePath = "C:\\Users\\hjqno\\Desktop\\students.xlsx"; //解析excel，
