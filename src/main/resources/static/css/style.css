@@ -1,0 +1,14 @@
+#container {
+    color: #838383;
+    font-size: 12px;
+}
+
+#uploader .queueList {
+    margin: 20px;
+    border: 3px dashed #e6e6e6;
+}
+#uploader .queueList.filled {
+    padding: 17px;
+    margin: 0;
+    border: 3px dashed transparent;
+}

@@ -3,11 +3,23 @@ package com.tmooc.work.controller;
 import java.io.IOException;
 import java.util.*;
 
+import com.alibaba.druid.util.HttpClientUtils;
 import com.tmooc.work.dao.StudentEntityDao;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.StudentEntity;
 import com.tmooc.work.util.FastDFSClientWrapper;
 import com.tmooc.work.util.MyExcelUtils;
+import org.apache.http.HttpClientConnection;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -24,13 +37,16 @@ public class ExcelController {
     private StudentEntityDao studentEntityDao;
     @Autowired
     private FastDFSClientWrapper fastDFSClientWrapper;
+
     @RequestMapping("/upload")
     @ResponseBody
-    public TmoocResult upload(@RequestParam("file")MultipartFile file) throws IOException {
+    public TmoocResult upload(@RequestParam("file") MultipartFile file) throws IOException {
         final String filePath = fastDFSClientWrapper.uploadFile(file);
+        System.out.println(filePath);
         return TmoocResult.ok(filePath);
     }
-    @RequestMapping("export")
+
+    @RequestMapping("/export")
     public void export(HttpServletResponse response) {
         //模拟从数据库获取需要导出的数据
         List<StudentEntity> studentEntities = new ArrayList<>();
@@ -50,12 +66,20 @@ public class ExcelController {
         MyExcelUtils.exportExcel(studentEntities, "", "", StudentEntity.class, "students.xls", response);
     }
 
-    @RequestMapping("import")
+    @RequestMapping("/import")
     @ResponseBody
-    public TmoocResult importExcel() {
-        String filePath = "C:\\Users\\hjqno\\Desktop\\students.xlsx"; //解析excel，
-        List<StudentEntity> list = MyExcelUtils.importExcel(filePath, 1, 1, StudentEntity.class);
-        List<StudentEntity> list1 = studentEntityDao.save(list);
-        return TmoocResult.ok(list1);
+    public TmoocResult importExcel(@RequestParam("remotFilePath") String remotFilePath) throws IOException {
+//        String remotFilePath = "http://140.143.0.246:8888/group1/M00/00/00/rBUADFrB0UaAanoiAACE4Uhh1WY40.xlsx";
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        String localFilePath="D:\\test\\";//本地目录
+        String filePath=localFilePath+remotFilePath.substring(remotFilePath.lastIndexOf("/")+1);//本地文件名
+        boolean isDowload=fastDFSClientWrapper.executeDownloadFile(httpClient,remotFilePath,filePath,"UTF-8",true);
+        if (isDowload) {
+            List<StudentEntity> list = MyExcelUtils.importExcel(filePath, 1, 1, StudentEntity.class);
+            List<StudentEntity> list1 = studentEntityDao.save(list);
+            return TmoocResult.ok(list1);
+        }
+        return TmoocResult.build(500,"error");
     }
+
 }
