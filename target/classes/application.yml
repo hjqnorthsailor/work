@@ -1,5 +1,8 @@
 # 配置数据连接
 spring:
+# ===================================================================
+# datasource配置
+# ===================================================================
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://northsailor.mysql.rds.aliyuncs.com:3306/tmooc_work?useSSL=false&useUnicode=true&character_set_server=utf8mb4
@@ -19,6 +22,9 @@ spring:
     properties:
       hibernate:
         dialect: com.tmooc.work.config.MySQL5InnoDBDialectUtf8mb4
+# ===================================================================
+# redis配置
+# ===================================================================
   redis:
     host: 39.107.98.120
     port: 6379
@@ -44,6 +50,13 @@ spring:
       enabled: true
       gzipped: true
       html-application-cache: true
+# ===================================================================
+# batch配置
+# ===================================================================
+  batch:
+    job:
+      enabled: false
+      names: null
 server:
   port: 8080
 

@@ -65,8 +65,10 @@
             var result = $.parseJSON(response._raw);//后台返回的结果
             if (result.status == 200) {
                 var filePath = result.data;
-                var $button = $('<button type="button" class="btn btn-info" onclick="' + importToDb(filePath) + '" >导入数据库</button>');
-                $('#' + file.id).children('h4').append($button);
+                var $button1 = $('<button type="button" class="btn btn-info" onclick="' + importStudent(filePath) + '" >导入学员信息</button>');
+                var $button2 = $('<button type="button" class="btn btn-info" onclick="' + importHuoYue(filePath) + '" >导入达到率数据</button>');
+                $('#' + file.id).children('h4').append($button1);
+                $('#' + file.id).children('h4').append($button2);
             }
         });
 
@@ -103,17 +105,29 @@
         });
     });
 
-    function importToDb(filePath) {
+    function importStudent(filePath) {
         $.ajax({
             type: 'POST',
-            url: "/excel/import",
+            url: "/excel/importStudent",
             data: {'remotFilePath': filePath},
             success: function (data) {
                 if (data.status == 200) {
-                    alert("导入成功" + data.data.length);
+                    alert("导入成功" + data.data);
                 }
             }
         });
+    }
+        function importHuoYue(filePath) {
+            $.ajax({
+                type: 'POST',
+                url: "/excel/importHuoYue",
+                data: {'remotFilePath': filePath},
+                success: function (data) {
+                    if (data.status == 200) {
+                        alert("导入成功" + data.data);
+                    }
+                }
+            });
     }
 </script>
 </body>

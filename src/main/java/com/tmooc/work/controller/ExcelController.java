@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.*;
 
 import com.alibaba.druid.util.HttpClientUtils;
+import com.tmooc.work.dao.HuoYueDao;
+import com.tmooc.work.dao.StudentDao;
 import com.tmooc.work.dao.StudentEntityDao;
 import com.tmooc.work.common.TmoocResult;
+import com.tmooc.work.entity.HuoYue;
+import com.tmooc.work.entity.Student;
 import com.tmooc.work.entity.StudentEntity;
 import com.tmooc.work.util.FastDFSClientWrapper;
 import com.tmooc.work.util.MyExcelUtils;
@@ -20,6 +24,11 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.batch.core.*;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +43,13 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/excel")
 public class ExcelController {
     @Autowired
-    private StudentEntityDao studentEntityDao;
-    @Autowired
     private FastDFSClientWrapper fastDFSClientWrapper;
+    @Autowired
+    private JobLauncher jobLauncher;
+    @Autowired
+    private Job importHuoYue;
+    @Autowired
+    private Job importStudent;
 
     @RequestMapping("/upload")
     @ResponseBody
@@ -45,6 +58,53 @@ public class ExcelController {
         System.out.println(filePath);
         return TmoocResult.ok(filePath);
     }
+
+
+    @RequestMapping("/importStudent")
+    @ResponseBody
+    public TmoocResult importExcel(@RequestParam("remoteFilePath") String remoteFilePath) throws IOException, JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+        JobExecution jobExecution = getJobExecution(remoteFilePath,importStudent);
+        return TmoocResult.ok(jobExecution.getExecutionContext().size());
+    }
+
+    @RequestMapping("/importHuoYue")
+    @ResponseBody
+    public TmoocResult importHuoYue(@RequestParam("remotFilePath") String remoteFilePath) throws IOException, JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+        JobExecution jobExecution = getJobExecution(remoteFilePath,importHuoYue);
+        return TmoocResult.ok(jobExecution.getExecutionContext().size());
+    }
+
+    private JobExecution getJobExecution(String remoteFilePath,Job job) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+        String localFilePath = "E:\\test\\";//本地目录
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addString("remoteFilePath", remoteFilePath)
+                .addString("localFilePath", localFilePath).toJobParameters();
+        return jobLauncher.run(job, jobParameters);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @RequestMapping("/export")
     public void export(HttpServletResponse response) {
@@ -65,21 +125,4 @@ public class ExcelController {
         //导出操作
         MyExcelUtils.exportExcel(studentEntities, "", "", StudentEntity.class, "students.xls", response);
     }
-
-    @RequestMapping("/import")
-    @ResponseBody
-    public TmoocResult importExcel(@RequestParam("remotFilePath") String remotFilePath) throws IOException {
-//        String remotFilePath = "http://140.143.0.246:8888/group1/M00/00/00/rBUADFrB0UaAanoiAACE4Uhh1WY40.xlsx";
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        String localFilePath="D:\\test\\";//本地目录
-        String filePath=localFilePath+remotFilePath.substring(remotFilePath.lastIndexOf("/")+1);//本地文件名
-        boolean isDowload=fastDFSClientWrapper.executeDownloadFile(httpClient,remotFilePath,filePath,"UTF-8",true);
-        if (isDowload) {
-            List<StudentEntity> list = MyExcelUtils.importExcel(filePath, 1, 1, StudentEntity.class);
-            List<StudentEntity> list1 = studentEntityDao.save(list);
-            return TmoocResult.ok(list1);
-        }
-        return TmoocResult.build(500,"error");
-    }
-
 }
