@@ -11,7 +11,6 @@ import org.springframework.batch.item.*;
 
 import java.io.IOException;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
@@ -20,20 +19,12 @@ import java.util.List;
 @Slf4j
 public class MyItemReader<T> implements ItemReader<T>, ItemStream {
     private List<T> items;
-    private Class<T> clazz;
     private int currentIndex = 0;
     private static final String CURRENT_INDEX = "current.index";
-    public MyItemReader(String remoteFilePath,String localFilePath,FastDFSClientWrapper fastDFSClientWrapper) throws IOException {
-        clazz=ReflectUtils.getClassGenricType(getClass());
-        System.out.println(clazz.getSimpleName());
-        init(remoteFilePath,localFilePath,fastDFSClientWrapper);
+    public MyItemReader(String remoteFilePath,String localFilePath,Class<T> clazz,FastDFSClientWrapper fastDFSClientWrapper) throws IOException {
+        init(remoteFilePath,localFilePath,clazz,fastDFSClientWrapper);
     }
-    public T newInstance(){
-        T newInstance=null;
-        Class<T> entityClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        return newInstance;
-    }
-    public void init(String remoteFilePath,String localFilePath,FastDFSClientWrapper fastDFSClientWrapper) throws IOException {
+    public void init(String remoteFilePath,String localFilePath,Class<T> clazz,FastDFSClientWrapper fastDFSClientWrapper) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         String filePath = localFilePath + remoteFilePath.substring(remoteFilePath.lastIndexOf("/") + 1);//本地文件名
         boolean isDowload = fastDFSClientWrapper.executeDownloadFile(httpClient, remoteFilePath, filePath, "UTF-8", true);

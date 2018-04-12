@@ -44,7 +44,7 @@ public class BatchConfiguration {
     public ItemReader<HuoYue> HuoYueReader(@Value("#{jobParameters['remoteFilePath']}")String remoteFilePath,
                                      @Value("#{jobParameters['localFilePath']}")String localFilePath) throws IOException {
         log.info("参数"+remoteFilePath);
-        MyItemReader<HuoYue> reader = new MyItemReader(remoteFilePath,localFilePath,fastDFSClientWrapper);
+        MyItemReader<HuoYue> reader = new MyItemReader(remoteFilePath,localFilePath,HuoYue.class,fastDFSClientWrapper);
         return reader;
     }
     @Bean
@@ -58,7 +58,7 @@ public class BatchConfiguration {
     public ItemReader<Student> StudentReader(@Value("#{jobParameters['remoteFilePath']}")String remoteFilePath,
                                        @Value("#{jobParameters['localFilePath']}")String localFilePath) throws IOException {
         log.info("参数"+remoteFilePath);
-        ItemReader<Student> reader = new MyItemReader(remoteFilePath,localFilePath,fastDFSClientWrapper);
+        ItemReader<Student> reader = new MyItemReader(remoteFilePath,localFilePath,Student.class,fastDFSClientWrapper);
         return reader;
     }
     @Bean
