@@ -56,7 +56,6 @@ spring:
   batch:
     job:
       enabled: false
-      names: null
 server:
   port: 8080
 

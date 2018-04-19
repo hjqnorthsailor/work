@@ -70,18 +70,40 @@
                 {data: "qunName"},
                 {data: "qunNum"},
                 {data: "stage"},
-                {data: "remark"},
                 {
                     data: null, render: function (data, type, row, meta) {
-                    return '<a class="btn btn-info" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=' + row.studentQQ + '&amp;site=qq&amp;menu=yes">回访</a>';
-                }
+                        return '<a class="btn btn-info"  target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin='+row.studentQQ+'&amp;site=qq&amp;menu=yes">聊天</a>';
+                    }
+                },
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        if (row.stage==1) {
+                            return '<a class="btn btn-info" id="' + row.studentQQ + '" onclick="changeStage(' + row.studentQQ + ')" disabled="true">已回访</a>';
+                        }else{
+                            return '<a class="btn btn-info" id="' + row.studentQQ + '" onclick="changeStage(' + row.studentQQ + ')">回访</a>';
+                        }
+                    }
                 }
             ],
             language: { //中文支持
                 sUrl: "/webjars/datatables-plugins/1.10.16/i18n/Chinese.json"
             }
         });
+
     });
+    function changeStage(qq) {
+        $.ajax({
+            type: 'POST',
+            url: "/student/changeStage",
+            data: {'studentQQ': qq},
+            success: function (data) {
+                if (data.data.stage == 1) {
+                    $("#"+qq).attr('disabled',"true");
+                    $("#"+qq).html("已回访");
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

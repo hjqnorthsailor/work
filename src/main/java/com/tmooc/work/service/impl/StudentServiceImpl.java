@@ -21,4 +21,11 @@ public class StudentServiceImpl implements StudentService {
     public Long getTotal(){
         return studentDao.count();
     }
+
+    @Override
+    public Student changeStage(String studentQQ) {
+        Student student = studentDao.findByStudentQQ(studentQQ);
+        student.setStage(1);
+        return  studentDao.saveAndFlush(student);
+    }
 }

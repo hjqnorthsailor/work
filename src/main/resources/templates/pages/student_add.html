@@ -3,13 +3,20 @@
 <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
 <link rel="stylesheet" th:href="@{/static/css/webuploader.css}"/>
 <body>
-<div id="uploader" class="wu-example">
-    <!--用来存放文件信息-->
-    <div lass="queueList">
-        <div id="thelist" class="uploader-list"></div>
-        <div class="btns">
-            <div id="picker">选择文件</div>
-            <button id="ctlBtn" class="btn btn-default">开始上传</button>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">上传学员达到率数据</h3>
+    </div>
+    <div class="panel-body">
+        <div id="uploader" class="wu-example">
+            <!--用来存放文件信息-->
+            <div lass="queueList">
+                <div id="thelist" class="uploader-list"></div>
+                <div class="btns">
+                    <div id="picker">选择文件</div>
+                    <button id="ctlBtn" class="btn btn-default">开始上传</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -65,9 +72,9 @@
             var result = $.parseJSON(response._raw);//后台返回的结果
             if (result.status == 200) {
                 var filePath = result.data;
-                var $button1 = $('<button type="button" class="btn btn-info" onclick="' + importStudent(filePath) + '" >导入学员信息</button>');
-                var $button2 = $('<button type="button" class="btn btn-info" onclick="' + importHuoYue(filePath) + '" >导入达到率数据</button>');
-                $('#' + file.id).children('h4').append($button1);
+                // var $button1 = $('<button type="button" class="btn btn-info" onclick="'+importStudent(filePath)+'">导入学员信息</button>');
+                var $button2 = $('<button type="button" class="btn btn-info" onclick="' + importHuoYue(filePath) + '">导入达到率数据</button>');
+                // $('#' + file.id).children('h4').append($button1);
                 $('#' + file.id).children('h4').append($button2);
             }
         });
@@ -105,29 +112,29 @@
         });
     });
 
-    function importStudent(filePath) {
+    // function importStudent(filePath) {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: "/excel/importStudent",
+    //         data: {'remoteFilePath': filePath},
+    //         success: function (data) {
+    //             if (data.status == 200) {
+    //                 alert("导入成功" + data.data);
+    //             }
+    //         }
+    //     });
+    // }
+    function importHuoYue(filePath) {
         $.ajax({
             type: 'POST',
-            url: "/excel/importStudent",
-            data: {'remotFilePath': filePath},
+            url: "/excel/importHuoYue",
+            data: {'remoteFilePath': filePath},
             success: function (data) {
                 if (data.status == 200) {
                     alert("导入成功" + data.data);
                 }
             }
         });
-    }
-        function importHuoYue(filePath) {
-            $.ajax({
-                type: 'POST',
-                url: "/excel/importHuoYue",
-                data: {'remotFilePath': filePath},
-                success: function (data) {
-                    if (data.status == 200) {
-                        alert("导入成功" + data.data);
-                    }
-                }
-            });
     }
 </script>
 </body>

@@ -2,12 +2,14 @@ package com.tmooc.work.controller;
 
 import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.DTO.DataTablesResponse;
+import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +34,15 @@ public class StudentController {
             order1=new Sort.Order(Sort.Direction.fromString(order2.getDir()),columns.get(order2.getColumn()).getData());
             orders1.add(order1);
         }
-
         Sort sort=new Sort(orders1);
         PageRequest pageRequest = new PageRequest(page, size, sort);
         final Page<Student> studentList = studentService.findAll(pageRequest);
         long total=studentService.getTotal();
         return new DataTablesResponse<Student>(dataTablesRequest.getDraw(),total,total,"",studentList.getContent());
+    }
+    @PostMapping("/student/changeStage")
+    public TmoocResult changeStage(String studentQQ){
+        Student student = studentService.changeStage(studentQQ);
+        return  TmoocResult.ok(student);
     }
 }

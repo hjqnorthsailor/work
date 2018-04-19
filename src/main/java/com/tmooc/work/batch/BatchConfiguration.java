@@ -73,7 +73,7 @@ public class BatchConfiguration {
             return new MyBeanValidator<>();
     }
     @Bean
-    public ItemProcessor<HuoYue, HuoYue> huoYueprocessor(Validator<HuoYue>  huoYueBeanValidator) {
+    public ItemProcessor<HuoYue, HuoYue> huoYueProcessor(Validator<HuoYue>  huoYueBeanValidator) {
         MyProcessor<HuoYue> processor= new MyProcessor();
         processor.setValidator( huoYueBeanValidator);
         return processor;
@@ -121,15 +121,15 @@ public class BatchConfiguration {
     }
     @Bean
     protected Step step2(ItemReader<Student> studentReader,ItemProcessor<Student, Student> studentProcessor,ItemWriter<Student> studentWriter) {
-        return steps.get("step1")
+        return steps.get("step2")
                 .<Student, Student> chunk(100)
                 .reader(studentReader)
                 .processor(studentProcessor)
                 .writer(studentWriter)
                 //设置每个Job通过并发方式执行，一般来讲一个Job就让它串行完成的好
-                .taskExecutor(new SimpleAsyncTaskExecutor())
+//                .taskExecutor(new SimpleAsyncTaskExecutor())
                 //并发任务数为 10,默认为4
-                .throttleLimit(10)
+//                .throttleLimit(10)
                 .build();
     }
     @Bean
@@ -140,9 +140,9 @@ public class BatchConfiguration {
                 .processor(huoYueProcessor)
                 .writer(huoYueWriter)
                 //设置每个Job通过并发方式执行，一般来讲一个Job就让它串行完成的好
-                .taskExecutor(new SimpleAsyncTaskExecutor())
+//                .taskExecutor(new SimpleAsyncTaskExecutor())
                 //并发任务数为 10,默认为4
-                .throttleLimit(10)
+//                .throttleLimit(10)
                 .build();
     }
     @Bean

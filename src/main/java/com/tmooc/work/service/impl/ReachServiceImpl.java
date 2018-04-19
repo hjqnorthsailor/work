@@ -1,24 +1,22 @@
-package com.tmooc.work.dao;
+package com.tmooc.work.service.impl;
 
-import com.tmooc.work.WorkApplicationTests;
 import com.tmooc.work.entity.Reach;
+import com.tmooc.work.service.ReachService;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
-import org.junit.Test;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-
-public class HuoYueDaoTest extends WorkApplicationTests {
+@Service
+public class ReachServiceImpl implements ReachService {
     @PersistenceContext
     private EntityManager entityManager;
-    @Test
-    public void queryReachRate() {
-        Integer month=4;
-        Integer week=2;
+    @Override
+    public List<Reach> queryReachRate(Integer month, Integer week) {
         String sql="SELECT s.`qun_name` AS qunName,COUNT(s.`studentqq`) AS countNum,AVG(h.`percent`) AS rate" +
                 " FROM student s JOIN huo_yue h" +
                 " ON s.`studentqq`=h.`qq`" +
@@ -31,6 +29,6 @@ public class HuoYueDaoTest extends WorkApplicationTests {
                 .addScalar("countNum", StandardBasicTypes.INTEGER)
                 .addScalar("rate", StandardBasicTypes.DOUBLE)
                 .setResultTransformer(Transformers.aliasToBean(Reach.class)).list();
-        resultList.forEach(r-> System.out.println(r.getRate()));
+        return resultList;
     }
 }
