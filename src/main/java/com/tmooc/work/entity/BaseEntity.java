@@ -1,5 +1,6 @@
 package com.tmooc.work.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public abstract class BaseEntity implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     protected Integer id;
     /**
      * 创建时间
@@ -35,6 +37,7 @@ public abstract class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreationTimestamp
+    @JsonIgnore
     protected Date createDateTime;
 
     /**
@@ -44,6 +47,7 @@ public abstract class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @UpdateTimestamp
+    @JsonIgnore
     protected Date updateDateTime;
 ;
 }

@@ -1,8 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <body>
 <div th:fragment="studentList">
-    <table id="student_table" class="display">
+    <div id='pop_html' style='height:140px;'>
+        <form class='form-horizontal container-fluid'>
+            <div class='row'>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">学生姓名</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control input-sm" id="studentName"
+                               placeholder="学生姓名"/>
+                    </div>
+                    <label class="col-sm-2 control-label">QQ</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control input-sm" id="studentQQ"
+                               placeholder="请输入学员姓名"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">群名称</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control input-sm" id="qunName"
+                               placeholder="请输入群名"/>
+                    </div>
+                    <label class="col-sm-2 control-label">群号</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control input-sm" id="qunNum"
+                               placeholder="请输入群号"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">跟踪阶段</label>
+                    <div class="col-sm-3">
+                        <select class="form-control input-sm" id="stage" name="stage"
+                                placeholder="请选择片区">
+                            <option value="">请选择</option>
+                            <option value="0">未跟进</option>
+                            <option value="1">已跟进</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-success btn-lg btn-block" id="searchBtn">搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table id="student_table" class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>id</th>
@@ -13,6 +61,7 @@
             <th>跟进阶段</th>
             <th>聊天</th>
             <th>操作</th>
+            <th>删除学员</th>
         </tr>
         </thead>
         <tbody>

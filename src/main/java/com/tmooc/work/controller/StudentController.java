@@ -1,48 +1,96 @@
 package com.tmooc.work.controller;
 
+
 import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.DTO.DataTablesResponse;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.service.StudentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.*;
+
 
 @RestController
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    /**
+     * 多条件分页查询
+     * @param dataTablesRequest
+     * @return
+     */
     @RequestMapping("/student/findAll")
     public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest){
-        System.out.println(dataTablesRequest.getDraw());
+        System.out.println(dataTablesRequest.getStudentName());
         int size=dataTablesRequest.getLength();
         int s=dataTablesRequest.getStart();
         int page=s/size;
-        List<DataTablesRequest.Column> columns=dataTablesRequest.getColumns();
-
-        List<Sort.Order> orders1=new ArrayList<>();
-        Sort.Order order1=null;
-        for (DataTablesRequest.Order order2 : dataTablesRequest.getOrders()){
-            System.out.println(columns.get(order2.getColumn()).getData());
-            order1=new Sort.Order(Sort.Direction.fromString(order2.getDir()),columns.get(order2.getColumn()).getData());
-            orders1.add(order1);
-        }
-        Sort sort=new Sort(orders1);
-        PageRequest pageRequest = new PageRequest(page, size, sort);
-        final Page<Student> studentList = studentService.findAll(pageRequest);
-        long total=studentService.getTotal();
-        return new DataTablesResponse<Student>(dataTablesRequest.getDraw(),total,total,"",studentList.getContent());
+        Student student=new Student();
+        copyProperties(dataTablesRequest,student);//拷贝参数
+        PageRequest pageRequest = new PageRequest(page, size);//分页请求
+        /**
+         * 查询匹配器
+         */
+        ExampleMatcher matcher=ExampleMatcher.matching()
+                .withMatcher("studentName",m->m.contains())//模糊匹配
+                .withMatcher("studentQQ",m->m.exact())//精确匹配
+                .withMatcher("qunName",m->m.contains())
+                .withMatcher("qunNum",m->m.exact())
+                .withMatcher("stage",m->m.exact());
+        Example<Student> studentExample=Example.of(student,matcher);//JPA Example查询
+        final Page<Student> studentList = studentService.findAll(studentExample,pageRequest);
+        long total=studentService.getTotal(studentExample);
+        return new DataTablesResponse(dataTablesRequest.getDraw(),total,total,"",studentList.getContent());
     }
+
+    /**
+     * 修改学员跟进状态
+     * @param studentQQ
+     * @return
+     */
     @PostMapping("/student/changeStage")
     public TmoocResult changeStage(String studentQQ){
         Student student = studentService.changeStage(studentQQ);
         return  TmoocResult.ok(student);
     }
+    @PostMapping("/student/delete")
+    public TmoocResult deleteStudent(Integer id){
+        studentService.delete(id);
+        return  TmoocResult.ok();
+    }
+    /**
+     * 拷贝参数(使用BeanUtils会拷贝空值过来，造成查询错误）
+     * @param request
+     * @param student
+     * @return
+     */
+    private Student copyProperties(DataTablesRequest request,Student student){
+        if (StringUtils.isNotEmpty(request.getStudentName())){
+            student.setStudentName(request.getStudentName());
+        }
+        if (StringUtils.isNotEmpty(request.getStudentQQ())){
+            student.setStudentQQ(request.getStudentQQ());
+        }
+        if (StringUtils.isNotEmpty(request.getQunName())){
+            student.setQunName(request.getQunName());
+        }
+        if (StringUtils.isNotEmpty(request.getQunNum())){
+            student.setQunNum(request.getQunNum());
+        }
+        if (StringUtils.isNotEmpty(request.getStage())){
+            student.setStage(Integer.parseInt(request.getStage()));
+        }
+        return student;
+    }
+
 }

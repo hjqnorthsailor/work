@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{/static/css/style.css}"/>
 <link rel="stylesheet" th:href="@{/static/css/webuploader.css}"/>
 <body>
 <div class="panel panel-primary">
@@ -72,9 +71,9 @@
             var result = $.parseJSON(response._raw);//后台返回的结果
             if (result.status == 200) {
                 var filePath = result.data;
-                // var $button1 = $('<button type="button" class="btn btn-info" onclick="'+importStudent(filePath)+'">导入学员信息</button>');
-                var $button2 = $('<button type="button" class="btn btn-info" onclick="' + importHuoYue(filePath) + '">导入达到率数据</button>');
-                // $('#' + file.id).children('h4').append($button1);
+                var $button1 = $('<button type="button" class="btn btn-info" onclick="importStudent(\''+ filePath+'\')">导入学员信息</button>');
+                var $button2 = $('<button type="button" class="btn btn-info" onclick="importHuoYue(\'' + filePath +'\')">导入达到率数据</button>');
+                $('#' + file.id).children('h4').append($button1);
                 $('#' + file.id).children('h4').append($button2);
             }
         });
@@ -112,29 +111,41 @@
         });
     });
 
-    // function importStudent(filePath) {
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: "/excel/importStudent",
-    //         data: {'remoteFilePath': filePath},
-    //         success: function (data) {
-    //             if (data.status == 200) {
-    //                 alert("导入成功" + data.data);
-    //             }
-    //         }
-    //     });
-    // }
+    <!-- 导入学员信息表 -->
+    function importStudent(filePath) {
+        g_showLoading();
+        $.ajax({
+            type: 'POST',
+            url: "/excel/importStudent",
+            data: {'remoteFilePath': filePath},
+            success: function (data) {
+                if (data.status == 200) {
+                    layer.msg('导入成功');
+                    layer.closeAll();
+                }
+            }
+        });
+    }
+
+    <!--导入学员达到率数据 -->
     function importHuoYue(filePath) {
+        g_showLoading();
         $.ajax({
             type: 'POST',
             url: "/excel/importHuoYue",
             data: {'remoteFilePath': filePath},
             success: function (data) {
                 if (data.status == 200) {
-                    alert("导入成功" + data.data);
+                    layer.msg('导入成功');
+                    layer.closeAll();
                 }
             }
         });
+    }
+    //展示loading
+    function g_showLoading(){
+        var idx = layer.msg('处理中...', {icon: 16,shade: [0.5, '#f5f5f5'],scrollbar: false,offset: '0px', time:100000}) ;
+        return idx;
     }
 </script>
 </body>

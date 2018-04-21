@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>周报</title>
+</head>
+<body>
+<table id="note_table" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>栏目/星期</th>
+        <th>答疑</th>
+        <th>远程</th>
+        <th>跟进人数</th>
+        <th>有效跟进人数</th>
+        <th>直播</th>
+        <th>题库录入</th>
+        <th>群转发</th>
+        <th>协作</th>
+        <th>保存</th>
+    </tr>
+    </thead>
+    <tbody>
+    <form id="mon" class="form">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="1"/>星期一</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="tus">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="2"/>星期二</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="input"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="wed">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="3"/>星期三</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="thu">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="4"/>星期四</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="fri">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="5"/>星期五</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="sat">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="6"/>星期六</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="sun">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="7"/>星期日</td>
+            <td><input type="number" class="form-control input-sm" name="answer"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote"/></td>
+            <td><input type="number" class="form-control input-sm" name="count"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward"/></td>
+            <td><input type="number" class="form-control input-sm" name="other"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    <form id="total">
+        <tr>
+            <td><input type="hidden" name="weekDay" value="8"/>总计</td>
+            <td><input type="number" class="form-control input-sm" name="answer" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="remote" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="count" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="validCount" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="broadcast" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="inputTitle" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="forward" readonly="true"/></td>
+            <td><input type="number" class="form-control input-sm" name="other" readonly="true"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+        </tr>
+    </form>
+    </tbody>
+</table>
+<script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script>
+    $(function () {
+        draw();
+    });
+    <!--绘制表格，回显数据 -->
+    function draw() {
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        var d = now.getDate();
+        var month = now.getMonth();
+        var week = getMonthWeek(y, m, d);
+        $.ajax({
+            url: "/note/findAll",
+            type: "GET",
+            data: {
+                "month": month,
+                "week": week
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    render(data.data);
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error: function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+    }
+    <!--回显数据 -->
+    function render(data) {
+        for (var i in data) {
+            var weekDay = $('input[value="' + i + '"]');
+            var answer = weekDay.parent().next().children();
+            var remote = answer.parent().next().children();
+            var count = remote.parent().next().children();
+            var validCount = count.parent().next().children();
+            var broadcast = validCount.parents().next().children();
+            var inputTitle = broadcast.parents().next().children();
+            var forward = inputTitle.parents().next().children();
+            var other = forward.parents().next().children();
+            answer.val(data[i]['answer']);
+            remote.val(data[i]['remote']);
+            count.val(data[i]['count']);
+            validCount.val(data[i]['validCount']);
+            broadcast.val(data[i]['broadcast']);
+            inputTitle.val(data[i]['inputTitle']);
+            forward.val(data[i]['forward']);
+            other.val(data[i]['other']);
+        }
+    }
+    <!--保存日志 -->
+    function saveNote(obj) {
+        var form = $(obj.form);
+        console.log(form);
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        var d = now.getDate()
+        var note = form.serializeArray();
+        var month = {name: "month", value: now.getMonth()};
+        var week = {name: "week", value: getMonthWeek(y, m, d)};
+        note.push(month);
+        note.push(week);
+        console.log(note);
+        $.ajax({
+            type: 'post',
+            url: '/note/save',
+            data: note,
+            dataType: "json",
+            success: function (result) {
+                if (result.status == 200) {
+                    draw();
+                    layer.msg('保存成功');
+                }
+            }
+
+        });
+
+    }
+    <!-- 获得当前是本月第几周-->
+    var getMonthWeek = function (a, b, c) {
+        /*
+        a = d = 当前日期
+        b = 6 - w = 当前周的还有几天过完(不算今天)
+        a + b 的和在除以7 就是当天是当前月份的第几周
+        */
+        var date = new Date(a, parseInt(b) - 1, c),
+            w = date.getDay(),
+            d = date.getDate();
+        return Math.ceil((d + 6 - w) / 7);
+    }
+</script>
+</body>
+</html>
