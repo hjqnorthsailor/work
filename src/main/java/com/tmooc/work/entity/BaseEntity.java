@@ -28,7 +28,6 @@ public abstract class BaseEntity implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     protected Integer id;
     /**
      * 创建时间

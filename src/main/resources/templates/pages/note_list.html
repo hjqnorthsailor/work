@@ -130,7 +130,8 @@
             <td><input type="number" class="form-control input-sm" name="inputTitle" readonly="true"/></td>
             <td><input type="number" class="form-control input-sm" name="forward" readonly="true"/></td>
             <td><input type="number" class="form-control input-sm" name="other" readonly="true"/></td>
-            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/></td>
+            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/>
+                <input type="button" class="btn btn-info" value="发送邮件" onclick="uploadAndSend(this)"/></td>
         </tr>
     </form>
     </tbody>
@@ -146,7 +147,7 @@
         var y = now.getFullYear();
         var m = now.getMonth() + 1;
         var d = now.getDate();
-        var month = now.getMonth();
+        var month = now.getMonth()+1;
         var week = getMonthWeek(y, m, d);
         $.ajax({
             url: "/note/findAll",
@@ -198,7 +199,7 @@
         var m = now.getMonth() + 1;
         var d = now.getDate()
         var note = form.serializeArray();
-        var month = {name: "month", value: now.getMonth()};
+        var month = {name: "month", value: now.getMonth()+1};
         var week = {name: "week", value: getMonthWeek(y, m, d)};
         note.push(month);
         note.push(week);
@@ -217,6 +218,59 @@
 
         });
 
+    }
+    function uploadAndSend(obj){
+        var form = $(obj.form);
+        console.log(form);
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        var d = now.getDate()
+        var note = form.serializeArray();
+        var month = {name: "month", value: now.getMonth()+1};
+        var week = {name: "week", value: getMonthWeek(y, m, d)};
+        note.push(month);
+        note.push(week);
+        console.log(note);
+        $.ajax({
+            type: 'post',
+            url: '/note/download',
+            data: note,
+            dataType: "json",
+            success: function (result) {
+                if (result.status == 200) {
+                    var filePath=result.data;
+                    sendMail(obj,filePath);
+                }
+            }
+
+        });
+    }
+    function sendMail(obj,filePath){
+        var form = $(obj.form);
+        console.log(form);
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        var d = now.getDate()
+        var note = form.serializeArray();
+        var month = {name: "month", value: now.getMonth()+1};
+        var week = {name: "week", value: getMonthWeek(y, m, d)};
+        note.push(month);
+        note.push(week);
+        console.log(note);
+        $.ajax({
+            type: 'post',
+            url: '/mail/send',
+            data: {"note":note,"filePath":filePath},
+            dataType: "json",
+            success: function (result) {
+                if (result.status == 200) {
+                  layer.msg('邮件发送成功');
+                }
+            }
+
+        });
     }
     <!-- 获得当前是本月第几周-->
     var getMonthWeek = function (a, b, c) {

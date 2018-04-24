@@ -3,6 +3,7 @@ package com.tmooc.work.service.impl;
 import com.tmooc.work.dao.NoteDao;
 import com.tmooc.work.entity.Note;
 import com.tmooc.work.service.NoteService;
+import com.tmooc.work.util.FastDFSClientWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import java.util.List;
 public class NoteServiceImpl implements NoteService {
     @Autowired
     private NoteDao noteDao;
-
     @Override
     public Note save(Note note) {
         if (noteDao.existsByMonthAndWeekAndWeekDay(note.getMonth(),note.getWeek(),note.getWeekDay())){

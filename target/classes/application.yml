@@ -56,6 +56,18 @@ spring:
   batch:
     job:
       enabled: false
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    username: 1045404308@qq.com
+    password: zmhcvpwleeyobfhj
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 server:
   port: 8080
 
