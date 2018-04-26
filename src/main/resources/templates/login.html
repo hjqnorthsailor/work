@@ -1,0 +1,71 @@
+﻿<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/static/css/login.css}"/>
+</head>
+<body>
+<div id="sky"></div>
+<div id="head"></div>
+<div id="middle">
+    <form  action="/login" method="post">
+        <ul style="text-align: center;">
+            <li style="font-size: 48px">TMOOC work系统</li>
+            <li><input class="name" name="username" placeholder="请输入用户名"></li>
+            <li><input type="password" name="password" class="pwd" placeholder="请输入密码"></li>
+            <li>
+                <button id="login">立即登录</button>
+            </li>
+            <li><span id="err" style="display: inline-block;"></span></li>
+        </ul>
+    </form>
+</div>
+<div id="footer">
+    <a>关于我们@qq1045404308</a>
+    <a>Copyright © 2018 黄建清 保留所有权利 沪ICP备110号-1</a>
+</div>
+<div id="cloud"></div>
+<script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script language='javascript' type='text/javascript'>
+    $(document).ready(function () {
+        init();
+
+    });
+
+
+    function init() {
+
+        $(".name,.pwd,#valid").keyup(function (event) {
+            if (event.keyCode == 13) {
+                $('#login').click();
+            }
+
+        });
+        $("form").submit(function (event) {
+            var account = $(".name").val();
+            var pwd = $(".pwd").val();
+            if (!account || !pwd) {
+                $("#err").css("display", "inline-block");
+                $("#err").text("请输入用户名或密码");
+                return false;
+            }
+            // var code = $("#valid").val().toLocaleLowerCase();
+            // code = $.trim(code);
+            // if (code.length < 4) {
+            //     $("#err").css("display", "inline-block");
+            //     $("#err").text("验证码错误");
+            //     return false;
+            // }
+        });
+
+
+        // $('#changeimg').click(function () {
+        //     $('#verifyCodePic')[0].src = '/jcaptcha.jpg?' + Math.random();
+        //     return false;
+        // });
+    }
+
+</script>
+
+
+</body>
+</html>

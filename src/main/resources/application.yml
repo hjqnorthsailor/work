@@ -82,3 +82,8 @@ fdfs:
     height: 150
   tracker-list:            #TrackerList参数,支持多个
     - 140.143.0.246:22122
+shiro:
+  web:
+    enabled: true
+  loginUrl: /login
+  successUrl: /index
