@@ -33,7 +33,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="active"><a href="home">首页</a></li>
+            <li class="active"><a href="home" class="glyphicon glyphicon-home">首页</a></li>
             <th:block th:each="tab,tabStatus:${tabList}">
                 <li><a th:href="${tab.href}"><i th:class="${tab.icon}"></i><span th:text="${tab.tabName}"> </span></a></li>
             </th:block>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,11 @@ public class HomeController {
     private RedisService redisService;
     @Autowired
     private ThymeleafService thymeleafService;
+    @GetMapping("/login")
+    public String toLogin(){
+        System.out.println("login");
+        return "login";
+    }
     @RequestMapping(value = "/{index}",produces = "text/html")
     @ResponseBody
     public String showPage(@PathVariable String index, ServletWebRequest request,Model model){

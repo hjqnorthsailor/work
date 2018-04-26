@@ -7,7 +7,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -34,11 +33,12 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken= (UsernamePasswordToken) authenticationToken;
         final String username = usernamePasswordToken.getUsername();
         final User userDb = userDao.findByUsername(username);
+        System.out.println(userDb.getUsername());
         if (userDb==null){
             return  null;
         }
         SimpleAuthenticationInfo simpleAuthenticationInfo=new SimpleAuthenticationInfo(userDb,userDb.getPassword()
-        ,ByteSource.Util.bytes(userDb.getSalt()),getName());
+        ,getName());
         return simpleAuthenticationInfo;
     }
 }
