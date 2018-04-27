@@ -1,7 +1,6 @@
 package com.tmooc.work.service.impl;
 
-import com.tmooc.work.DTO.Mail;
-import com.tmooc.work.entity.Note;
+import com.tmooc.work.entity.Mail;
 import com.tmooc.work.service.MailService;
 import com.tmooc.work.service.ThymeleafService;
 import org.springframework.beans.factory.annotation.Autowired;

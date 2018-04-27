@@ -3,11 +3,18 @@ package com.tmooc.work.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
-public class SysPermission extends BaseEntity{
+public class SysPermission implements Serializable {
+    /**
+     * 主键ID自动生成策略
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
     private String name;//名称.
     @Column(columnDefinition="enum('menu','button')")
     private String resourceType;//资源类型，[menu|button]

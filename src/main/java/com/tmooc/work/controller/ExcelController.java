@@ -59,7 +59,7 @@ public class ExcelController {
     }
 
     private JobExecution getJobExecution(String remoteFilePath,Job job) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
-        String localFilePath = "E:\\test\\";//本地目录
+        String localFilePath = "/test";//本地目录
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("remoteFilePath", remoteFilePath)
                 .addString("localFilePath", localFilePath).toJobParameters();

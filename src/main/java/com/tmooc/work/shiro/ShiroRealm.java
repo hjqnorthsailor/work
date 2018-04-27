@@ -33,7 +33,6 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken= (UsernamePasswordToken) authenticationToken;
         final String username = usernamePasswordToken.getUsername();
         final User userDb = userDao.findByUsername(username);
-        System.out.println(userDb.getUsername());
         if (userDb==null){
             return  null;
         }

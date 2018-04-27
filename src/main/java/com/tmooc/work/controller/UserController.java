@@ -26,7 +26,7 @@ public class UserController {
         UsernamePasswordToken token=new UsernamePasswordToken(username,password);
         try {
             subject.login(token);
-            System.out.println(token.getUsername());
+            log.info("欢迎登陆"+subject.getPrincipal());
         } catch (Exception e) {
         log.info("验证失败");
         return "login";

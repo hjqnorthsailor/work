@@ -3,12 +3,18 @@ package com.tmooc.work.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
-public class User extends BaseEntity{
-    @Column(unique =true)
+public class User implements Serializable {
+    /**
+     * 主键ID自动生成策略
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
     private String username;//帐号
     private String name;//名称（昵称或者真实姓名，不同系统不同定义）
     private String password; //密码;

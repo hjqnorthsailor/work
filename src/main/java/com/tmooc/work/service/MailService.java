@@ -1,6 +1,6 @@
 package com.tmooc.work.service;
 
-import com.tmooc.work.DTO.Mail;
+import com.tmooc.work.entity.Mail;
 import org.springframework.ui.Model;
 import org.springframework.web.context.request.ServletWebRequest;
 

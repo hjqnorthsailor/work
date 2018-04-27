@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface NoteDao extends JpaRepository<Note,Integer> {
-    boolean existsByMonthAndWeekAndWeekDay(Integer month,Integer week,Integer weekDay);
-    Note findNoteByMonthAndWeekAndWeekDay(Integer month,Integer week,Integer weekDay);
-    List<Note> findNotesByMonthAndWeek(Integer month,Integer week);
+    boolean existsByMonthAndWeekAndWeekDayAndUser(Integer month,Integer week,Integer weekDay,String user);
+    Note findNoteByMonthAndWeekAndWeekDayAndUser(Integer month,Integer week,Integer weekDay,String user);
+    List<Note> findNotesByMonthAndWeekAndUser(Integer month,Integer week,String user);
 }

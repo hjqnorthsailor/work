@@ -19,6 +19,7 @@ public class Student extends BaseEntity{
     private String qunName;
     @Excel(name="群号",orderNum = "2")
     private String qunNum;
-    /** 备注**/
-    private String remark;
+    /** 标签**/
+    private Integer mark;
+
 }

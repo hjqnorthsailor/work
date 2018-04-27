@@ -11,7 +11,8 @@ $(function () {
             url: "/student/findAll",
             type: "POST",
             data: function (data) {//参数
-                data.studentName = $("#studentName").val();//自定义参数
+                data.user = $("#user").val();//自定义参数
+                console.log($("#user").val());
                 data.studentQQ = $("#studentQQ").val();
                 data.qunName = $("#qunName").val();
                 data.qunNum = $("#qunNum").val();
@@ -27,7 +28,6 @@ $(function () {
 
         columns: [//对接收到的json格式数据进行处理，data为json中对应的key
             {data: "id"},
-            {data: "studentName"},
             {data: "studentQQ"},
             {data: "qunName"},
             {data: "qunNum"},
@@ -35,13 +35,13 @@ $(function () {
                 data: null, render: function (data, type, row, meta) {
                     switch (row.stage) {
                         case 0:
-                            return "未跟进"
+                            return "未跟进";
                             break;
                         case 1:
-                            return "已跟进"
+                            return "已跟进";
                             break;
                         default :
-                            return "未跟进"
+                            return "未跟进";
                     }
                 }
             },
@@ -61,9 +61,35 @@ $(function () {
             },
             {
                 data: null, render: function (data, type, row, meta) {
+                    switch (row.mark) {
+                        case 1:
+                           return  '<a  class="btn btn-success" disabled="true">正常</a>';
+                           break;
+                        case 2:
+                            return  '<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>';
+                            break;
+                        case 3:
+                            return  '<a  class="btn btn-danger" disabled="true">长时间未登录</a>';
+                            break;
+                        case 4:
+                            return  '<a  class="btn btn-info" disabled="true">其他</a>';
+                            break;
+                        default :
+                            return '<div id="group' + row.studentQQ + '" class="btn-group-sm" role="group" aria-label="...">'
+                                +'<a  class="btn btn-sm btn-success" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ +','+1+ ')">正常</a>'
+                                +'<a  class="btn btn-sm btn-danger" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ + ','+2+')">未-登</a>'
+                                +'<a  class="btn btn-sm btn-warning" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ +','+3+ ')">未-未</a>'
+                                +'<a  class="btn btn-sm btn-info" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ + ','+4+')">其他</a>'
+                           +' </div>';
+                    }
+                }
+            },
+            {
+                data: null, render: function (data, type, row, meta) {
                     return '<a class="btn btn-danger" onclick="deleteStudent(' + row.id + ')">删除</a>';
                 }
-            }
+            },
+            {data: "user"}
         ],
         language: { //中文支持
             sUrl: "/webjars/datatables-plugins/1.10.16/i18n/Chinese.json"
@@ -73,10 +99,11 @@ $(function () {
         table.draw();
     });
 });
+
 <!--删除学员 -->
 function deleteStudent(id) {
-    layer.confirm("确定删除？", {btn:["确定","取消"]},
-        function(){
+    layer.confirm("确定删除？", {btn: ["确定", "取消"]},
+        function () {
             $.ajax({
                 type: 'POST',
                 url: "/student/delete",
@@ -88,11 +115,12 @@ function deleteStudent(id) {
                 }
             });
         },
-        function(){
+        function () {
             layer.closeAll();
         });
 
 }
+
 <!-- 修改学员状态-->
 function changeStage(qq) {
     $.ajax({
@@ -103,8 +131,40 @@ function changeStage(qq) {
             if (data.data.stage == 1) {
                 $("#" + qq).attr('disabled', "true");
                 $("#" + qq).html("已回访");
-                layer.msg('已对'+qq+'进行回访');
+                layer.msg('已对' + qq + '进行回访');
             }
         }
     });
 }
+    <!-- 修改学员标签-->
+    function changeMark(qq, mark) {
+        $.ajax({
+            type: 'POST',
+            url: "/student/changeMark",
+            data: {'studentQQ': qq, "mark": mark},
+            success: function (data) {
+                if (data.status == 200) {
+                    switch (mark) {
+                        case 1:
+                            $('#group'+qq).empty();
+                            $('#group'+qq).append('<a  class="btn btn-success" disabled="true">正常</a>');
+                            break;
+                        case 2:
+                            $('#group'+qq).empty();
+                            $('#group'+qq).append('<a  class="btn btn-btn-danger" disabled="true">未联系到-登陆正常</a>');
+                            break;
+                        case 3:
+                            $('#group'+qq).empty();
+                            $('#group'+qq).append('<a  class="btn btn-warning" disabled="true">长时间未登录</a>');
+                            break;
+                        case 4:
+                            $('#group'+qq).empty();
+                            $('#group'+qq).append('<a  class="btn btn-info" disabled="true">其他</a>');
+                            break;
+                    }
+                    layer.msg('已对' + qq + '备注');
+                }
+            }
+        });
+}
+

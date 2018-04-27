@@ -6,6 +6,7 @@ import com.alibaba.druid.sql.visitor.functions.If;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.dao.NoteDao;
 import com.tmooc.work.entity.Note;
+import com.tmooc.work.entity.User;
 import com.tmooc.work.service.NoteService;
 import com.tmooc.work.util.FastDFSClientWrapper;
 import org.apache.http.util.Asserts;
@@ -29,13 +30,14 @@ public class NoteController {
     @Autowired
     private FastDFSClientWrapper fastDFSClientWrapper;
     @RequestMapping("save")
-    public TmoocResult save(Note note){
-        final Note n = noteService.save(note);
+    public TmoocResult save(Note note, User user){
+        note.setUser(user.getUsername());
+        final Note n = noteService.save(note,user);
         return TmoocResult.ok(n);
     }
     @RequestMapping("findAll")
-    public TmoocResult findAll(Note note){
-        final List<Note> notes = noteService.findAll(note);
+    public TmoocResult findAll(Note note,User user){
+        final List<Note> notes = noteService.findAll(note,user);
         Map<Integer,Object> dailyNote=new HashMap<>();
         notes.forEach(n->{if (n!=null)dailyNote.put(n.getWeekDay(),n);});
         int totalAnswer=0,totalRemote=0,totalCount=0,totalValidCount=0,totalBroadcast=0,totalInputTitle=0
@@ -57,8 +59,8 @@ public class NoteController {
         return TmoocResult.ok(dailyNote);
     }
     @RequestMapping("download")
-    public TmoocResult dowloadExcel(Note note) throws IOException {
-        final List<Note> notes = noteService.findAll(note);
+    public TmoocResult dowloadExcel(Note note,User user) throws IOException {
+        final List<Note> notes = noteService.findAll(note,user);
         System.out.println(notes.size());
         Map<String,Object> dailyNote=new HashMap<>();
         notes.forEach(n->dailyNote.put("week"+n.getWeekDay().toString(),n));

@@ -48,5 +48,9 @@ public abstract class BaseEntity implements Serializable {
     @UpdateTimestamp
     @JsonIgnore
     protected Date updateDateTime;
+    /**
+     * 操作人
+     */
+    protected  String user;
 ;
 }

@@ -5,6 +5,7 @@ import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.DTO.DataTablesResponse;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.Student;
+import com.tmooc.work.entity.User;
 import com.tmooc.work.service.StudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,24 +32,25 @@ public class StudentController {
      */
     @RequestMapping("/student/findAll")
     public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest){
-        System.out.println(dataTablesRequest.getStudentName());
         int size=dataTablesRequest.getLength();
         int s=dataTablesRequest.getStart();
         int page=s/size;
         Student student=new Student();
         copyProperties(dataTablesRequest,student);//拷贝参数
+        System.out.println(student.getUser());
         PageRequest pageRequest = new PageRequest(page, size);//分页请求
         /**
          * 查询匹配器
          */
         ExampleMatcher matcher=ExampleMatcher.matching()
-                .withMatcher("studentName",m->m.contains())//模糊匹配
+                .withMatcher("user",m->m.contains())//模糊匹配
                 .withMatcher("studentQQ",m->m.exact())//精确匹配
                 .withMatcher("qunName",m->m.contains())
                 .withMatcher("qunNum",m->m.exact())
                 .withMatcher("stage",m->m.exact());
         Example<Student> studentExample=Example.of(student,matcher);//JPA Example查询
         final Page<Student> studentList = studentService.findAll(studentExample,pageRequest);
+        System.out.println(studentList.getTotalElements());
         long total=studentService.getTotal(studentExample);
         return new DataTablesResponse(dataTablesRequest.getDraw(),total,total,"",studentList.getContent());
     }
@@ -59,13 +61,23 @@ public class StudentController {
      * @return
      */
     @PostMapping("/student/changeStage")
-    public TmoocResult changeStage(String studentQQ){
-        Student student = studentService.changeStage(studentQQ);
+    public TmoocResult changeStage(String studentQQ, User user){
+        Student student = studentService.changeStage(studentQQ,user);
+        return  TmoocResult.ok(student);
+    }
+    /**
+     * 修改学员标签
+     * @param studentQQ
+     * @return
+     */
+    @PostMapping("/student/changeMark")
+    public TmoocResult changeMark(String studentQQ,Integer mark, User user){
+        Student student = studentService.changeMark(studentQQ,mark,user);
         return  TmoocResult.ok(student);
     }
     @PostMapping("/student/delete")
-    public TmoocResult deleteStudent(Integer id){
-        studentService.delete(id);
+    public TmoocResult deleteStudent(Integer id, User user){
+        studentService.delete(id,user);
         return  TmoocResult.ok();
     }
     /**
@@ -75,8 +87,8 @@ public class StudentController {
      * @return
      */
     private Student copyProperties(DataTablesRequest request,Student student){
-        if (StringUtils.isNotEmpty(request.getStudentName())){
-            student.setStudentName(request.getStudentName());
+        if (StringUtils.isNotEmpty(request.getUser())){
+            student.setUser(request.getUser());
         }
         if (StringUtils.isNotEmpty(request.getStudentQQ())){
             student.setStudentQQ(request.getStudentQQ());
@@ -90,6 +102,10 @@ public class StudentController {
         if (StringUtils.isNotEmpty(request.getStage())){
             student.setStage(Integer.parseInt(request.getStage()));
         }
+        if (StringUtils.isNotEmpty(request.getMark())){
+            student.setMark(Integer.parseInt(request.getMark()));
+        }
+
         return student;
     }
 
