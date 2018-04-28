@@ -11,8 +11,8 @@ public interface StudentService {
     Page<Student> findAll(PageRequest request);
     Page<Student> findAll(Example<Student> studentExample,PageRequest request);
     Long getTotal(Example<Student> studentExample);
-    Student changeStage(String studentQQ, User user);
+    Student changeStage(Integer id, User user);
     void delete(Integer id, User user);
-
-    Student changeMark(String studentQQ,Integer mark, User user);
+    void delete(String studentQQ);
+    Student changeMark(Integer id,Integer mark, User user);
 }

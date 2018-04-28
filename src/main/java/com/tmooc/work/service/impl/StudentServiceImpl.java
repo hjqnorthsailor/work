@@ -31,8 +31,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student changeStage(String studentQQ,User user) {
-        Student student = studentDao.findByStudentQQ(studentQQ);
+    public Student changeStage(Integer id,User user) {
+        Student student = studentDao.findOne(id);
         student.setStage(1);
         student.setUser(user.getUsername());
         return  studentDao.saveAndFlush(student);
@@ -41,21 +41,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void delete(Integer id, User user) {
         studentDao.delete(id);
-        saveUser(id,user);
 
     }
 
     @Override
-    public Student changeMark(String studentQQ,Integer mark, User user) {
-        Student student = studentDao.findByStudentQQ(studentQQ);
+    public void delete(String studentQQ) {
+        studentDao.deleteAllByStudentQQ(studentQQ);
+    }
+
+    @Override
+    public Student changeMark(Integer id,Integer mark, User user) {
+        Student student = studentDao.findOne(id);
         student.setMark(mark);
         student.setUser(user.getUsername());
         return  studentDao.saveAndFlush(student);
     }
 
-    private void saveUser(Integer id, User user){
-        Student student = studentDao.getOne(id);
-        student.setUser(user.getUsername());
-        studentDao.saveAndFlush(student);
-    }
 }

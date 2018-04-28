@@ -57,27 +57,27 @@ public class StudentController {
 
     /**
      * 修改学员跟进状态
-     * @param studentQQ
+     * @param
      * @return
      */
     @PostMapping("/student/changeStage")
-    public TmoocResult changeStage(String studentQQ, User user){
-        Student student = studentService.changeStage(studentQQ,user);
+    public TmoocResult changeStage(Integer id, User user){
+        Student student = studentService.changeStage(id,user);
         return  TmoocResult.ok(student);
     }
     /**
      * 修改学员标签
-     * @param studentQQ
+     * @param
      * @return
      */
     @PostMapping("/student/changeMark")
-    public TmoocResult changeMark(String studentQQ,Integer mark, User user){
-        Student student = studentService.changeMark(studentQQ,mark,user);
+    public TmoocResult changeMark(Integer id,Integer mark, User user){
+        Student student = studentService.changeMark(id,mark,user);
         return  TmoocResult.ok(student);
     }
     @PostMapping("/student/delete")
-    public TmoocResult deleteStudent(Integer id, User user){
-        studentService.delete(id,user);
+    public TmoocResult deleteStudent(String studentQQ){
+        studentService.delete(studentQQ);
         return  TmoocResult.ok();
     }
     /**

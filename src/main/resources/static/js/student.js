@@ -53,9 +53,9 @@ $(function () {
             {
                 data: null, render: function (data, type, row, meta) {
                     if (row.stage == 1) {
-                        return '<a class="btn btn-info" id="' + row.studentQQ + '" onclick="changeStage(' + row.studentQQ + ')" disabled="true">已回访</a>';
+                        return '<a class="btn btn-info" id="' + row.id + '" onclick="changeStage(' + row.id + ')" disabled="true">已回访</a>';
                     } else {
-                        return '<a class="btn btn-info" id="' + row.studentQQ + '" onclick="changeStage(' + row.studentQQ + ')">回访</a>';
+                        return '<a class="btn btn-info" id="' + row.id + '" onclick="changeStage(' + row.id + ')">回访</a>';
                     }
                 }
             },
@@ -69,17 +69,21 @@ $(function () {
                             return  '<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>';
                             break;
                         case 3:
-                            return  '<a  class="btn btn-danger" disabled="true">长时间未登录</a>';
+                            return  '<a  class="btn btn-danger" disabled="true">未联系到-长时间未登录</a>';
                             break;
                         case 4:
-                            return  '<a  class="btn btn-info" disabled="true">其他</a>';
+                            return  '<a  class="btn btn-info" disabled="true">账号过期</a>';
+                            break;
+                        case 5:
+                            return  '<a  class="btn btn-default" disabled="true">其他</a>';
                             break;
                         default :
-                            return '<div id="group' + row.studentQQ + '" class="btn-group-sm" role="group" aria-label="...">'
-                                +'<a  class="btn btn-sm btn-success" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ +','+1+ ')">正常</a>'
-                                +'<a  class="btn btn-sm btn-danger" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ + ','+2+')">未-登</a>'
-                                +'<a  class="btn btn-sm btn-warning" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ +','+3+ ')">未-未</a>'
-                                +'<a  class="btn btn-sm btn-info" id="' + row.studentQQ + '" onclick="changeMark(' + row.studentQQ + ','+4+')">其他</a>'
+                            return '<div id="group' + row.id + '" class="btn-group-sm" role="group" aria-label="...">'
+                                +'<a  class="btn btn-sm btn-success" id="' + row.id + '" onclick="changeMark(' + row.id +','+1+ ')">正常</a>'
+                                +'<a  class="btn btn-sm btn-warning" id="' + row.id + '" onclick="changeMark(' + row.id + ','+2+')">未-登</a>'
+                                +'<a  class="btn btn-sm btn-danger" id="' + row.id + '" onclick="changeMark(' + row.id +','+3+ ')">未-未</a>'
+                                +'<a  class="btn btn-sm btn-info" id="' + row.id + '" onclick="changeMark(' + row.id + ','+4+')">账号过期</a>'
+                                +'<a  class="btn btn-sm btn-default" id="' + row.id + '" onclick="changeMark(' + row.id + ','+5+')">其他</a>'
                            +' </div>';
                     }
                 }
@@ -122,49 +126,53 @@ function deleteStudent(id) {
 }
 
 <!-- 修改学员状态-->
-function changeStage(qq) {
+function changeStage(id) {
     $.ajax({
         type: 'POST',
         url: "/student/changeStage",
-        data: {'studentQQ': qq},
+        data: {'id': id},
         success: function (data) {
             if (data.data.stage == 1) {
-                $("#" + qq).attr('disabled', "true");
-                $("#" + qq).html("已回访");
-                layer.msg('已对' + qq + '进行回访');
+                $("#" + id).attr('disabled', "true");
+                $("#" + id).html("已回访");
+                layer.msg('进行回访完毕');
             }
         }
     });
 }
     <!-- 修改学员标签-->
-    function changeMark(qq, mark) {
+    function changeMark(id, mark) {
+        console.log(id);
         $.ajax({
             type: 'POST',
             url: "/student/changeMark",
-            data: {'studentQQ': qq, "mark": mark},
+            data: {'id':id, "mark": mark},
             success: function (data) {
                 if (data.status == 200) {
                     switch (mark) {
                         case 1:
-                            $('#group'+qq).empty();
-                            $('#group'+qq).append('<a  class="btn btn-success" disabled="true">正常</a>');
+                            $('#group'+id).empty();
+                            $('#group'+id).append('<a  class="btn btn-success" disabled="true">正常</a>');
                             break;
                         case 2:
-                            $('#group'+qq).empty();
-                            $('#group'+qq).append('<a  class="btn btn-btn-danger" disabled="true">未联系到-登陆正常</a>');
+                            $('#group'+id).empty();
+                            $('#group'+id).append('<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>');
                             break;
                         case 3:
-                            $('#group'+qq).empty();
-                            $('#group'+qq).append('<a  class="btn btn-warning" disabled="true">长时间未登录</a>');
+                            $('#group'+id).empty();
+                            $('#group'+id).append('<a  class="btn btn-danger" disabled="true">未联系到-长时间未登录</a>');
                             break;
                         case 4:
-                            $('#group'+qq).empty();
-                            $('#group'+qq).append('<a  class="btn btn-info" disabled="true">其他</a>');
+                            $('#group'+id).empty();
+                            $('#group'+id).append('<a  class="btn btn-info" disabled="true">账号已过期</a>');
+                            break;
+                        case 5:
+                            $('#group'+id).empty();
+                            $('#group'+id).append('<a  class="btn btn-info" disabled="true">其他</a>');
                             break;
                     }
-                    layer.msg('已对' + qq + '备注');
+                    layer.msg('备注成功');
                 }
             }
         });
 }
-

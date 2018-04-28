@@ -8,4 +8,5 @@ public interface StudentDao extends JpaRepository<Student,Integer> {
     Student findByStudentQQ(String studentQQ);
 
     void delete(Integer id);
+    void deleteAllByStudentQQ(String studentQQ);
 }
