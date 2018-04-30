@@ -91,4 +91,5 @@ shiro:
   successUrl: /index
 my:
   properties:
-    excel-template-path: /Users/northsailor/Downloads/work/src/main/resources/templates/excel/
+    excel-template-path: /work/excel/
+    local-file-path: /work/tem/
