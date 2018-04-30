@@ -18,4 +18,5 @@ public class Mail extends SimpleMailMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     private String user;
+    private String filePath;
 }

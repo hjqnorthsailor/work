@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URI;
 import java.util.*;
 public class MyExcelUtils {
     public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response) {
@@ -62,7 +63,13 @@ public class MyExcelUtils {
         List<T> list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
         return list;
     }
-
+    public static <T> List<T> importExcel(URI filePath, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
+        ImportParams params = new ImportParams();
+        params.setTitleRows(titleRows);
+        params.setHeadRows(headerRows);
+        List<T> list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
+        return list;
+    }
     public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
         if (file == null) {
             return null;

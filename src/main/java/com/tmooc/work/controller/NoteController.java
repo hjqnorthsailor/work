@@ -45,6 +45,13 @@ public class NoteController {
         final Note n = noteService.save(note,user);
         return TmoocResult.ok(n);
     }
+
+    /**
+     * 获取对应用户的周报内容
+     * @param note
+     * @param user
+     * @return
+     */
     @RequestMapping("findAll")
     public TmoocResult findAll(Note note,User user){
         final List<Note> notes = noteService.findAll(note,user);
@@ -55,6 +62,14 @@ public class NoteController {
         return TmoocResult.ok(dailyNote);
     }
 
+    /**
+     * 导入周报数据到模板上并下载
+     * @param note
+     * @param response
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("download")
     public TmoocResult writeExcel(Note note, HttpServletResponse response,User user) throws Exception {
         String templatePath=myProperties.getExcelTemplatePath()+"note.xlsx";
@@ -69,8 +84,14 @@ public class NoteController {
         JxlsUtils.exportExcel(templatePath, os, noteMap);
         os.close();
         JxlsUtils.doDownLoad(userNotePath,fileName,response);
-        return  TmoocResult.ok(fileName);
+        return  TmoocResult.ok(userNotePath);
     }
+
+    /**
+     * 计算总值
+     * @param notes
+     * @return
+     */
     private Note getNote(List<Note> notes) {
         int totalAnswer=0,totalRemote=0,totalCount=0,totalValidCount=0,totalBroadcast=0,totalInputTitle=0
                 ,totalForward=0,totalOther=0;

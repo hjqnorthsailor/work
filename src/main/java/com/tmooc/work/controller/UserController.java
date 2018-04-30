@@ -1,6 +1,5 @@
 package com.tmooc.work.controller;
 
-import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.User;
 import lombok.extern.java.Log;
 import org.apache.shiro.SecurityUtils;

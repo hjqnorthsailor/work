@@ -9,6 +9,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -31,6 +34,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public Student changeStage(Integer id,User user) {
         Student student = studentDao.findOne(id);
         student.setStage(1);
@@ -39,12 +43,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer id, User user) {
         studentDao.delete(id);
 
     }
 
     @Override
+    @Transactional
     public void delete(String studentQQ) {
         studentDao.deleteAllByStudentQQ(studentQQ);
     }
@@ -55,6 +61,12 @@ public class StudentServiceImpl implements StudentService {
         student.setMark(mark);
         student.setUser(user.getUsername());
         return  studentDao.saveAndFlush(student);
+    }
+
+    @Override
+    @Transactional
+    public void save(List<Student> list) {
+        studentDao.save(list);
     }
 
 }

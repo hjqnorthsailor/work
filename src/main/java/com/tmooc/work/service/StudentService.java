@@ -6,6 +6,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 public interface StudentService {
     /** 分页查询所有学生**/
     Page<Student> findAll(PageRequest request);
@@ -15,4 +17,5 @@ public interface StudentService {
     void delete(Integer id, User user);
     void delete(String studentQQ);
     Student changeMark(Integer id,Integer mark, User user);
+    void save(List<Student> list);
 }

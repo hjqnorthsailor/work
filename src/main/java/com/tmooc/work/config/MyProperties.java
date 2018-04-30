@@ -11,4 +11,5 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class MyProperties {
     private String excelTemplatePath="/Users/northsailor/Downloads/work/src/main/resources/templates/";
+    private String localFilePath="/Users/northsailor/Downloads/work/src/main/resources/templates/test/";;
 }

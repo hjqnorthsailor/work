@@ -4,6 +4,7 @@ import com.tmooc.work.entity.Mail;
 import com.tmooc.work.service.MailService;
 import com.tmooc.work.service.ThymeleafService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,8 @@ public class MailServiceImpl implements MailService {
             helper.setFrom(mail.getFrom());
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
+            FileSystemResource resource=new FileSystemResource(mail.getFilePath());
+            helper.addAttachment("周报.xlsx",resource);
             helper.setText(html,true);
         } catch (MessagingException e) {
             e.printStackTrace();
