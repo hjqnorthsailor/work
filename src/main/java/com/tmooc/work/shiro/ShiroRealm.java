@@ -5,8 +5,10 @@ import com.tmooc.work.entity.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -36,8 +38,10 @@ public class ShiroRealm extends AuthorizingRealm {
         if (userDb==null){
             return  null;
         }
-        SimpleAuthenticationInfo simpleAuthenticationInfo=new SimpleAuthenticationInfo(userDb,userDb.getPassword()
-        ,getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo=
+                new SimpleAuthenticationInfo(userDb,userDb.getPassword(),getName());
         return simpleAuthenticationInfo;
     }
+
+
 }

@@ -124,7 +124,7 @@
                         <img th:src="@{/webjars/AdminLTE/2.4.2/dist/img/user2-160x160.jpg}" class="user-image"
                              alt="User Image"/>
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">黄建清</span>
+                        <span class="hidden-xs" th:text="${username}"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
@@ -133,8 +133,8 @@
                                  alt="User Image"/>
 
                             <p>
-                                黄建清 - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <span  th:text="${username}"> - JAVA Developer</span>
+                                <small>Member since Nov. 2017</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -158,7 +158,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/user/logout" class="btn btn-default btn-flat">退出</a>
                             </div>
                         </li>
                     </ul>

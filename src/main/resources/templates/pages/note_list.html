@@ -130,8 +130,12 @@
             <td><input type="number" class="form-control input-sm" name="inputTitle" readonly="true"/></td>
             <td><input type="number" class="form-control input-sm" name="forward" readonly="true"/></td>
             <td><input type="number" class="form-control input-sm" name="other" readonly="true"/></td>
-            <td><input type="button" class="btn btn-info" value="保存" onclick="saveNote(this)"/>
-                <input type="button" class="btn btn-info" value="发送邮件" onclick="uploadAndSend(this)"/></td>
+            <td><div class="btn-group">
+                <input type="button" class="btn btn-info" onclick="saveNote(this)" value="保存"/>
+                <input type="button" class="btn btn-default"  onclick="download(this)" value="下载"/>
+                <input type="button" class="btn btn-success" value="发送邮件"/>
+            </div>
+            </td>
         </tr>
     </form>
     </tbody>
@@ -219,7 +223,7 @@
         });
 
     }
-    function uploadAndSend(obj){
+    function download(obj){
         var form = $(obj.form);
         console.log(form);
         var now = new Date();
@@ -232,19 +236,21 @@
         note.push(month);
         note.push(week);
         console.log(note);
-        $.ajax({
-            type: 'post',
-            url: '/note/download',
-            data: note,
-            dataType: "json",
-            success: function (result) {
-                if (result.status == 200) {
-                    var filePath=result.data;
-                    sendMail(obj,filePath);
-                }
-            }
+        var url="/note/download"
+        var downloadForm = $('<form method="POST" action="' + url + '">');
+        for(var k in note){
+            console.log(note[k].name);
+            downloadForm.append($('<input type="hidden" name="' + note[k].name+
+                            '" value="' + note[k].value + '"/>'));
+        }
+        downloadForm.append("</form>");
+        layer.confirm("确定下载？", {btn: ["确定", "取消"]},
+            function () {
+                downloadForm.appendTo('body').submit();
+            }, function () {
+                layer.closeAll();
+            });
 
-        });
     }
     function sendMail(obj,filePath){
         var form = $(obj.form);

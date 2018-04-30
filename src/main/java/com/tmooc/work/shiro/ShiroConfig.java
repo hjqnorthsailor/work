@@ -22,19 +22,10 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/static/**", "anon");
         chainDefinition.addPathDefinition("/webjars/**", "anon");
         chainDefinition.addPathDefinition("/user/login", "anon");
-        chainDefinition.addPathDefinition("/logout", "logout");
+        chainDefinition.addPathDefinition("/user/logout", "logout");
         chainDefinition.addPathDefinition("/**", "authc");
         return chainDefinition;
     }
-
-//    @Bean
-//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-//        hashedCredentialsMatcher.setHashAlgorithmName("md5");// 散列算法:这里使用MD5算法;
-//        hashedCredentialsMatcher.setHashIterations(2);// 散列的次数，比如散列两次，相当于md5(md5(""));
-//        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);//表示是否存储散列后的密码为16进制，需要和生成密码时的一样，默认是base64；
-//         return hashedCredentialsMatcher;
-//    }
 
         @Bean
         protected CacheManager cacheManager () {
