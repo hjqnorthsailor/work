@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ad3770-873f-4363-8f11-01b2724f1bb3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/batch/StudentTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/HuoYueService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/HuoYueServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/batch/HuoYueTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/batch/HuoYueTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/config/MyProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/config/MyProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/ExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/ExcelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Mail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/MailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/MailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/NoteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/NoteServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/util/MyExcelUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/util/MyExcelUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/controller/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/controller/HomeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/StudentService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/impl/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/impl/StudentServiceImpl.class" afterDir="false" />
@@ -54,16 +40,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NoteController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NoteController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+            <state relative-caret-position="-319">
+              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MailController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MailController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/MailController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="333">
@@ -92,7 +81,7 @@
       <file leaf-file-name="note_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/note_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
+            <state relative-caret-position="228">
               <caret line="258" column="34" lean-forward="true" selection-start-line="258" selection-start-column="34" selection-end-line="258" selection-end-column="34" />
             </state>
           </provider>
@@ -231,10 +220,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/ExcelController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/batch/HuoYueTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Mail.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/MailServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java" />
       </list>
     </option>
   </component>
@@ -694,7 +683,7 @@
       <workItem from="1524830847446" duration="5988000" />
       <workItem from="1524933169248" duration="27537000" />
       <workItem from="1525069803848" duration="6482000" />
-      <workItem from="1525076496647" duration="11451000" />
+      <workItem from="1525076496647" duration="11843000" />
     </task>
     <task id="LOCAL-00001" summary="实现了batch，目前泛型存在问题">
       <created>1523441031540</created>
@@ -745,7 +734,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525083426027</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="添加了注释，优化了上传，默认上传到本地，舍弃使用fastdfs并再次下载到本地的方式">
+      <created>1525095145272</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1525095145272</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -781,11 +777,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="226583000" />
+    <option name="totallyTimeSpent" value="226975000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="812" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50214595" side_tool="true" weight="0.4755245" />
@@ -835,7 +830,8 @@
     <MESSAGE value="完善了学生回访功能" />
     <MESSAGE value="完善了周报系统，可以完美的导出模板excel" />
     <MESSAGE value="删去了华而不实的batch操作，改用forkjoin框架实现达到率导入" />
-    <option name="LAST_COMMIT_MESSAGE" value="删去了华而不实的batch操作，改用forkjoin框架实现达到率导入" />
+    <MESSAGE value="添加了注释，优化了上传，默认上传到本地，舍弃使用fastdfs并再次下载到本地的方式" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了注释，优化了上传，默认上传到本地，舍弃使用fastdfs并再次下载到本地的方式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1151,13 +1147,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-526">
@@ -1203,17 +1192,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/note_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="258" column="34" lean-forward="true" selection-start-line="258" selection-start-column="34" selection-end-line="258" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/MailController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
           <caret line="28" column="26" lean-forward="true" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/note_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="258" column="34" lean-forward="true" selection-start-line="258" selection-start-column="34" selection-end-line="258" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-319">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -1,30 +1,16 @@
 package com.tmooc.work.controller;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.annotation.Excel;
-import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
-import com.alibaba.druid.sql.visitor.functions.If;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.config.MyProperties;
-import com.tmooc.work.dao.NoteDao;
 import com.tmooc.work.entity.Note;
 import com.tmooc.work.entity.User;
 import com.tmooc.work.service.NoteService;
 import com.tmooc.work.util.FastDFSClientWrapper;
 import com.tmooc.work.util.JxlsUtils;
-import org.apache.http.util.Asserts;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.jxls.util.JxlsConfigProvider;
-import org.jxls.util.JxlsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.JstlUtils;
-
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Transformer;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +21,6 @@ import java.util.Map;
 public class NoteController {
     @Autowired
     private NoteService noteService;
-    @Autowired
-    private FastDFSClientWrapper fastDFSClientWrapper;
     @Autowired
     private MyProperties myProperties;
     @RequestMapping("save")
@@ -74,7 +58,7 @@ public class NoteController {
     public TmoocResult writeExcel(Note note, HttpServletResponse response,User user) throws Exception {
         String templatePath=myProperties.getExcelTemplatePath()+"note.xlsx";
         String fileName=user.getUsername()+"_"+note.getMonth()+"_"+note.getWeek()+".xlsx";
-        String userNotePath=myProperties.getExcelTemplatePath()+fileName;
+        String userNotePath=myProperties.getExcelTemplatePath()+user.getUsername()+"/"+fileName;//设置临时文件存储在/用户文件夹下
         OutputStream os=new FileOutputStream(userNotePath);
         final List<Note> notes = noteService.findAll(note,user);
         Map<String,Object> noteMap=new HashMap<>();
