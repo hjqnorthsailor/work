@@ -68,6 +68,8 @@ spring:
           starttls:
             enable: true
             required: true
+  aop:
+    proxy-target-class: true
 server:
   port: 8080
 
