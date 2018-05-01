@@ -5,19 +5,23 @@ import com.tmooc.work.config.MyProperties;
 import com.tmooc.work.entity.Note;
 import com.tmooc.work.entity.User;
 import com.tmooc.work.service.NoteService;
-import com.tmooc.work.util.FastDFSClientWrapper;
 import com.tmooc.work.util.JxlsUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import org.springframework.web.context.request.ServletWebRequest;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/note")
+@Slf4j
 public class NoteController {
     @Autowired
     private NoteService noteService;
@@ -49,17 +53,24 @@ public class NoteController {
     /**
      * 导入周报数据到模板上并下载
      * @param note
-     * @param response
+     * @param
      * @param user
      * @return
      * @throws Exception
      */
     @RequestMapping("download")
-    public TmoocResult writeExcel(Note note, HttpServletResponse response,User user) throws Exception {
+    public TmoocResult writeExcel(Note note, ServletWebRequest request, User user) throws Exception {
+        System.out.println(request.getRequest().getContextPath());
         String templatePath=myProperties.getExcelTemplatePath()+"note.xlsx";
         String fileName=user.getUsername()+"_"+note.getMonth()+"_"+note.getWeek()+".xlsx";
-        String userNotePath=myProperties.getExcelTemplatePath()+user.getUsername()+"/"+fileName;//设置临时文件存储在/用户文件夹下
-        OutputStream os=new FileOutputStream(userNotePath);
+        String userNotePath=myProperties.getExcelTemplatePath()+user.getUsername();//设置临时文件存储在/用户文件夹下
+        File file=new File(userNotePath);
+        if (!file.exists()){
+            file.mkdir();
+            log.info("创建了"+file);
+        }
+        String userFile=userNotePath+"/"+fileName;
+        OutputStream os=new FileOutputStream(userNotePath+"/"+userFile);
         final List<Note> notes = noteService.findAll(note,user);
         Map<String,Object> noteMap=new HashMap<>();
         notes.forEach(n->noteMap.put("week"+n.getWeekDay().toString(),n));
@@ -67,7 +78,7 @@ public class NoteController {
         noteMap.put("week8",note8);
         JxlsUtils.exportExcel(templatePath, os, noteMap);
         os.close();
-        JxlsUtils.doDownLoad(userNotePath,fileName,response);
+        JxlsUtils.doDownLoad(userFile,fileName,request.getResponse());
         return  TmoocResult.ok(userNotePath);
     }
 

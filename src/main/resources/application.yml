@@ -15,7 +15,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+#    show-sql: true
     database: mysql
     database-platform: com.tmooc.work.config.MySQL5InnoDBDialectUtf8mb4
     open-in-view: true
@@ -44,7 +44,7 @@ spring:
   resources:
     add-mappings: true
     cache-period: 3600
-    static-locations: classpath:/static/
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,file:${my.properties.excel-template-path},file:${my.properties.local-file-path}
     chain:
       cache: true
       enabled: true
@@ -92,4 +92,4 @@ shiro:
 my:
   properties:
     excel-template-path: /work/excel/
-    local-file-path: /work/tem/
+    local-file-path: /work/tmp/

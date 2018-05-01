@@ -4,7 +4,6 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
-import org.apache.catalina.util.URLEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,33 +11,34 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.*;
 public class MyExcelUtils {
-    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response) {
+    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response) throws UnsupportedEncodingException {
         ExportParams exportParams = new ExportParams(title, sheetName);
         exportParams.setCreateHeadRows(isCreateHeader);
         defaultExport(list, pojoClass, fileName, response, exportParams);
     }
 
-    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, HttpServletResponse response) {
+    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, HttpServletResponse response) throws UnsupportedEncodingException {
         defaultExport(list, pojoClass, fileName, response, new ExportParams(title, sheetName));
     }
 
-    public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
+    public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response) throws UnsupportedEncodingException {
         defaultExport(list, fileName, response);
     }
 
-    private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName, HttpServletResponse response, ExportParams exportParams) {
+    private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName, HttpServletResponse response, ExportParams exportParams) throws UnsupportedEncodingException {
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, pojoClass, list);
         if (workbook != null) ;
         downLoadExcel(fileName, response, workbook);
     }
 
-    private static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
+    private static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) throws UnsupportedEncodingException {
 
             response.setCharacterEncoding("UTF-8");
             response.setHeader("content-Type", "application/vnd.ms-excel");
-            response.setHeader("Content-Disposition", "attachment;filename=" +URLEncoder.DEFAULT.encode(fileName, "UTF-8"));
+            response.setHeader("Content-Disposition", "attachment;filename=" +URLEncoder.encode(fileName, "UTF-8"));
         try {
             workbook.write(response.getOutputStream());
         } catch (IOException e) {
@@ -47,7 +47,7 @@ public class MyExcelUtils {
 
     }
 
-    private static void defaultExport(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
+    private static void defaultExport(List<Map<String, Object>> list, String fileName, HttpServletResponse response) throws UnsupportedEncodingException {
         Workbook workbook = ExcelExportUtil.exportExcel(list, ExcelType.HSSF);
         if (workbook != null) ;
         downLoadExcel(fileName, response, workbook);

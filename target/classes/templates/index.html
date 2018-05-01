@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="/common/common_top :: commonTop"></head>
+<head th:include="common/common_top :: commonTop"></head>
 
 <body class="hold-transition skin-blue-light fixed">
 <div class="wrapper">
 
     <!-- Main Header -->
-    <header class="main-header" th:include="/common/main_header :: mainHeader">
+    <header class="main-header" th:include="common/main_header :: mainHeader">
 
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar" th:include="/common/main_sidebar :: mainSidebar">
+    <aside class="main-sidebar" th:include="common/main_sidebar :: mainSidebar">
 
     </aside>
 
@@ -18,7 +18,7 @@
     <div class="content-wrapper">
 
         <section class="content container-fluid">
-            <div th:include="${'/pages/'+title}"></div>
+            <div th:include="${'pages/'+title}"></div>
         </section>
         <!-- /.content -->
     </div>
@@ -31,9 +31,9 @@
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark"
-           th:include="/common/main_controlSidebar :: controlSidebar"></aside>
+           th:include="common/main_controlSidebar :: controlSidebar"></aside>
 </div>
-<div th:include="/common/onload_js :: onloadJS"></div>
+<div th:include="common/onload_js :: onloadJS"></div>
 <!-- 加载页面-->
 <script type="text/javascript" th:src="@{/static/js/student.js}"></script>
 </body>

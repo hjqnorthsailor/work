@@ -32,10 +32,12 @@ public class HomeController {
     private RedisService redisService;
     @Autowired
     private ThymeleafService thymeleafService;
-
+    @GetMapping("/")
+    public String home() {
+        return "login";
+    }
     @GetMapping("/login")
     public String toLogin() {
-        System.out.println("login");
         return "login";
     }
 
@@ -50,7 +52,6 @@ public class HomeController {
     @RequestMapping(value = "/{index}", produces = "text/html")
     @ResponseBody
     public String showPage(@PathVariable String index, ServletWebRequest request, Model model, User user) {
-        System.out.println("欢迎登陆" + user.getUsername());
         String html;
         if (redisService.exists(TabKey.tabListKey, index)) {
             html = redisService.get(TabKey.tabListKey, index, new TypeReference<String>() {

@@ -2,6 +2,7 @@ package com.tmooc.work.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 
@@ -99,7 +100,7 @@ public class ExcelController {
      * @param week
      */
     @RequestMapping("/export")
-    public void export(HttpServletResponse response,Integer month,Integer week) {
+    public void export(HttpServletResponse response,Integer month,Integer week) throws UnsupportedEncodingException {
         //需要导出的数据
         List<Reach> reachList = reachService.queryReachRate(month, week);
         //导出操作
