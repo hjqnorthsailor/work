@@ -53,12 +53,12 @@ public class HomeController {
     @ResponseBody
     public String showPage(@PathVariable String index, ServletWebRequest request, Model model, User user) {
         String html;
-        if (redisService.exists(TabKey.tabListKey, index)) {
-            html = redisService.get(TabKey.tabListKey, index, new TypeReference<String>() {
-            });
-            log.info("使用了缓存"+index);
-            return html;
-        }
+//        if (redisService.exists(TabKey.tabListKey, index)) {
+//            html = redisService.get(TabKey.tabListKey, index, new TypeReference<String>() {
+//            });
+//            log.info("使用了缓存"+index);
+//            return html;
+//        }
         final List<Tab> tabList = tabService.findAll();
         if (!StringUtils.isEmpty(index)) {
             if (index.equals("index")) {
@@ -67,9 +67,10 @@ public class HomeController {
             model.addAttribute("title", index);
         }
         model.addAttribute("tabList", tabList);
+        model.addAttribute("username",user.getName());
         html = thymeleafService.process(request, model, "index");
-        redisService.set(TabKey.tabListKey, index, html);
-        log.info("更新了缓存"+index);
+//        redisService.set(TabKey.tabListKey, index, html);
+//        log.info("更新了缓存"+index);
         return html;
     }
 

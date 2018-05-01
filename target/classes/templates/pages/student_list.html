@@ -7,31 +7,31 @@
         <form class='form-horizontal container-fluid'>
             <div class='row'>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">跟踪老师</label>
+                    <label class="col-sm-1 control-label">跟踪老师</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control input-sm" id="user"
                                placeholder="老师姓名"/>
                     </div>
-                    <label class="col-sm-2 control-label">QQ</label>
+                    <label class="col-sm-1 control-label">QQ</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control input-sm" id="studentQQ"
                                placeholder="请输入学员姓名"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">群名称</label>
+                    <label class="col-sm-1 control-label">群名称</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control input-sm" id="qunName"
                                placeholder="请输入群名"/>
                     </div>
-                    <label class="col-sm-2 control-label">群号</label>
+                    <label class="col-sm-1 control-label">群号</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control input-sm" id="qunNum"
                                placeholder="请输入群号"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">跟踪阶段</label>
+                    <label class="col-sm-1 control-label">跟踪阶段</label>
                     <div class="col-sm-3">
                         <select class="form-control input-sm" id="stage" name="stage"
                                 placeholder="请选择片区">
@@ -40,8 +40,20 @@
                             <option value="1">已跟进</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 control-label"></label>
+                    <label class="col-sm-1 control-label">备注</label>
                     <div class="col-sm-3">
+                        <select class="form-control input-sm" id="mark" name="mark"
+                                placeholder="请选择片区">
+                            <option value="">请选择</option>
+                            <option value="0">未跟进</option>
+                            <option value="1">正常</option>
+                            <option value="2">未联系到-登陆正常</option>
+                            <option value="3">未联系到-长时间未登录</option>
+                            <option value="4">账号已过期</option>
+                            <option value="5">其他(试听等)</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-1">
                         <button type="button" class="btn btn-success btn-lg btn-block" id="searchBtn">搜索
                         </button>
                     </div>

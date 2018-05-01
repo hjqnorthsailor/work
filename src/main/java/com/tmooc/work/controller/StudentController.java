@@ -44,10 +44,11 @@ public class StudentController {
          */
         ExampleMatcher matcher=ExampleMatcher.matching()
                 .withMatcher("user",m->m.contains())//模糊匹配
-                .withMatcher("studentQQ",m->m.exact())//精确匹配
+                .withMatcher("studentQQ",m->m.contains())//精确匹配
                 .withMatcher("qunName",m->m.contains())
                 .withMatcher("qunNum",m->m.exact())
-                .withMatcher("stage",m->m.exact());
+                .withMatcher("stage",m->m.exact())
+                .withMatcher("mark",m->m.exact());
         Example<Student> studentExample=Example.of(student,matcher);//JPA Example查询
         final Page<Student> studentList = studentService.findAll(studentExample,pageRequest);
         System.out.println(studentList.getTotalElements());

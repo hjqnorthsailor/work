@@ -29,9 +29,6 @@ public class UserController {
         UsernamePasswordToken token=new UsernamePasswordToken(username,encryPwd);
         try {
             subject.login(token);
-            User user= (User) SecurityUtils.getSubject().getPrincipal();
-            subject.getSession().setAttribute("username",user.getUsername());
-            log.info("欢迎登陆"+subject.getPrincipal());
         } catch (Exception e) {
         log.info("验证失败");
         return "redirect:/login";
@@ -43,12 +40,19 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
     }
-    private String encry(String username,String password) {
+    private static String encry(String username,String password) {
         ByteSource salt = ByteSource.Util.bytes(username);
         String simpleHash=new SimpleHash("md5",password,salt,2).toHex();
         System.out.println(simpleHash);
         return simpleHash;
     }
 
+    public static void main(String[] args) {
+        System.out.println(encry("jintao","123456"));
+        System.out.println(encry("huangjq","123456"));
+        System.out.println(encry("mengbo","123456"));
+        System.out.println(encry("baojq","123456"));
+        System.out.println(encry("liuxy","123456"));
+    }
 }
 

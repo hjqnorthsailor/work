@@ -17,6 +17,7 @@ $(function () {
                 data.qunName = $("#qunName").val();
                 data.qunNum = $("#qunNum").val();
                 data.stage = $("#stage option:selected").val();
+                data.mark = $("#mark option:selected").val();
                 return JSON.stringify(data);//默认参数
             },
             dataType: "json",
