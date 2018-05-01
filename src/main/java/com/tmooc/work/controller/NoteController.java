@@ -70,7 +70,7 @@ public class NoteController {
             log.info("创建了"+file);
         }
         String userFile=userNotePath+"/"+fileName;
-        OutputStream os=new FileOutputStream(userNotePath+"/"+userFile);
+        OutputStream os=new FileOutputStream(userFile);
         final List<Note> notes = noteService.findAll(note,user);
         Map<String,Object> noteMap=new HashMap<>();
         notes.forEach(n->noteMap.put("week"+n.getWeekDay().toString(),n));
@@ -79,7 +79,7 @@ public class NoteController {
         JxlsUtils.exportExcel(templatePath, os, noteMap);
         os.close();
         JxlsUtils.doDownLoad(userFile,fileName,request.getResponse());
-        return  TmoocResult.ok(userNotePath);
+        return  TmoocResult.ok(userFile);
     }
 
     /**
