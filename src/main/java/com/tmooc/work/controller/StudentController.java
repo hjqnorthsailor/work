@@ -78,6 +78,11 @@ public class StudentController {
         studentService.delete(id);
         return  TmoocResult.ok();
     }
+    public TmoocResult reset(@RequestParam("id") Integer id,User user){
+        Student student=studentService.resetMark(id,user);
+        if (student==null){return TmoocResult.error();}
+        return TmoocResult.ok();
+    }
     /**
      * 拷贝参数(使用BeanUtils会拷贝空值过来，造成查询错误）
      * @param request

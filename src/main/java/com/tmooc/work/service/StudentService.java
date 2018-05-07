@@ -18,4 +18,6 @@ public interface StudentService {
     void delete(String studentQQ);
     Student changeMark(Integer id,Integer mark, User user);
     void save(List<Student> list);
+    /** 重置学员状态及标记*/
+    Student resetMark(Integer id, User user);
 }

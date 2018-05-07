@@ -3,6 +3,8 @@ package com.tmooc.work.service.impl;
 import com.tmooc.work.dao.StudentDao;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.entity.User;
+import com.tmooc.work.enums.StudentMark;
+import com.tmooc.work.enums.StudentStage;
 import com.tmooc.work.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -37,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public Student changeStage(Integer id,User user) {
         Student student = studentDao.findOne(id);
-        student.setStage(1);
+        student.setStage(StudentStage.FOLLOWUP.getStage());
         student.setUser(user.getUsername());
         return  studentDao.saveAndFlush(student);
     }
@@ -67,6 +69,15 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public void save(List<Student> list) {
         studentDao.save(list);
+    }
+
+    @Override
+    public Student resetMark(Integer id, User user) {
+        Student student = studentDao.findOne(id);
+        student.setStage(StudentStage.NOFOLLOWUP.getStage());
+        student.setMark(StudentMark.NOMARK.getMark());
+        student.setUser(user.getUsername());
+        return studentDao.saveAndFlush(student);
     }
 
 }

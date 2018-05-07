@@ -13,6 +13,7 @@ import com.tmooc.work.config.MyProperties;
 import com.tmooc.work.entity.HuoYue;
 import com.tmooc.work.entity.Reach;
 import com.tmooc.work.entity.Student;
+import com.tmooc.work.excel.StudentExcel;
 import com.tmooc.work.service.HuoYueService;
 import com.tmooc.work.service.ReachService;
 import com.tmooc.work.service.StudentService;
@@ -22,6 +23,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.tomcat.util.http.fileupload.FileUpload;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,8 +87,14 @@ public class ExcelController {
     @RequestMapping("/importStudent")
     @ResponseBody
     public TmoocResult importStudent(@RequestParam("remoteFilePath") String remoteFilePath) {
-        List<Student> studentList = MyExcelUtils.importExcel(remoteFilePath, 0, 1, Student.class);
-        MyExcelUtils.importExcel(remoteFilePath, 0, 1, Student.class);
+        List<StudentExcel> studentExcelList = MyExcelUtils.importExcel(remoteFilePath, 0, 1, StudentExcel.class);
+        List<Student> studentList=new ArrayList<>();
+        studentExcelList.forEach(s->{
+            Student student=new Student();
+            BeanUtils.copyProperties(s,student);
+            studentList.add(student);
+        });
+        MyExcelUtils.importExcel(remoteFilePath, 0, 1, StudentExcel.class);
         ForkJoinPool pool=new ForkJoinPool();
         StudentTask task=new StudentTask(studentList,studentService);
         pool.submit(task);

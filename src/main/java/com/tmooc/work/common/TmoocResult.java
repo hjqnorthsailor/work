@@ -39,7 +39,14 @@ public class TmoocResult implements Serializable {
     public static TmoocResult ok() {
         return new TmoocResult(null);
     }
+    public static TmoocResult error(){
 
+        return new TmoocResult(500,"请求失败",null);
+    }
+    public static TmoocResult error(String msg){
+
+        return new TmoocResult(500,msg,null);
+    }
     public TmoocResult() {
 
     }
