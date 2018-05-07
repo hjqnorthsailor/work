@@ -14,7 +14,7 @@ public interface StudentService {
     Page<Student> findAll(Example<Student> studentExample,PageRequest request);
     Long getTotal(Example<Student> studentExample);
     Student changeStage(Integer id, User user);
-    void delete(Integer id, User user);
+    void delete(Integer id);
     void delete(String studentQQ);
     Student changeMark(Integer id,Integer mark, User user);
     void save(List<Student> list);

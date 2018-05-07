@@ -14,10 +14,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -77,8 +74,8 @@ public class StudentController {
         return  TmoocResult.ok(student);
     }
     @PostMapping("/student/delete")
-    public TmoocResult deleteStudent(String studentQQ){
-        studentService.delete(studentQQ);
+    public TmoocResult deleteStudent(@RequestParam("id")Integer id){
+        studentService.delete(id);
         return  TmoocResult.ok();
     }
     /**

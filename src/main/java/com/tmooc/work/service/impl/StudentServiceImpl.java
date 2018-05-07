@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public void delete(Integer id, User user) {
+    public void delete(Integer id) {
         studentDao.delete(id);
 
     }
