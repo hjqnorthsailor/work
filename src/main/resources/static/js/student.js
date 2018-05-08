@@ -62,7 +62,7 @@ $(function () {
             },
             {
                 data: null, render: function (data, type, row, meta) {
-                    return getMark(row.id,row.mark);
+                    return getMark(row.id,row.mark,row.remark);
                 }
             },
             {
@@ -127,27 +127,37 @@ function changeStage(id) {
             data: {'id':id, "mark": mark},
             success: function (data) {
                 if (data.status == 200) {
+                    alert(mark);
                     switch (mark) {
                         case 1:
                             $('#group'+id).empty();
-                            $('#group'+id).append(getMark(id,1));
+                            $('#group'+id).append(getMark(id,1,''));
                             break;
                         case 2:
                             $('#group'+id).empty();
-                            $('#group'+id).append(getMark(id,2));
+                            $('#group'+id).append(getMark(id,2,''));
                             break;
                         case 3:
                             $('#group'+id).empty();
-                            $('#group'+id).append(getMark(id,3));
+                            $('#group'+id).append(getMark(id,3,''));
                             break;
                         case 4:
                             $('#group'+id).empty();
-                            $('#group'+id).append(getMark(id,4));
+                            $('#group'+id).append(getMark(id,4,''));
                             break;
                         case 5:
                             $('#group'+id).empty();
-                            $('#group'+id).append(getMark(id,5));
+                            $('#group'+id).append(getMark(id,5,''));
                             break;
+                        case 6:
+                            $('#group'+id).empty();
+                            $('#group'+id).append(getMark(id,6,''));
+                            break;
+                        case 7:
+                            $('#group'+id).empty();
+                            $('#group'+id).append(getMark(id,7,''));
+                            break;
+
                     }
                     layer.msg('备注成功');
                 }
@@ -155,7 +165,7 @@ function changeStage(id) {
         });
 }
 <!-- 恢复标签状态-->
-function reset(id) {
+function reset(id,remark) {
     $.ajax({
         type: 'POST',
         url: "/student/reset",
@@ -163,42 +173,75 @@ function reset(id) {
         success: function (data) {
             if (data.status=200) {
                 $('#group'+id).empty();
-                $('#group'+id).append(getMark(id,0));
+                console.log(id);
+                $('#group'+id).append(getMark(id,0,remark));
                 layer.msg('恢复状态完毕');
             }
         }
     });
-    
+
+}
+function remark(id,remark) {
+    $('#myModal').modal('show');
+    $('#modalBody').empty();
+    var url='/student/remark';
+    $('#modalBody').append('<form method="POST" action="' + url + '" id="form'+id+'">'
+        +'<input type="hidden" name="id" value="'+id+'"/>'
+        +'<textarea class="form-control" rows="3" name="remark">'+remark+'</textarea>'
+        +'</form>');
+    $('#remarkBtn').attr('onclick','submitRemark('+id+');');
+
+}
+function submitRemark(id) {
+    $('#form'+id).submit();
+    $('#myModal').modal('hide');
 }
 <!-- 获取标签 -->
-function getMark(id,mark) {
+function getMark(id,mark,remark) {
 
     var mark1 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
-        + '<a  class="btn btn-warning" disabled="true">正常</a>'
-        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id +')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="btn btn-xs btn-success" disabled="true">正常</a>'
+        + '<a  class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
         + '</div>';
     var mark2 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
-        + '<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>'
-        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id + ')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="btn btn-xs btn-warning" disabled="true">未联系到-登陆正常</a>'
+        + '<a  class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
         + '</div>';
     var mark3 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
-        + '<a  class="btn btn-danger" disabled="true">未联系到-长时间未登录</a>'
-        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id + ')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="btn btn-xs btn-danger" disabled="true">未联系到-长时间未登录</a>'
+        + '<a  class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
         + '</div>';
     var mark4 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
-        + '<a  class="btn btn-info" disabled="true">账号过期</a>'
-        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id +')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="btn btn-xs btn-info" disabled="true">账号过期</a>'
+        + '<a  class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
         + '</div>';
     var mark5 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
-        + '<a  class="btn btn-default" disabled="true">其他</a>'
-        + '<a   class="button button-small button-plain button-border button-circle" onclick="reset(' + id +')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="btn btn-xs btn-default" disabled="true">转脱产</a>'
+        + '<a  class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
+        + '</div>';
+    var mark6 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-xs btn-default" disabled="true">查询不到</a>'
+        + '<a  class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
+        + '</div>';
+    var mark7 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-xs btn-primary" disabled="true">其他</a>'
+        + '<a   class="button-plain button-border button-circle" onclick="reset(' + id +',' +remark+')"><i class="fa fa-reply"></i></a>'
+        + '<a  class="button-plain button-border button-circle" onclick="remark(' + id +',' +remark+')"><i class="fa fa-plus"></i></a>'
         + '</div>';
     var defaultMark = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
-        + '<a  class="btn btn-sm btn-success" id="' + id + '" onclick="changeMark(' + id + ',' + 1 + ')">正常</a>'
-        + '<a  class="btn btn-sm btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 2 + ')">未-登</a>'
-        + '<a  class="btn btn-sm btn-danger"  id="' + id + '" onclick="changeMark(' + id + ',' + 3 + ')">未-未</a>'
-        + '<a  class="btn btn-sm btn-info"    id="' + id + '" onclick="changeMark(' + id + ',' + 4 + ')">账号过期</a>'
-        + '<a  class="btn btn-sm btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 5 + ')">其他</a>'
+        + '<a  class="btn btn-xs btn-success" id="' + id + '" onclick="changeMark(' + id + ',' + 1 + ')" title="在读(未转方向)">正常</a>'
+        + '<a  class="btn btn-xs btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 2 + ')" title="未联系到，登录正常">未-登</a>'
+        + '<a  class="btn btn-xs btn-danger"  id="' + id + '" onclick="changeMark(' + id + ',' + 3 + ')" title="未联系到，超过两月未登录">未-未</a>'
+        + '<a  class="btn btn-xs btn-info"    id="' + id + '" onclick="changeMark(' + id + ',' + 4 + ')" title="账号已过期，学员回访查不到">过期</a>'
+        + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 5 + ')" title="已转脱产">脱产</a>'
+        + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 6 + ')" title="学员回访和学员管理都无法查询到">查询不到</a>'
+        + '<a  class="btn btn-xs btn-primary" id="' + id + '" onclick="changeMark(' + id + ',' + 7 + ')" title="试听、休学">其他</a>'
         + '</div>';
     switch (mark){
         case 1:
@@ -215,6 +258,12 @@ function getMark(id,mark) {
             break;
         case 5:
             return mark5;
+            break;
+        case 6:
+            return mark6;
+            break;
+        case 7:
+            return mark7;
             break;
         default:
             return defaultMark;

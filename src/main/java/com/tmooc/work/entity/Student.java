@@ -3,6 +3,7 @@ package com.tmooc.work.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
@@ -18,5 +19,7 @@ public class Student extends BaseEntity{
     private String qunNum;
     /** 标签**/
     private Integer mark;
+    /** 备注**/
+    private String remark;
 
 }

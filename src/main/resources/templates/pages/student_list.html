@@ -50,7 +50,9 @@
                             <option value="2">未联系到-登陆正常</option>
                             <option value="3">未联系到-长时间未登录</option>
                             <option value="4">账号已过期</option>
-                            <option value="5">其他(试听等)</option>
+                            <option value="5">查询不到</option>
+                            <option value="6">脱产</option>
+                            <option value="7">其他(试听等)</option>
                         </select>
                     </div>
                     <div class="col-sm-1">
@@ -72,7 +74,7 @@
             <th >跟进阶段</th>
             <th >聊天</th>
             <th >操作</th>
-            <th class="col-md-3">标签</th>
+            <th class="col-md-4">标签</th>
             <th >删除学员</th>
             <th >操作人</th>
         </tr>
@@ -81,6 +83,24 @@
 
         </tbody>
     </table>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">学员备注信息</h4>
+                </div>
+                <div class="modal-body" id="modalBody">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modelBtn">关闭</button>
+                    <button type="button" class="btn btn-primary"  id="remarkBtn" onclick="submitRemark()">提交更改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>
 </body>
 </html>

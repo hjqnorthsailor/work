@@ -13,11 +13,13 @@ public interface StudentService {
     Page<Student> findAll(PageRequest request);
     Page<Student> findAll(Example<Student> studentExample,PageRequest request);
     Long getTotal(Example<Student> studentExample);
-    Student changeStage(Integer id, User user);
+    Student changeStage(Integer id);
     void delete(Integer id);
     void delete(String studentQQ);
-    Student changeMark(Integer id,Integer mark, User user);
+    Student changeMark(Integer id,Integer mark);
     void save(List<Student> list);
     /** 重置学员状态及标记*/
-    Student resetMark(Integer id, User user);
+    Student resetMark(Integer id);
+
+    Student changeRemark(Integer id,String remark);
 }

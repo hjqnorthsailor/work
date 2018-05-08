@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,10 +38,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public Student changeStage(Integer id,User user) {
+    public Student changeStage(Integer id) {
         Student student = studentDao.findOne(id);
         student.setStage(StudentStage.FOLLOWUP.getStage());
-        student.setUser(user.getUsername());
+//        student.setUser(user.getUsername());https://www.jianshu.com/p/14cb69646195
         return  studentDao.saveAndFlush(student);
     }
 
@@ -58,10 +59,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student changeMark(Integer id,Integer mark, User user) {
+    public Student changeMark(Integer id,Integer mark) {
         Student student = studentDao.findOne(id);
         student.setMark(mark);
-        student.setUser(user.getUsername());
+//        student.setUser(user.getUsername());https://www.jianshu.com/p/14cb69646195
         return  studentDao.saveAndFlush(student);
     }
 
@@ -72,11 +73,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student resetMark(Integer id, User user) {
+    public Student resetMark(Integer id) {
         Student student = studentDao.findOne(id);
         student.setStage(StudentStage.NOFOLLOWUP.getStage());
         student.setMark(StudentMark.NOMARK.getMark());
-        student.setUser(user.getUsername());
+//        student.setUser(user.getUsername());//https://www.jianshu.com/p/14cb69646195
+        return studentDao.saveAndFlush(student);
+    }
+
+    @Override
+    public Student changeRemark(Integer id,String remark) {
+        Student student = studentDao.findOne(id);
+        student.setRemark(remark);
         return studentDao.saveAndFlush(student);
     }
 

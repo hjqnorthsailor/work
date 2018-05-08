@@ -59,8 +59,8 @@ public class StudentController {
      * @return
      */
     @PostMapping("/changeStage")
-    public TmoocResult changeStage(Integer id, User user){
-        Student student = studentService.changeStage(id,user);
+    public TmoocResult changeStage(Integer id){
+        Student student = studentService.changeStage(id);
         return  TmoocResult.ok(student);
     }
     /**
@@ -69,8 +69,8 @@ public class StudentController {
      * @return
      */
     @PostMapping("/changeMark")
-    public TmoocResult changeMark(Integer id,Integer mark, User user){
-        Student student = studentService.changeMark(id,mark,user);
+    public TmoocResult changeMark(Integer id,Integer mark){
+        Student student = studentService.changeMark(id,mark);
         return  TmoocResult.ok(student);
     }
     @PostMapping("/delete")
@@ -79,8 +79,15 @@ public class StudentController {
         return  TmoocResult.ok();
     }
     @PostMapping("/reset")
-    public TmoocResult reset(@RequestParam("id") Integer id,User user){
-        Student student=studentService.resetMark(id,user);
+    public TmoocResult reset(@RequestParam("id") Integer id){
+        Student student=studentService.resetMark(id);
+        if (student==null){return TmoocResult.error();}
+        return TmoocResult.ok();
+    }
+    @PostMapping("/remark")
+    public TmoocResult remark(@RequestParam("id") Integer id,
+                              @RequestParam("remark")String remark){
+        Student student=studentService.changeRemark(id,remark);
         if (student==null){return TmoocResult.error();}
         return TmoocResult.ok();
     }
