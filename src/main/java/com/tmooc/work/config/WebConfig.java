@@ -12,6 +12,11 @@ public class WebConfig  extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	UserArgumentResolver userArgumentResolver;
+
+	/**
+	 * 配置User参数到springmvc
+	 * @param argumentResolvers
+	 */
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(userArgumentResolver);

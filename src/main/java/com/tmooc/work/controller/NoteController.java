@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/note")
@@ -87,21 +88,27 @@ public class NoteController {
      * @param notes
      * @return
      */
-    private Note getNote(List<Note> notes) {
-        int totalAnswer=0,totalRemote=0,totalCount=0,totalValidCount=0,totalBroadcast=0,totalInputTitle=0
-                ,totalForward=0,totalOther=0;
+    private Note getNote(final List<Note> notes) {
+        AtomicInteger totalAnswer=new AtomicInteger(0);
+        AtomicInteger totalRemote=new AtomicInteger(0);
+        AtomicInteger totalCount=new AtomicInteger(0);
+        AtomicInteger totalValidCount=new AtomicInteger(0);
+        AtomicInteger totalBroadcast=new AtomicInteger(0);
+        AtomicInteger totalInputTitle=new AtomicInteger(0);
+        AtomicInteger totalForward=new AtomicInteger(0);
+        AtomicInteger totalOther=new AtomicInteger(0);
         for (Note n : notes) {
-            if (n.getAnswer()!=null){totalAnswer+=n.getAnswer();}
-            if (n.getRemote()!=null){totalRemote+=n.getRemote();}
-            if (n.getCount()!=null){totalCount+=n.getCount();}
-            if (n.getValidCount()!=null){totalValidCount+=n.getValidCount();}
-            if (n.getBroadcast()!=null){totalBroadcast+=n.getBroadcast();}
-            if (n.getForward()!=null){totalForward+=n.getForward();}
-            if (n.getInputTitle()!=null){totalInputTitle+=n.getInputTitle();}
-            if (n.getOther()!=null){totalOther+=n.getOther();}
+            if (n.getAnswer()!=null){totalAnswer.addAndGet(n.getAnswer());}
+            if (n.getRemote()!=null){totalRemote.addAndGet(n.getRemote());}
+            if (n.getCount()!=null){totalCount.addAndGet(n.getCount());}
+            if (n.getValidCount()!=null){totalValidCount.addAndGet(n.getValidCount());}
+            if (n.getBroadcast()!=null){totalBroadcast.addAndGet(n.getBroadcast());}
+            if (n.getForward()!=null){totalForward.addAndGet(n.getForward());}
+            if (n.getInputTitle()!=null){totalInputTitle.addAndGet(n.getInputTitle());}
+            if (n.getOther()!=null){totalOther.addAndGet(n.getOther());}
         }
-        return Note.builder().answer(totalAnswer).remote(totalRemote).count(totalCount)
-                .validCount(totalValidCount).broadcast(totalBroadcast).forward(totalForward)
-                .inputTitle(totalInputTitle).other(totalOther).build();
+        return Note.builder().answer(totalAnswer.get()).remote(totalRemote.get()).count(totalCount.get())
+                .validCount(totalValidCount.get()).broadcast(totalBroadcast.get()).forward(totalForward.get())
+                .inputTitle(totalInputTitle.get()).other(totalOther.get()).build();
     }
 }

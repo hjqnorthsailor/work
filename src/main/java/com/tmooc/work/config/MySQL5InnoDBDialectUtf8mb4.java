@@ -1,6 +1,5 @@
 package com.tmooc.work.config;
 
-import org.hibernate.dialect.MySQL5Dialect;
 import org.hibernate.dialect.MySQL5InnoDBDialect;
 
 public class MySQL5InnoDBDialectUtf8mb4 extends MySQL5InnoDBDialect {

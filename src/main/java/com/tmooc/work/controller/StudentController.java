@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/student")
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -27,14 +28,13 @@ public class StudentController {
      * @param dataTablesRequest
      * @return
      */
-    @RequestMapping("/student/findAll")
+    @RequestMapping("/findAll")
     public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest){
         int size=dataTablesRequest.getLength();
         int s=dataTablesRequest.getStart();
         int page=s/size;
         Student student=new Student();
         copyProperties(dataTablesRequest,student);//拷贝参数
-        System.out.println(student.getUser());
         PageRequest pageRequest = new PageRequest(page, size);//分页请求
         /**
          * 查询匹配器
@@ -58,7 +58,7 @@ public class StudentController {
      * @param
      * @return
      */
-    @PostMapping("/student/changeStage")
+    @PostMapping("/changeStage")
     public TmoocResult changeStage(Integer id, User user){
         Student student = studentService.changeStage(id,user);
         return  TmoocResult.ok(student);
@@ -68,16 +68,17 @@ public class StudentController {
      * @param
      * @return
      */
-    @PostMapping("/student/changeMark")
+    @PostMapping("/changeMark")
     public TmoocResult changeMark(Integer id,Integer mark, User user){
         Student student = studentService.changeMark(id,mark,user);
         return  TmoocResult.ok(student);
     }
-    @PostMapping("/student/delete")
+    @PostMapping("/delete")
     public TmoocResult deleteStudent(@RequestParam("id")Integer id){
         studentService.delete(id);
         return  TmoocResult.ok();
     }
+    @PostMapping("/reset")
     public TmoocResult reset(@RequestParam("id") Integer id,User user){
         Student student=studentService.resetMark(id,user);
         if (student==null){return TmoocResult.error();}

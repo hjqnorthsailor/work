@@ -62,31 +62,7 @@ $(function () {
             },
             {
                 data: null, render: function (data, type, row, meta) {
-                    switch (row.mark) {
-                        case 1:
-                           return  '<a  class="btn btn-success" disabled="true">正常</a>';
-                           break;
-                        case 2:
-                            return  '<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>';
-                            break;
-                        case 3:
-                            return  '<a  class="btn btn-danger" disabled="true">未联系到-长时间未登录</a>';
-                            break;
-                        case 4:
-                            return  '<a  class="btn btn-info" disabled="true">账号过期</a>';
-                            break;
-                        case 5:
-                            return  '<a  class="btn btn-default" disabled="true">其他</a>';
-                            break;
-                        default :
-                            return '<div id="group' + row.id + '" class="btn-group-sm" role="group" aria-label="...">'
-                                +'<a  class="btn btn-sm btn-success" id="' + row.id + '" onclick="changeMark(' + row.id +','+1+ ')">正常</a>'
-                                +'<a  class="btn btn-sm btn-warning" id="' + row.id + '" onclick="changeMark(' + row.id + ','+2+')">未-登</a>'
-                                +'<a  class="btn btn-sm btn-danger" id="' + row.id + '" onclick="changeMark(' + row.id +','+3+ ')">未-未</a>'
-                                +'<a  class="btn btn-sm btn-info" id="' + row.id + '" onclick="changeMark(' + row.id + ','+4+')">账号过期</a>'
-                                +'<a  class="btn btn-sm btn-default" id="' + row.id + '" onclick="changeMark(' + row.id + ','+5+')">其他</a>'
-                           +' </div>';
-                    }
+                    return getMark(row.id,row.mark);
                 }
             },
             {
@@ -107,6 +83,7 @@ $(function () {
 
 <!--删除学员 -->
 function deleteStudent(id) {
+    var table=$('#student_table').DataTable();
     layer.confirm("确定删除？", {btn: ["确定", "取消"]},
         function () {
             $.ajax({
@@ -115,7 +92,8 @@ function deleteStudent(id) {
                 data: {'id': id},
                 success: function (data) {
                     if (data.status = 200) {
-                        layer.msg('删除成功');
+                        table.row($('#group'+id).parents('tr')).remove().draw();
+                        layer.msg('id'+id+'删除成功,刷新后显示结果');
                     }
                 }
             });
@@ -143,7 +121,6 @@ function changeStage(id) {
 }
     <!-- 修改学员标签-->
     function changeMark(id, mark) {
-        console.log(id);
         $.ajax({
             type: 'POST',
             url: "/student/changeMark",
@@ -153,27 +130,94 @@ function changeStage(id) {
                     switch (mark) {
                         case 1:
                             $('#group'+id).empty();
-                            $('#group'+id).append('<a  class="btn btn-success" disabled="true">正常</a>');
+                            $('#group'+id).append(getMark(id,1));
                             break;
                         case 2:
                             $('#group'+id).empty();
-                            $('#group'+id).append('<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>');
+                            $('#group'+id).append(getMark(id,2));
                             break;
                         case 3:
                             $('#group'+id).empty();
-                            $('#group'+id).append('<a  class="btn btn-danger" disabled="true">未联系到-长时间未登录</a>');
+                            $('#group'+id).append(getMark(id,3));
                             break;
                         case 4:
                             $('#group'+id).empty();
-                            $('#group'+id).append('<a  class="btn btn-info" disabled="true">账号已过期</a>');
+                            $('#group'+id).append(getMark(id,4));
                             break;
                         case 5:
                             $('#group'+id).empty();
-                            $('#group'+id).append('<a  class="btn btn-info" disabled="true">其他</a>');
+                            $('#group'+id).append(getMark(id,5));
                             break;
                     }
                     layer.msg('备注成功');
                 }
             }
         });
+}
+<!-- 恢复标签状态-->
+function reset(id) {
+    $.ajax({
+        type: 'POST',
+        url: "/student/reset",
+        data: {'id': id},
+        success: function (data) {
+            if (data.status=200) {
+                $('#group'+id).empty();
+                $('#group'+id).append(getMark(id,0));
+                layer.msg('恢复状态完毕');
+            }
+        }
+    });
+    
+}
+<!-- 获取标签 -->
+function getMark(id,mark) {
+
+    var mark1 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-warning" disabled="true">正常</a>'
+        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id +')"><i class="fa fa-reply"></i></a>'
+        + '</div>';
+    var mark2 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-warning" disabled="true">未联系到-登陆正常</a>'
+        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id + ')"><i class="fa fa-reply"></i></a>'
+        + '</div>';
+    var mark3 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-danger" disabled="true">未联系到-长时间未登录</a>'
+        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id + ')"><i class="fa fa-reply"></i></a>'
+        + '</div>';
+    var mark4 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-info" disabled="true">账号过期</a>'
+        + '<a class="button button-small button-plain button-border button-circle" onclick="reset(' + id +')"><i class="fa fa-reply"></i></a>'
+        + '</div>';
+    var mark5 = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-default" disabled="true">其他</a>'
+        + '<a   class="button button-small button-plain button-border button-circle" onclick="reset(' + id +')"><i class="fa fa-reply"></i></a>'
+        + '</div>';
+    var defaultMark = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
+        + '<a  class="btn btn-sm btn-success" id="' + id + '" onclick="changeMark(' + id + ',' + 1 + ')">正常</a>'
+        + '<a  class="btn btn-sm btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 2 + ')">未-登</a>'
+        + '<a  class="btn btn-sm btn-danger"  id="' + id + '" onclick="changeMark(' + id + ',' + 3 + ')">未-未</a>'
+        + '<a  class="btn btn-sm btn-info"    id="' + id + '" onclick="changeMark(' + id + ',' + 4 + ')">账号过期</a>'
+        + '<a  class="btn btn-sm btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 5 + ')">其他</a>'
+        + '</div>';
+    switch (mark){
+        case 1:
+            return mark1;
+            break;
+        case 2:
+            return mark2;
+            break;
+        case 3:
+            return mark3;
+            break;
+        case 4:
+            return mark4;
+            break;
+        case 5:
+            return mark5;
+            break;
+        default:
+            return defaultMark;
+
+    }
 }

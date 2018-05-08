@@ -1,7 +1,6 @@
 package com.tmooc.work.controller;
 
-import com.tmooc.work.entity.User;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Log
+@Slf4j
 @RequestMapping("/user")
 public class UserController {
     /**

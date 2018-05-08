@@ -1,6 +1,6 @@
 package com.tmooc.work.service.impl;
 
-import com.tmooc.work.entity.Reach;
+import com.tmooc.work.excel.Reach;
 import com.tmooc.work.service.ReachService;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;

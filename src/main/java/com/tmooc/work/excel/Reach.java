@@ -1,6 +1,7 @@
-package com.tmooc.work.entity;
+package com.tmooc.work.excel;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.tmooc.work.entity.BaseEntity;
 import lombok.*;
 
 @Setter

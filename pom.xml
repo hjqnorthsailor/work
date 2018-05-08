@@ -119,8 +119,6 @@
             <artifactId>datatables.net-select</artifactId>
             <version>1.2.3</version>
         </dependency>
-
-
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
