@@ -25,9 +25,12 @@ $(function () {
     });
     <!-- 初始化dataTable -->
     var table = $('#student_table').DataTable({
-        dom: 'Brtlip',//布局
+        dom: 'Brtip',
         buttons: [
-            'copy', 'excel', 'pdf'
+            'copy', {
+                extend:'excelHtml5',
+                text: '导出Excel'
+            }, 'pdf'
         ],
         lengthMenu: [10, 20, 30, 50, 100],//每页多少条数据
         destroy: true,
