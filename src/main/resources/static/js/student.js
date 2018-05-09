@@ -1,5 +1,6 @@
 $(function () {
-    var startTime;var endTime;
+    var startTime;var endTime;//开始时间以及结束时间，以便赋值后传递后台
+    <!-- 初始化日期选择器 -->
     $(function() {//http://www.daterangepicker.com/#options
         $('input[name="datefilter"]').daterangepicker({
             autoUpdateInput: false,
@@ -10,19 +11,24 @@ $(function () {
             }
         }, function(start, end, label) {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-            startTime=start.format('YYYY-MM-DD');
+            startTime=start.format('YYYY-MM-DD');//通过时间选择器给开始、结束时间赋值
             endTime=end.format('YYYY-MM-DD');
         });
     });
+    <!-- 日前选择信息回显 -->
     $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
     });
-
+    <!-- 取消选择显示空 -->
     $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
         $(this).val('');
     });
+    <!-- 初始化dataTable -->
     var table = $('#student_table').DataTable({
-        dom: 'rtlip',//布局
+        dom: 'Brtlip',//布局
+        buttons: [
+            'copy', 'excel', 'pdf'
+        ],
         lengthMenu: [10, 20, 30, 50, 100],//每页多少条数据
         destroy: true,
         paging: true,//分页

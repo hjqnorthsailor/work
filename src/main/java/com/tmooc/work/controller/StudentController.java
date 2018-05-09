@@ -4,26 +4,14 @@ package com.tmooc.work.controller;
 import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.DTO.DataTablesResponse;
 import com.tmooc.work.common.TmoocResult;
-import com.tmooc.work.entity.Note;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.service.StudentService;
-import com.tmooc.work.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -32,6 +20,11 @@ import java.util.stream.Collectors;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    /**
+     * 多条件分页查询
+     * @param dataTablesRequest 自己构建的请求体
+     * @return
+     */
     @RequestMapping("/findAll")
     public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest){
         int size=dataTablesRequest.getLength();
@@ -43,50 +36,7 @@ public class StudentController {
         log.info(""+total);
         return new DataTablesResponse(dataTablesRequest.getDraw(),total,total,"",studentList.getContent());
     }
-    /**
-     * 多条件分页查询
-     * @param dataTablesRequest
-     * @return
-     */
-//    @RequestMapping("/findAll")
-//    public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest) throws ParseException {
-//        int size=dataTablesRequest.getLength();
-//        int s=dataTablesRequest.getStart();
-//        int page=s/size;
-//        String startTime=dataTablesRequest.getStartTime();
-//        System.out.println(startTime);
-//        String endTime=dataTablesRequest.getEndTime();
-//        Student student=new Student();
-//        copyProperties(dataTablesRequest,student);//拷贝参数
-//        PageRequest pageRequest = new PageRequest(page, size);//分页请求
-//        /**
-//         * 查询匹配器
-//         */
-//        ExampleMatcher matcher=ExampleMatcher.matching()
-//                .withMatcher("user",m->m.contains())//模糊匹配
-//                .withMatcher("studentQQ",m->m.contains())//精确匹配
-//                .withMatcher("qunName",m->m.contains())
-//                .withMatcher("qunNum",m->m.exact())
-//                .withMatcher("stage",m->m.exact())
-//                .withMatcher("mark",m->m.exact());
-//        Example<Student> studentExample=Example.of(student,matcher);//JPA Example查询
-//        final Page<Student> studentList = studentService.findAll(studentExample,pageRequest);
-//        List<Student> students;
-//        if (StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
-//            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            Date start=simpleDateFormat.parse(startTime.trim()+" 00:00:00");
-//            Date end=simpleDateFormat.parse(endTime.trim()+" 23:59:59");
-//            students = studentList.getContent().stream()
-//                    .filter(st -> DateUtils.isBetweenTime(st.getUpdateDateTime(), start, end))
-//                    .collect(Collectors.toList());
-//
-//        }else {
-//            students = studentList.getContent();
-//        }
-//        long total=studentList.getTotalElements();
-//        log.info(""+total);
-//        return new DataTablesResponse(dataTablesRequest.getDraw(),total,total,"",students);
-//    }
+
 
     /**
      * 修改学员跟进状态
@@ -108,51 +58,42 @@ public class StudentController {
         Student student = studentService.changeMark(id,mark);
         return  TmoocResult.ok(student);
     }
+
+    /**
+     * 删除学员信息
+     * @param id
+     * @return
+     */
     @PostMapping("/delete")
     public TmoocResult deleteStudent(@RequestParam("id")Integer id){
         studentService.delete(id);
         return  TmoocResult.ok();
     }
+
+    /**
+     * 重置学员状态
+     * @param id
+     * @return
+     */
     @PostMapping("/reset")
     public TmoocResult reset(@RequestParam("id") Integer id){
         Student student=studentService.resetMark(id);
         if (student==null){return TmoocResult.error();}
         return TmoocResult.ok();
     }
+
+    /**
+     * 添加学员备注
+     * @param id
+     * @param remark
+     * @return
+     */
     @PostMapping("/remark")
     public TmoocResult remark(@RequestParam("id") Integer id,
                               @RequestParam("remark")String remark){
         Student student=studentService.changeRemark(id,remark);
         if (student==null){return TmoocResult.error();}
         return TmoocResult.ok();
-    }
-    /**
-     * 拷贝参数(使用BeanUtils会拷贝空值过来，造成查询错误）
-     * @param request
-     * @param student
-     * @return
-     */
-    private Student copyProperties(DataTablesRequest request,Student student){
-        if (StringUtils.isNotEmpty(request.getUser())){
-            student.setUser(request.getUser());
-        }
-        if (StringUtils.isNotEmpty(request.getStudentQQ())){
-            student.setStudentQQ(request.getStudentQQ());
-        }
-        if (StringUtils.isNotEmpty(request.getQunName())){
-            student.setQunName(request.getQunName());
-        }
-        if (StringUtils.isNotEmpty(request.getQunNum())){
-            student.setQunNum(request.getQunNum());
-        }
-        if (StringUtils.isNotEmpty(request.getStage())){
-            student.setStage(Integer.parseInt(request.getStage()));
-        }
-        if (StringUtils.isNotEmpty(request.getMark())){
-            student.setMark(Integer.parseInt(request.getMark()));
-        }
-
-        return student;
     }
 
 }
