@@ -5,8 +5,8 @@ import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.DTO.DataTablesResponse;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.Student;
-import com.tmooc.work.entity.User;
 import com.tmooc.work.service.StudentService;
+import com.tmooc.work.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -15,6 +15,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -29,10 +35,13 @@ public class StudentController {
      * @return
      */
     @RequestMapping("/findAll")
-    public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest){
+    public DataTablesResponse<Student> studentList(@RequestBody final DataTablesRequest dataTablesRequest) throws ParseException {
         int size=dataTablesRequest.getLength();
         int s=dataTablesRequest.getStart();
         int page=s/size;
+        String startTime=dataTablesRequest.getStartTime();
+        System.out.println(startTime);
+        String endTime=dataTablesRequest.getEndTime();
         Student student=new Student();
         copyProperties(dataTablesRequest,student);//拷贝参数
         PageRequest pageRequest = new PageRequest(page, size);//分页请求
@@ -48,9 +57,20 @@ public class StudentController {
                 .withMatcher("mark",m->m.exact());
         Example<Student> studentExample=Example.of(student,matcher);//JPA Example查询
         final Page<Student> studentList = studentService.findAll(studentExample,pageRequest);
-        System.out.println(studentList.getTotalElements());
-        long total=studentService.getTotal(studentExample);
-        return new DataTablesResponse(dataTablesRequest.getDraw(),total,total,"",studentList.getContent());
+        List<Student> students;
+        if (StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date start=simpleDateFormat.parse(startTime.trim()+" 00:00:00");
+            Date end=simpleDateFormat.parse(endTime.trim()+" 23:59:59");
+            students = studentList.getContent().stream()
+                    .filter(st -> DateUtils.isBetweenTime(st.getUpdateDateTime(), start, end))
+                    .collect(Collectors.toList());
+
+        }else {
+            students = studentList.getContent();
+        }
+        long total=students.size();
+        return new DataTablesResponse(dataTablesRequest.getDraw(),total,total,"",students);
     }
 
     /**

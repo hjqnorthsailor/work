@@ -13,6 +13,8 @@ public class DataTablesRequest {
     private String qunNum;
     private String stage;
     private String mark;
+    private String startTime;
+    private String endTime;
     /**
      * Draw counter. This is used by DataTables to ensure that the Ajax returns from server-side processing requests are drawn in sequence by DataTables
      * (Ajax requests are asynchronous and thus can return out of sequence). This is used as part of the draw return parameter (see below).

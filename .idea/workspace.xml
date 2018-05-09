@@ -2,22 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77047fda-fb62-46e3-a9f2-fcabaf57efe7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/config/UserAuditorAware.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/util/DateUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/WorkApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/WorkApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/DTO/DataTablesRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/DTO/DataTablesRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/enums/StudentMark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/enums/StudentMark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/student.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/common_top.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/common_top.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/onload_js.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/onload_js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/WorkApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/WorkApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/entity/BaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/entity/BaseEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/entity/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/entity/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/impl/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/impl/StudentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest$Column.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest$Column.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest$Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest$Order.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest$Search.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest$Search.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/DTO/DataTablesRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/controller/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/controller/StudentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/common/common_top.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/common/common_top.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/common/onload_js.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/common/onload_js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/pages/student_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/pages/student_list.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,96 +32,72 @@
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="StudentService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StudentServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1017">
-              <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+            <state relative-caret-position="306">
+              <caret line="65" column="45" lean-forward="true" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="student.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DateUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/util/DateUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="student.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/student.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="195" column="4" lean-forward="true" selection-start-line="195" selection-start-column="4" selection-end-line="195" selection-end-column="4" />
+            <state relative-caret-position="148">
+              <caret line="17" column="101" selection-start-line="17" selection-start-column="101" selection-end-line="17" selection-end-column="101" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reach_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/reach_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-170" />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="student_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="98" column="80" selection-start-line="98" selection-start-column="80" selection-end-line="98" selection-end-column="80" />
-              <folding>
-                <element signature="e#3834#3841#1" expanded="true" />
-              </folding>
+            <state relative-caret-position="271">
+              <caret line="64" column="51" lean-forward="true" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="student_add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_add.html">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-947">
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="note_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/note_list.html">
+      <file leaf-file-name="common_top.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common/common_top.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="245" column="37" lean-forward="true" selection-start-line="245" selection-start-column="28" selection-end-line="245" selection-end-column="37" />
+            <state relative-caret-position="283">
+              <caret line="22" column="117" selection-start-line="22" selection-start-column="117" selection-end-line="22" selection-end-column="117" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentMark.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/enums/StudentMark.java">
+      <file leaf-file-name="onload_js.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common/onload_js.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Student.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Student.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+            <state relative-caret-position="321">
+              <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -147,6 +123,9 @@
       <find>action</find>
       <find>remark(' + id + ')</find>
       <find>reset(' + id + ')</find>
+      <find>getMark</find>
+      <find>' + id +',' +remark+'</find>
+      <find>' + id + ',' + 2 +','+remark+'</find>
     </findStrings>
     <replaceStrings>
       <replace>action</replace>
@@ -158,6 +137,8 @@
       <replace>success</replace>
       <replace>remark(' + id +',' +remark+')</replace>
       <replace>reset(' + id +',' +remark+')</replace>
+      <replace>' + id +',\'' +remark+'\'</replace>
+      <replace>' + id + ',' + 1 +',\'' +remark+'\'</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -173,8 +154,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Student.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/DTO/DataTablesRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/common/onload_js.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/common/common_top.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tmooc/work/util/DateUtils.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/student.js" />
       </list>
     </option>
@@ -184,6 +170,13 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
@@ -259,6 +252,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="work" type="462c0819:PsiDirectoryNode" />
+              <item name="DTO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="work" type="462c0819:PsiDirectoryNode" />
               <item name="entity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -312,6 +314,15 @@
               <item name="work" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="work" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="work" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -357,6 +368,10 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="work" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -391,7 +406,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.WorkApplication">
+    <configuration name="DateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tmooc.work.util.DateUtils" />
+      <module name="work" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tmooc.work.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -437,6 +463,15 @@
       <properties />
       <listeners />
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.WorkApplication" />
+      <item itemvalue="Application.DateUtils" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DateUtils" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -445,51 +480,60 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1525768733738</updated>
-      <workItem from="1525768735780" duration="14082000" />
+      <workItem from="1525768735780" duration="14225000" />
+      <workItem from="1525829410082" duration="18091000" />
     </task>
+    <task id="LOCAL-00001" summary="细分标签、添加模态框，使用@CreatDate等注解">
+      <created>1525796745303</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1525796745304</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14082000" />
+    <option name="totallyTimeSpent" value="32316000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="812" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info id="Designer" />
-      <window_info id="Project Explorer" />
-      <window_info id="Job Explorer" />
-      <window_info anchor="bottom" id="Console" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Project Explorer" order="2" />
+      <window_info id="Job Explorer" order="2" />
+      <window_info anchor="bottom" id="Console" order="7" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" />
+      <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" weight="0.32867134" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32447553" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Spring" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="right" id="FAQ Robot" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
-      <window_info anchor="bottom" id="Problems" />
-      <window_info anchor="right" id="Bean Validation" />
-      <window_info id="Web" side_tool="true" />
-      <window_info anchor="bottom" id="SmartIM" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32867134" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2881119" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="right" id="FAQ Robot" order="3" />
+      <window_info anchor="bottom" id="Problems" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20386267" />
+      <window_info anchor="right" id="Bean Validation" order="3" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="SmartIM" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,7 +542,82 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="细分标签、添加模态框，使用@CreatDate等注解" />
+    <option name="LAST_COMMIT_MESSAGE" value="细分标签、添加模态框，使用@CreatDate等注解" />
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/service/StudentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1364">
+          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/student.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4290">
+          <caret line="195" column="4" lean-forward="true" selection-start-line="195" selection-start-column="4" selection-end-line="195" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/reach_list.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2156">
+          <caret line="98" column="80" selection-start-line="98" selection-start-column="80" selection-end-line="98" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/note_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5390">
+          <caret line="245" column="37" lean-forward="true" selection-start-line="245" selection-start-column="28" selection-end-line="245" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/enums/StudentMark.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1650">
+          <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/common/TmoocResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -588,23 +707,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/enums/StudentMark.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-947">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="308">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Student.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
+        <state relative-caret-position="396">
           <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
         </state>
       </provider>
@@ -618,44 +728,122 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        <state relative-caret-position="1364">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/reach_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170" />
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/note_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="245" column="37" lean-forward="true" selection-start-line="245" selection-start-column="28" selection-end-line="245" selection-end-column="37" />
+        <state relative-caret-position="5390">
+          <caret line="245" column="37" selection-start-line="245" selection-start-column="28" selection-end-line="245" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-564">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/DTO/DataTablesRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/webjars/AdminLTE/2.4.2/AdminLTE-2.4.2.jar!/META-INF/resources/webjars/AdminLTE/2.4.2/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="1677" column="4" selection-start-line="1677" selection-start-column="4" selection-end-line="1677" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-datepicker/1.8.0/bootstrap-datepicker-1.8.0.jar!/META-INF/resources/webjars/bootstrap-datepicker/1.8.0/dist/js/bootstrap-datepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-81">
+          <caret line="1669" column="4" selection-start-line="1669" selection-start-column="4" selection-end-line="1669" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-datepicker/1.8.0/bootstrap-datepicker-1.8.0.jar!/META-INF/resources/webjars/bootstrap-datepicker/1.8.0/tests/timezone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-390" />
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-datepicker/1.8.0/bootstrap-datepicker-1.8.0.jar!/META-INF/resources/webjars/bootstrap-datepicker/1.8.0/tests/assets/qunit.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-datepicker/1.8.0/bootstrap-datepicker-1.8.0.jar!/META-INF/resources/webjars/bootstrap-datepicker/1.8.0/tests/tests.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common/onload_js.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/common/common_top.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="22" column="117" selection-start-line="22" selection-start-column="117" selection-end-line="22" selection-end-column="117" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/student_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="98" column="80" selection-start-line="98" selection-start-column="80" selection-end-line="98" selection-end-column="80" />
+        <state relative-caret-position="271">
+          <caret line="64" column="51" lean-forward="true" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="65" column="45" lean-forward="true" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="45" />
           <folding>
-            <element signature="e#3834#3841#1" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/util/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/student.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="195" column="4" lean-forward="true" selection-start-line="195" selection-start-column="4" selection-end-line="195" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/StudentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1017">
-          <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+        <state relative-caret-position="148">
+          <caret line="17" column="101" selection-start-line="17" selection-start-column="101" selection-end-line="17" selection-end-column="101" />
         </state>
       </provider>
     </entry>
