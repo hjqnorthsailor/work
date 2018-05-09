@@ -15,7 +15,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-#    show-sql: true
+    show-sql: true
     database: mysql
     database-platform: com.tmooc.work.config.MySQL5InnoDBDialectUtf8mb4
     open-in-view: true

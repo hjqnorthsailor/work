@@ -1,10 +1,13 @@
 package com.tmooc.work.service;
 
+import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.entity.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
@@ -22,4 +25,6 @@ public interface StudentService {
     Student resetMark(Integer id);
 
     Student changeRemark(Integer id,String remark);
+
+    Page<Student> findAll(DataTablesRequest request, Pageable pageable);
 }
