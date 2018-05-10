@@ -215,12 +215,12 @@ function remark(id,remark) {
     $('#modalBody').empty();
     $('#modalBody').append('<input type="hidden" name="id" value="'+id+'"/>'
         +'<textarea id="area'+id+'" class="form-control" rows="3" name="remark"></textarea>');
-    $('#area'+id).html(remark);
-    $('#remarkBtn').attr('onclick','submitRemark('+id+');');
+    $('#area'+id).html(remark);//坑，赋值得用html
+    $('#remarkBtn').attr('onclick','submitRemark('+id+')');
 
 }
 function submitRemark(id) {
-    var remark=$('#area'+id).html();
+    var remark=$('#area'+id).val();//取值用val。。
     $.ajax({
         type: 'POST',
         url: "/student/remark",

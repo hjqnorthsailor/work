@@ -91,6 +91,7 @@ public class StudentController {
     @PostMapping("/remark")
     public TmoocResult remark(@RequestParam("id") Integer id,
                               @RequestParam("remark")String remark){
+        log.info("对"+id+"进行备注"+remark);
         Student student=studentService.changeRemark(id,remark);
         if (student==null){return TmoocResult.error();}
         return TmoocResult.ok();

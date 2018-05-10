@@ -60,6 +60,7 @@ public class StudentServiceImpl implements StudentService {
     public Student changeMark(Integer id, Integer mark) {
         Student student = studentDao.findOne(id);
         student.setMark(mark);
+        System.out.println(mark);
 //        student.setUser(user.getUsername());https://www.jianshu.com/p/14cb69646195
         return studentDao.saveAndFlush(student);
     }
