@@ -1,16 +1,13 @@
-package com.tmooc.work.entity;
+package com.tmooc.work.DTO;
 
 import lombok.*;
 
-import javax.persistence.Entity;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Note extends BaseEntity{
+public class NoteDTO {
     private Integer month=1;
     private Integer week=1;
     private Integer weekDay=1;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="common/common_top :: commonTop"></head>
+<head th:include="common/common_top :: commonTop">
+</head>
 
 <body class="hold-transition skin-blue-light fixed">
 <div class="wrapper">
@@ -30,8 +31,35 @@
     </footer>
 
 </div>
+
 <div th:include="common/onload_js :: onloadJS"></div>
 <!-- 加载页面-->
 <script type="text/javascript" th:src="@{/static/js/student.js}"></script>
+<script>
+    function userSet(){
+        $('#userModal').modal('show');
+        
+    }
+    function submitUser(){
+        $.ajax({
+            type: 'POST',
+            url: "/user/update",
+            data: {
+                "email":$('#email').val(),
+                "name":$('#name').val(),
+                "newPwd":$('#newPwd').val()
+            },
+            success: function (data) {
+                if (data.status=200) {
+                    layer.msg('用户信息保存成功');
+                    $('#userModal').modal('hide');
+                    window.location='/login';
+                }else {
+                    layer.alert(data.msg);
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

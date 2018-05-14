@@ -6,14 +6,22 @@
 </head>
 <body>
 <div>
-    <h5>TMOOC教研部-黄建清—本周工作总结及下周工作计划</h5>
+    <h5>TMOOC教研部-<span th:text="${user.name}"></span>—本周工作总结及下周工作计划</h5>
     <div>
         <p style="text-align: left">王老师您好：</p>
         <p>以下是本周工作计划及下周工作计划，本周工作计划请<a th:href="${filePath}">查阅附件</a>，谢谢</p>
-        <p>1、本周答疑量：<span th:text="${note.answer}"></span></p>
-        <p>2、本周远程：<span th:text="${note.remote}"></span></p>
-        <p>3、本周跟进人数：<span th:text="${note.count}"></span></p>
-        <p>下周工作计划：</p>
+        <p>&nbsp;&nbsp;1、本周答疑量：<span th:text="${note.answer}"></span></p>
+        <p>&nbsp;&nbsp;2、本周远程：<span th:text="${note.remote}"></span></p>
+        <p>&nbsp;&nbsp;3、本周跟进人数：<span th:text="${note.count}"></span></p>
+        <p>&nbsp;&nbsp;4、本周有效跟进人数：<span th:text="${note.validCount}"></span></p>
+        <p>&nbsp;&nbsp;5、本周直播：<span th:text="${note.broadcast}"></span></p>
+        <p>&nbsp;&nbsp;6、本周群内转发文章：<span th:text="${note.forward}"></span></p>
+        <p style="text-align: left"> 下周工作计划：</p>
+        <p>&nbsp;&nbsp;1. 做好VIP群的审核以及答疑工作，努力提高答疑水平</p>
+        <p>&nbsp;&nbsp;2. 尽可能活跃群内气氛，构建良好的群氛围</p>
+        <p>&nbsp;&nbsp;3. 做好直播工作，锻炼授课能力，提高教学水平</p>
+        <p>&nbsp;&nbsp;4. 学习巩固专业技术，提高个人能力</p>
+        <p>&nbsp;&nbsp;5. 跟进学员、录入信息</p>
     </div>
 </div>
 </body>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head><title>学员跟进</title></head>
 <body>
 <div th:fragment="studentList">
     <div id='pop_html' style='height:140px;'>
@@ -22,6 +22,7 @@
                         <input type="text" class="form-control input-sm" id="qunName"
                                placeholder="请输入群名"/>
                     </div>
+                    <div class="col-sm-3"></div>
                 </div>
             </div>
             <div class='row'>
@@ -55,11 +56,12 @@
                             <option value="7">其他(试听等)</option>
                         </select>
                     </div>
+                    <div class="col-sm-3"></div>
                 </div>
             </div>
             <div class='row'>
                 <div class="form-group">
-                    <label class="col-sm-1 control-label" >选择时间</label>
+                    <label class="col-sm-1 control-label">选择时间</label>
                     <div class="col-sm-2 ">
                         <input type="text" class="form-control input-sm" name="datefilter" value=""
                                placeholder="点击选择"/>
@@ -68,53 +70,59 @@
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-success btn-lg btn-block" id="searchBtn">搜索
                         </button>
-                    </div><label class="col-sm-1 control-label"></label>
+                    </div>
+                    <label class="col-sm-1 control-label"></label>
                     <div class="col-sm-2">
                         <a class="btn btn-success btn-lg btn-block" target="_blank"
-                            href="https://das.base.shuju.aliyun.com/token3rd/dashboard/view/pc.htm?pageId=c4bab706-defb-4436-906c-f897469ff53c&amp;accessToken=bc12023bf9c5ddd27cfa2f2d9d6e3464">数据报表</a>
+                           href="https://das.base.shuju.aliyun.com/token3rd/dashboard/view/pc.htm?pageId=c4bab706-defb-4436-906c-f897469ff53c&amp;accessToken=bc12023bf9c5ddd27cfa2f2d9d6e3464">数据报表</a>
+                    </div>
+                    <label class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2">
+                    <a class="btn btn-success btn-lg btn-block" target="_blank"
+                       href="https://datav.aliyun.com/share/d020f4e4f3e22675f4adfbcbe1032035">数据可视化</a>
                     </div>
                 </div>
             </div>
         </form>
-    </div>
+</div>
 
-    <table id="student_table" class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>QQ</th>
-            <th>群名</th>
-            <th>群号</th>
-            <th>跟进</th>
-            <th>聊天</th>
-            <th>操作</th>
-            <th class="col-md-4">标签</th>
-            <th>删除</th>
-            <th>用户</th>
-        </tr>
-        </thead>
-        <tbody>
+<table id="student_table" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th class="col-sm-1">id</th>
+        <th class="col-sm-1">QQ</th>
+        <th class="col-sm-1">群名</th>
+        <th class="col-sm-1">群号</th>
+        <th class="col-sm-1">跟进</th>
+        <th class="col-sm-1">聊天</th>
+        <th class="col-sm-1">操作</th>
+        <th class="col-sm-6">标签</th>
+        <th class="col-sm-1">删除</th>
+        <th class="col-sm-1">用户</th>
+    </tr>
+    </thead>
+    <tbody>
 
-        </tbody>
-    </table>
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">学员备注信息</h4>
-                </div>
-                <div class="modal-body" id="modalBody">
+    </tbody>
+</table>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">学员备注信息</h4>
+            </div>
+            <div class="modal-body" id="modalBody">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modelBtn">关闭</button>
-                    <button type="button" class="btn btn-primary" id="remarkBtn" onclick="submitRemark()">提交更改</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="modelBtn">关闭</button>
+                <button type="button" class="btn btn-primary" id="remarkBtn" onclick="submitRemark()">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 </div>
 </body>
 </html>

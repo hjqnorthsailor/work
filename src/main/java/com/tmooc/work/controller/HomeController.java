@@ -1,6 +1,7 @@
 package com.tmooc.work.controller;
 
 
+import com.google.common.collect.Lists;
 import com.tmooc.work.common.TabKey;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.entity.Tab;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -52,14 +54,15 @@ public class HomeController {
     @RequestMapping(value = "/{index}", produces = "text/html")
     @ResponseBody
     public String showPage(@PathVariable String index, ServletWebRequest request, Model model, User user) {
-        String html;
-//        if (redisService.exists(TabKey.tabListKey, index)) {
-//            html = redisService.get(TabKey.tabListKey, index, new TypeReference<String>() {
-//            });
-//            log.info("使用了缓存"+index);
-//            return html;
-//        }
-        final List<Tab> tabList = tabService.findAll();
+        List<Tab> tabList;
+        if (redisService.exists(TabKey.tabListKey,"")){
+            tabList=redisService.get(TabKey.tabListKey, "", new TypeReference<List<Tab>>() {
+            });
+        }else {
+            tabList = tabService.findAll();
+            redisService.set(TabKey.tabListKey,"",tabList);
+            log.info("对tab进行了缓存");
+        }
         if (!StringUtils.isEmpty(index)) {
             if (index.equals("index")) {
                 index = "home";
@@ -68,9 +71,8 @@ public class HomeController {
         }
         model.addAttribute("tabList", tabList);
         model.addAttribute("username",user.getName());
-        html = thymeleafService.process(request, model, "index");
-//        redisService.set(TabKey.tabListKey, index, html);
-//        log.info("更新了缓存"+index);
+        model.addAttribute("email",user.getEmail());
+        String html = thymeleafService.process(request, model, "index");
         return html;
     }
 
@@ -81,10 +83,14 @@ public class HomeController {
     @RequestMapping(value = "/tab/findAll")
     @ResponseBody
     public TmoocResult findAllTab() {
-
-        final List<Tab> tabList = tabService.findAll();
-        System.out.println(tabList.size());
-
+        List<Tab> tabList;
+        if (redisService.exists(TabKey.tabListKey,"")){
+            tabList=redisService.get(TabKey.tabListKey, "", new TypeReference<List<Tab>>() {
+            });
+        }else {
+            tabList = tabService.findAll();
+            redisService.set(TabKey.tabListKey,"",tabList);
+        }
         return TmoocResult.ok(tabList);
     }
 }

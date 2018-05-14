@@ -133,7 +133,7 @@
             <td><div class="btn-group">
                 <input type="button" class="btn btn-info" onclick="saveNote(this)" value="保存"/>
                 <input type="button" class="btn btn-default"  onclick="download(this)" value="下载"/>
-                <input type="button" class="btn btn-success" value="发送邮件"/>
+                <input type="button" class="btn btn-success" onclick="sendMail(this)" value="发送邮件"/>
             </div>
             </td>
         </tr>
@@ -225,7 +225,6 @@
     }
     function download(obj){
         var form = $(obj.form);
-        console.log(form);
         var now = new Date();
         var y = now.getFullYear();
         var m = now.getMonth() + 1;
@@ -252,9 +251,8 @@
             });
 
     }
-    function sendMail(obj,filePath){
+    function sendMail(obj){
         var form = $(obj.form);
-        console.log(form);
         var now = new Date();
         var y = now.getFullYear();
         var m = now.getMonth() + 1;
@@ -264,19 +262,34 @@
         var week = {name: "week", value: getMonthWeek(y, m, d)};
         note.push(month);
         note.push(week);
-        console.log(note);
-        $.ajax({
-            type: 'post',
-            url: '/mail/send',
-            data: {"note":note,"filePath":filePath},
-            dataType: "json",
-            success: function (result) {
-                if (result.status == 200) {
-                  layer.msg('邮件发送成功');
-                }
+        layer.open({
+            title:'邮箱密码',
+            content:'<p>将发邮件给wangyu@tedu.cn,抄送tanxue@tedu.cn,xuzj@tedu.cn，本邮件附件是按照表格自动生成，如果手动修改了表格，请自己手动发送</p><input type="password" id="emailPwd"/>',
+            btn:['发送','取消'],
+            yes:function(){
+                var emailPwd={name:"emailPwd",value:$('#emailPwd').val()};
+                note.push(emailPwd);
+                g_showLoading();
+                $.ajax({
+                    type: 'post',
+                    url: '/mail/send',
+                    data: note,
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.status == 200) {
+                            layer.msg('邮件发送成功');
+                        }else{
+                            layer.alert(result.msg);
+                        }
+                    }
+
+                });
+            },btn2:function (index) {
+                layer.close(index)
             }
 
         });
+
     }
     <!-- 获得当前是本月第几周-->
     var getMonthWeek = function (a, b, c) {
@@ -289,6 +302,11 @@
             w = date.getDay(),
             d = date.getDate();
         return Math.ceil((d + 6 - w) / 7);
+    }
+    //展示loading
+    function g_showLoading(){
+        var idx = layer.msg('处理中...', {icon: 16,shade: [0.5, '#f5f5f5'],scrollbar: false,offset: '0px', time:100000}) ;
+        return idx;
     }
 </script>
 </body>

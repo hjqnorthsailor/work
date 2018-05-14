@@ -1,20 +1,25 @@
 package com.tmooc.work.controller;
 
+import com.tmooc.work.common.TmoocResult;
+import com.tmooc.work.dao.UserDao;
+import com.tmooc.work.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private UserDao userDao;
     /**
      * 登录方法
      * @param
@@ -38,6 +43,26 @@ public class UserController {
     public void loginOut() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
+    }
+    @PostMapping("/update")
+    @ResponseBody
+    public TmoocResult updateUser(@RequestParam(value = "email",required =false)String email,
+                                  @RequestParam(value = "name",required =false)String name,
+                                  @RequestParam(value = "newPwd",required =false)String newPwd, User user){
+        if (StringUtils.isNotEmpty(email.trim())){
+            user.setEmail(email);
+        }
+        if (StringUtils.isNotEmpty(name.trim())){
+            user.setName(name);
+        }
+        if (StringUtils.isNotEmpty(newPwd.trim())){
+            user.setPassword(encry(user.getUsername(),newPwd));
+        }
+        final User u = userDao.saveAndFlush(user);
+        if (u==null){
+            return TmoocResult.error("用户信息修改失败");
+        }
+        return TmoocResult.ok();
     }
     private static String encry(String username,String password) {
         ByteSource salt = ByteSource.Util.bytes(username);

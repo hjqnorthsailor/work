@@ -1,4 +1,5 @@
 package com.tmooc.work.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Parent;
@@ -16,11 +17,5 @@ public class Tab extends BaseEntity {
     private String dataUrl;
     private String tabName;
     private String icon;
-    private Integer parentId;
-    @ManyToOne
-    @Transient
-    private Parent parent;
-    @OneToMany
-    private List<Tab> children;
 
 }

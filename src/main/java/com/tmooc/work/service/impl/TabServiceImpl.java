@@ -4,7 +4,6 @@ import com.tmooc.work.dao.TabDao;
 import com.tmooc.work.entity.Tab;
 import com.tmooc.work.service.TabService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,8 @@ public class TabServiceImpl implements TabService {
     @Autowired
     private TabDao tabDao;
     @Override
-    @Cacheable(value = "tab")
     public List<Tab> findAll() {
+
         return tabDao.findAll();
     }
 }

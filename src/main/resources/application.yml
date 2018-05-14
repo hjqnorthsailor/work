@@ -49,25 +49,7 @@ spring:
       cache: true
       enabled: true
       gzipped: true
-      html-application-cache: true
-# ===================================================================
-# batch配置
-# ===================================================================
-  batch:
-    job:
-      enabled: false
-  mail:
-    default-encoding: UTF-8
-    host: smtp.qq.com
-    username: 1045404308@qq.com
-    password: zmhcvpwleeyobfhj
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
+      html-application-cache: false
   aop:
     proxy-target-class: true
 server:
@@ -92,4 +74,4 @@ shiro:
 my:
   properties:
     excel-template-path: /work/excel/
-    local-file-path: /work/tmp/
+    local-file-path: /work/temp/

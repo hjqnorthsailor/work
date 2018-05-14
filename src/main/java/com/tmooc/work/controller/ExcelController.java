@@ -56,7 +56,7 @@ public class ExcelController {
     public TmoocResult upload(@RequestParam("file") MultipartFile file) throws IOException {
 //        final String filePath = fastDFSClientWrapper.uploadFile(file);
         String filePath=myProperties.getLocalFilePath()+file.getOriginalFilename();
-        file.transferTo(new File(myProperties.getLocalFilePath()+file.getOriginalFilename()));
+        file.transferTo(new File(filePath));
 //        System.out.println(filePath);
         return TmoocResult.ok(filePath);
     }
@@ -69,7 +69,7 @@ public class ExcelController {
      */
     @RequestMapping("/importHuoYue")
     @ResponseBody
-    public TmoocResult importHuoYue(@RequestParam("remoteFilePath") String remoteFilePath) {
+    public TmoocResult importHuoYue(@RequestParam(value = "remoteFilePath",required = true) String remoteFilePath) {
         List<HuoYue> huoYueList =MyExcelUtils.importExcel(remoteFilePath,0,1,HuoYue.class);
         ForkJoinPool pool=new ForkJoinPool();
         HuoYueTask task=new HuoYueTask(huoYueList,huoYueService);
@@ -84,7 +84,7 @@ public class ExcelController {
      */
     @RequestMapping("/importStudent")
     @ResponseBody
-    public TmoocResult importStudent(@RequestParam("remoteFilePath") String remoteFilePath) {
+    public TmoocResult importStudent(@RequestParam(value = "remoteFilePath",required = true) String remoteFilePath) {
         List<StudentExcel> studentExcelList = MyExcelUtils.importExcel(remoteFilePath, 0, 1, StudentExcel.class);
         List<Student> studentList=new ArrayList<>();
         studentExcelList.forEach(s->{

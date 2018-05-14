@@ -1,5 +1,6 @@
 package com.tmooc.work.util;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
@@ -23,6 +24,7 @@ public class JsonUtil {
         objectMapper.setFilters(new SimpleFilterProvider().setFailOnUnknownId(false));
         objectMapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_EMPTY);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true) ;
     }
     public static <T> String obj2String(T src){
         if (src==null){
