@@ -273,7 +273,7 @@ function getMark(id,mark,remark) {
         + '</div>';
     var defaultMark = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
         + '<a  class="btn btn-xs btn-success" id="' + id + '" onclick="changeMark(' + id + ',' + 1 +',\'' +remark+'\')" title="在读(未转方向)">正常</a>'
-        + '<a  class="btn btn-xs btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 1 +',\'' +remark+'\')" title="未联系到，登录正常">未-登</a>'
+        + '<a  class="btn btn-xs btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 2 +',\'' +remark+'\')" title="未联系到，登录正常">未-登</a>'
         + '<a  class="btn btn-xs btn-danger"  id="' + id + '" onclick="changeMark(' + id + ',' + 3 +','+remark+')" title="未联系到，超过两月未登录">未-未</a>'
         + '<a  class="btn btn-xs btn-info"    id="' + id + '" onclick="changeMark(' + id + ',' + 4 +','+remark+')" title="账号已过期，学员回访查不到">过期</a>'
         + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 5 +','+remark+')" title="已转脱产">脱产</a>'
