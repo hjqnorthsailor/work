@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.*;
 /**
  * 标签
+ * @author northsailor
  */
 @Entity
 @Setter

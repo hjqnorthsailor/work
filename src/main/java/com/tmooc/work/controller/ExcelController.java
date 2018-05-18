@@ -31,6 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author northsailor
+ */
 @Controller
 @RequestMapping("/excel")
 public class ExcelController {
@@ -69,6 +72,7 @@ public class ExcelController {
      */
     @RequestMapping("/importHuoYue")
     @ResponseBody
+    @Deprecated
     public TmoocResult importHuoYue(@RequestParam(value = "remoteFilePath",required = true) String remoteFilePath) {
         List<ReachRate> reachRateList =MyExcelUtils.importExcel(remoteFilePath,0,1,ReachRate.class);
         ForkJoinPool pool=new ForkJoinPool();
@@ -84,6 +88,7 @@ public class ExcelController {
      */
     @RequestMapping("/importStudent")
     @ResponseBody
+    @Deprecated
     public TmoocResult importStudent(@RequestParam(value = "remoteFilePath",required = true) String remoteFilePath) {
         List<StudentExcel> studentExcelList = MyExcelUtils.importExcel(remoteFilePath, 0, 1, StudentExcel.class);
         List<Student> studentList=new ArrayList<>();
