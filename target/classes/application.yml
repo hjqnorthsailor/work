@@ -5,11 +5,11 @@ spring:
 # ===================================================================
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.107.98.120:3306/tmooc_work?useSSL=false&useUnicode=true&character_set_server=utf8mb4
+    url: jdbc:mysql://northsailor.mysql.rds.alyuncs.com:3306/tmooc_work?useSSL=false&useUnicode=true&character_set_server=utf8mb4
     platform: mysql
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: 123456
+    password: Hjq910314
   mvc:
     static-path-pattern: /static/**
   jpa:

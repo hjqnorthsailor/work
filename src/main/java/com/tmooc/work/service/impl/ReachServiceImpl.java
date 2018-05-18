@@ -11,6 +11,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+/**
+ * @author northsailor
+ */
 @Service
 public class ReachServiceImpl implements ReachService {
     @PersistenceContext
@@ -18,7 +21,7 @@ public class ReachServiceImpl implements ReachService {
     @Override
     public List<Reach> queryReachRate(Integer month, Integer week) {
         String sql="SELECT s.`qun_name` AS qunName,COUNT(s.`studentqq`) AS countNum,AVG(h.`percent`) AS rate" +
-                " FROM student s JOIN huo_yue h" +
+                " FROM student s JOIN reach_rate h" +
                 " ON s.`studentqq`=h.`qq`" +
                 " WHERE h.`month`="+month+" AND h.`week`="+week+"" +
                 " GROUP BY s.`qun_name`";
