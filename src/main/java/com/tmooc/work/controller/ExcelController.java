@@ -10,7 +10,7 @@ import com.tmooc.work.batch.HuoYueTask;
 import com.tmooc.work.batch.StudentTask;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.config.MyProperties;
-import com.tmooc.work.entity.HuoYue;
+import com.tmooc.work.entity.ReachRate;
 import com.tmooc.work.excel.Reach;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.excel.StudentExcel;
@@ -70,9 +70,9 @@ public class ExcelController {
     @RequestMapping("/importHuoYue")
     @ResponseBody
     public TmoocResult importHuoYue(@RequestParam(value = "remoteFilePath",required = true) String remoteFilePath) {
-        List<HuoYue> huoYueList =MyExcelUtils.importExcel(remoteFilePath,0,1,HuoYue.class);
+        List<ReachRate> reachRateList =MyExcelUtils.importExcel(remoteFilePath,0,1,ReachRate.class);
         ForkJoinPool pool=new ForkJoinPool();
-        HuoYueTask task=new HuoYueTask(huoYueList,huoYueService);
+        HuoYueTask task=new HuoYueTask(reachRateList,huoYueService);
         pool.submit(task);
         return TmoocResult.ok();
     }
@@ -120,12 +120,12 @@ public class ExcelController {
      * @return
      * @throws IOException
      */
-    public List<HuoYue> init(String remoteFilePath, String localFilePath) throws IOException {
+    public List<ReachRate> init(String remoteFilePath, String localFilePath) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         String filePath = localFilePath + remoteFilePath.substring(remoteFilePath.lastIndexOf("/") + 1);//本地文件名
         boolean isDownload = fastDFSClientWrapper.executeDownloadFile(httpClient, remoteFilePath, filePath, "UTF-8", true);
         if (isDownload) {
-            return MyExcelUtils.importExcel(filePath, 0, 1, HuoYue.class);
+            return MyExcelUtils.importExcel(filePath, 0, 1, ReachRate.class);
         }
         return  null;
     }

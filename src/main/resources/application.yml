@@ -9,7 +9,7 @@ spring:
     platform: mysql
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: Hjq910314
+    password: 123456
   mvc:
     static-path-pattern: /static/**
   jpa:
@@ -22,6 +22,7 @@ spring:
     properties:
       hibernate:
         dialect: com.tmooc.work.config.MySQL5InnoDBDialectUtf8mb4
+        enable_lazy_load_no_trans: true
 # ===================================================================
 # redis配置
 # ===================================================================
@@ -46,7 +47,7 @@ spring:
     cache-period: 3600
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,file:${my.properties.excel-template-path},file:${my.properties.local-file-path}
     chain:
-      cache: true
+      cache: false
       enabled: true
       gzipped: true
       html-application-cache: false

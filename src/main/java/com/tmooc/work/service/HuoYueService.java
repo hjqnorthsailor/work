@@ -1,9 +1,9 @@
 package com.tmooc.work.service;
 
-import com.tmooc.work.entity.HuoYue;
+import com.tmooc.work.entity.ReachRate;
 
 import java.util.List;
 
 public interface HuoYueService {
-    void save(List<HuoYue> list);
+    void save(List<ReachRate> list);
 }
