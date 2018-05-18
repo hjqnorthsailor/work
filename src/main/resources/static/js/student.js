@@ -117,8 +117,8 @@ function deleteStudent(id) {
                 data: {'id': id},
                 success: function (data) {
                     if (data.status = 200) {
-                        table.row($('#group' + id).parents('tr')).remove().draw();
-                        layer.msg('id' + id + '删除成功,刷新后显示结果');
+                        table.row('.selected').remove().draw( false );
+                        layer.msg('id' + id + '删除成功');
                     }
                 }
             });
@@ -312,20 +312,12 @@ function getMark(id, mark, remark) {
         + '</div>';
     var defaultMark = '<div id="group' + id + '" class="btn-group-sm" role="group" aria-label="...">'
         + '<a  class="btn btn-xs btn-success" id="' + id + '" onclick="changeMark(' + id + ',' + 1 + ',\'' + remark + '\')" title="在读(未转方向)">正常</a>'
-        + '<a  class="btn btn-xs btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 1 + ',\'' + remark + '\')" title="未联系到，登录正常">未-登</a>'
+        + '<a  class="btn btn-xs btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 2 + ',\'' + remark + '\')" title="未联系到，登录正常">未-登</a>'
         + '<a  class="btn btn-xs btn-danger"  id="' + id + '" onclick="changeMark(' + id + ',' + 3 + ',' + remark + ')" title="未联系到，超过两月未登录">未-未</a>'
         + '<a  class="btn btn-xs btn-info"    id="' + id + '" onclick="changeMark(' + id + ',' + 4 + ',' + remark + ')" title="账号已过期，学员回访查不到">过期</a>'
         + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 5 + ',' + remark + ')" title="已转脱产">脱产</a>'
         + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 6 + ',' + remark + ')" title="学员回访和学员管理都无法查询到">查询不到</a>'
         + '<a  class="btn btn-xs btn-primary" id="' + id + '" onclick="changeMark(' + id + ',' + 7 + ',' + remark + ')" title="试听、休学">其他</a>'
-        + '<a  class="btn btn-xs btn-success" id="' + id + '" onclick="changeMark(' + id + ',' + 1 +',\'' +remark+'\')" title="在读(未转方向)">正常</a>'
-        + '<a  class="btn btn-xs btn-warning" id="' + id + '" onclick="changeMark(' + id + ',' + 2 +',\'' +remark+'\')" title="未联系到，登录正常">未-登</a>'
-        + '<a  class="btn btn-xs btn-danger"  id="' + id + '" onclick="changeMark(' + id + ',' + 3 +','+remark+')" title="未联系到，超过两月未登录">未-未</a>'
-        + '<a  class="btn btn-xs btn-info"    id="' + id + '" onclick="changeMark(' + id + ',' + 4 +','+remark+')" title="账号已过期，学员回访查不到">过期</a>'
-        + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 5 +','+remark+')" title="已转脱产">脱产</a>'
-        + '<a  class="btn btn-xs btn-default" id="' + id + '" onclick="changeMark(' + id + ',' + 6 +','+remark+')" title="学员回访和学员管理都无法查询到">查询不到</a>'
-        + '<a  class="btn btn-xs btn-primary" id="' + id + '" onclick="changeMark(' + id + ',' + 7 +','+remark+')" title="试听、休学">其他</a>'
-
         + '</div>';
     switch (mark) {
         case 1:

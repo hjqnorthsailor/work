@@ -46,7 +46,8 @@ public class MailController {
         mail.setSubject("TMOOC教研部-" + user.getName() + "—本周工作总结及下周工作计划");
         model.addAttribute("note", note);
         String fileName = user.getUsername() + "_" + note.getMonth() + "_" + note.getWeek() + ".xlsx";
-        String userNotePath = myProperties.getExcelTemplatePath() + user.getUsername();//设置临时文件存储在/用户文件夹下
+        //设置临时文件存储在/用户文件夹下
+        String userNotePath = myProperties.getExcelTemplatePath() + user.getUsername();
         String filePath = userNotePath + "/" + fileName;
         mail.setFilePath(filePath);
         FileInputStream fileInputStream;
