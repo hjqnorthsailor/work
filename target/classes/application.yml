@@ -5,7 +5,7 @@ spring:
 # ===================================================================
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://northsailor.mysql.rds.aliyuncs.com:3306/tmooc_work?useSSL=false&useUnicode=true&character_set_server=utf8mb4
+    url: jdbc:mysql://39.107.98.120:3306/tmooc_work?useSSL=false&useUnicode=true&character_set_server=utf8mb4
     platform: mysql
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
