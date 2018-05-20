@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77047fda-fb62-46e3-a9f2-fcabaf57efe7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/dao/GroupReachDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/GroupReach.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/DTO/NoteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/DTO/NoteDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/EChartsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/EchartsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/ExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/ExcelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/controller/NoteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/entity/Note.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/excel/Reach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/excel/ReachExcel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/ReachService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/ReachService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/ReachServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/ReachServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tmooc/work/service/impl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/pages/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/impl/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tmooc/work/service/impl/StudentServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/pages/home.html" afterDir="false" />
     </list>
@@ -622,7 +609,7 @@
       <workItem from="1526780028034" duration="12719000" />
       <workItem from="1526797170629" duration="12849000" />
       <workItem from="1526810554167" duration="65000" />
-      <workItem from="1526818100987" duration="8566000" />
+      <workItem from="1526818100987" duration="8641000" />
     </task>
     <task id="LOCAL-00001" summary="细分标签、添加模态框，使用@CreatDate等注解">
       <created>1525796745303</created>
@@ -715,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526810615537</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="使用echarts完成四个图表的设计">
+      <created>1526827975626</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1526827975626</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -751,7 +745,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147541000" />
+    <option name="totallyTimeSpent" value="147616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="821" extended-state="6" />
@@ -774,7 +768,7 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2320442" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2320442" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Problems" order="7" />
@@ -850,7 +844,8 @@
     <MESSAGE value="修改完善细节，不再使用本地导入excel数据，工具更高效" />
     <MESSAGE value="优化删除学员操作" />
     <MESSAGE value="用ECHARTS实现了图表，目前note模块存在问题，需要排查" />
-    <option name="LAST_COMMIT_MESSAGE" value="用ECHARTS实现了图表，目前note模块存在问题，需要排查" />
+    <MESSAGE value="使用echarts完成四个图表的设计" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用echarts完成四个图表的设计" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
