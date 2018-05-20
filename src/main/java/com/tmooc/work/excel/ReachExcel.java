@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reach extends BaseEntity {
+public class ReachExcel extends BaseEntity {
     @Excel(name="群名称",orderNum = "0")
     private String qunName;
     @Excel(name="有效人数",orderNum = "1")

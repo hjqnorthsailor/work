@@ -11,7 +11,7 @@ import com.tmooc.work.batch.StudentTask;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.config.MyProperties;
 import com.tmooc.work.entity.ReachRate;
-import com.tmooc.work.excel.Reach;
+import com.tmooc.work.excel.ReachExcel;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.excel.StudentExcel;
 import com.tmooc.work.service.HuoYueService;
@@ -46,7 +46,8 @@ public class ExcelController {
     @Autowired
     private StudentService studentService;
     @Autowired
-    private MyProperties myProperties;//自定义属性
+    //自定义属性
+    private MyProperties myProperties;
 
     /**
      * 上传excel
@@ -113,9 +114,10 @@ public class ExcelController {
     @RequestMapping("/export")
     public void export(HttpServletResponse response,Integer month,Integer week) throws UnsupportedEncodingException {
         //需要导出的数据
-        List<Reach> reachList = reachService.queryReachRate(month, week);
+        List<ReachExcel> reachExcelList = reachService.queryReachRate(month, week);
+        reachService.saveGroupReach(reachExcelList,month,week);
         //导出操作
-        MyExcelUtils.exportExcel(reachList, ""+month+"月"+week+"周达到率", ""+month+"月"+week+"周达到率", Reach.class, month+"月"+week+"周达到率.xls", response);
+        MyExcelUtils.exportExcel(reachExcelList, ""+month+"月"+week+"周达到率", ""+month+"月"+week+"周达到率", ReachExcel.class, month+"月"+week+"周达到率.xls", response);
     }
 
     /**

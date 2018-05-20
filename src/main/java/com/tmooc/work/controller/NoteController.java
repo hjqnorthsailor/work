@@ -45,11 +45,18 @@ public class NoteController {
     @RequestMapping("findAll")
     public TmoocResult findAll(Note note,User user){
         final List<Note> notes = noteService.findAll(note,user);
-        Map<Integer,Object> dailyNote=Maps.newHashMap();
-        notes.forEach(n->{if(n!=null){dailyNote.put(n.getWeekDay(),n);}});
-        Note note8 = getNote(notes);
-        dailyNote.put(8,note8);
-        return TmoocResult.ok(dailyNote);
+        if (notes.size()>0) {
+            Map<Integer, Object> dailyNote = Maps.newHashMap();
+            notes.forEach(n -> {
+                if (n != null) {
+                    dailyNote.put(n.getWeekDay(), n);
+                }
+            });
+            Note note8 = getNote(notes);
+            dailyNote.put(8, note8);
+            return TmoocResult.ok(dailyNote);
+        }
+        return TmoocResult.error("你还没有写周报");
     }
 
     /**

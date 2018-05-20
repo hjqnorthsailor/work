@@ -1,5 +1,4 @@
 package com.tmooc.work.controller;
-import com.github.abel533.echarts.data.Data;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.Tool;
@@ -7,23 +6,30 @@ import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.Option;
 import com.github.abel533.echarts.series.Bar;
 import com.github.abel533.echarts.series.Gauge;
-import com.github.abel533.echarts.series.gauge.Detail;
+import com.github.abel533.echarts.series.Line;
+import com.github.abel533.echarts.series.Series;
+import com.google.common.collect.Lists;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.enums.StudentStage;
+import com.tmooc.work.service.ReachService;
 import com.tmooc.work.service.StudentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 /**
  * @author northsailor
  */
 @RestController
-public class EChartsController {
+@Slf4j
+public class EchartsController {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private ReachService reachService;
     @RequestMapping("/echarts/bar")
     public TmoocResult getBar(){
         final List<Map<String, Object>> studentsInfo = studentService.findStudentsInfo();
@@ -85,6 +91,42 @@ public class EChartsController {
         //设置数据
         option.series(bar);
         return TmoocResult.ok(option);
+    }
+    @RequestMapping("/echarts/lines")
+    public TmoocResult getLines(){
+        Option option=new Option();
+        option.title("QQ群达到率");
+        option.tooltip().trigger(Trigger.axis);
+        List<Map<String, Object>> GroupReaches = reachService.findAllGroupReaches();
+        Set<String> dates=new HashSet<>();
+        GroupReaches.forEach(g->dates.add(g.get("date").toString()));
+        List<String> dateList=new ArrayList<>(dates);
+        Collections.sort(dateList, (o1, o2) -> {
+            if(Double.parseDouble(o1)>Double.parseDouble(o2)){
+                return 1;
+            }
+            return -1;
+        });
+        log.info(Arrays.toString(dateList.toArray()));
+        option.xAxis(new CategoryAxis().boundaryGap(false).data(dateList.toArray()));
+        option.yAxis(new ValueAxis());
+        Set<String> qunNames=new HashSet<>();
+        GroupReaches.forEach(g->qunNames.add(g.get("qunName").toString()));
+        List<Series> seriesList=Lists.newArrayList();
+        qunNames.forEach(q->{
+            option.legend(q);
+            Line line=new Line(q);
+            line.smooth(true).itemStyle().normal().lineStyle();
+            GroupReaches.forEach(g->{
+                if (g.containsKey(q+g.get("date"))){
+                line.data(g.get(q+g.get("date")));
+                }
+            });
+                seriesList.add(line);
+            });
+        option.series(seriesList);
+        return TmoocResult.ok(option);
+
     }
 
 }

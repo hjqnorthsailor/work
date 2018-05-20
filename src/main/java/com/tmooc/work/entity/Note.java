@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.Entity;
 
+/**
+ * @author northsailor
+ */
 @Getter
 @Setter
 @Entity
@@ -22,5 +25,4 @@ public class Note extends BaseEntity{
     private Integer inputTitle=0;
     private Integer forward=0;
     private Integer other=0;
-    private String emailPwd;
 }
