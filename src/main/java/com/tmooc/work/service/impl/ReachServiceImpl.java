@@ -23,7 +23,7 @@ public class ReachServiceImpl implements ReachService {
         String sql="SELECT s.`qun_name` AS qunName,COUNT(s.`studentqq`) AS countNum,AVG(h.`percent`) AS rate" +
                 " FROM student s JOIN reach_rate h" +
                 " ON s.`studentqq`=h.`qq`" +
-                " WHERE h.`month`="+month+" AND h.`week`="+week+"" +
+                " WHERE h.`month`="+month+" AND h.`week`="+week+
                 " GROUP BY s.`qun_name`";
         Query query = entityManager.createNativeQuery(sql);
         final List<Reach> resultList = query.unwrap(SQLQuery.class)

@@ -12,8 +12,8 @@ public enum StudentMark {
     UNRELATEDANDUNLOGIN(3,"为联系到并且长时间未登录"),
     EXPIRE(4,"账户过期"),
     TUOCHAN(5,"脱产"),
-    ERROR(5,"查询不到"),
-    OTHER(6,"其他(试听、休学)");
+    ERROR(6,"查询不到"),
+    OTHER(7,"其他(试听、休学)");
     @Getter
     @Setter
     private Integer mark;

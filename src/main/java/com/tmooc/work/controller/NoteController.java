@@ -1,5 +1,6 @@
 package com.tmooc.work.controller;
 
+import com.google.common.collect.Maps;
 import com.tmooc.work.common.TmoocResult;
 import com.tmooc.work.config.MyProperties;
 import com.tmooc.work.entity.Note;
@@ -44,8 +45,8 @@ public class NoteController {
     @RequestMapping("findAll")
     public TmoocResult findAll(Note note,User user){
         final List<Note> notes = noteService.findAll(note,user);
-        Map<Integer,Object> dailyNote=new HashMap<>();
-        notes.forEach(n->{if (n!=null)dailyNote.put(n.getWeekDay(),n);});
+        Map<Integer,Object> dailyNote=Maps.newHashMap();
+        notes.forEach(n->{if(n!=null){dailyNote.put(n.getWeekDay(),n);}});
         Note note8 = getNote(notes);
         dailyNote.put(8,note8);
         return TmoocResult.ok(dailyNote);
@@ -64,7 +65,8 @@ public class NoteController {
         System.out.println(request.getRequest().getContextPath());
         String templatePath=myProperties.getExcelTemplatePath()+"note.xlsx";
         String fileName=user.getUsername()+"_"+note.getMonth()+"_"+note.getWeek()+".xlsx";
-        String userNotePath=myProperties.getExcelTemplatePath()+user.getUsername();//设置临时文件存储在/用户文件夹下
+        //设置临时文件存储在/用户文件夹下
+        String userNotePath=myProperties.getExcelTemplatePath()+user.getUsername();
         File file=new File(userNotePath);
         if (!file.exists()){
             file.mkdir();

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 自定义响应结构
+ * @author northsailor
  */
 public class TmoocResult implements Serializable {
 

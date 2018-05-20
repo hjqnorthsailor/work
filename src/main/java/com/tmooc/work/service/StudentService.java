@@ -12,8 +12,10 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 public interface StudentService {
+    List<Student> findAll();
     /** 分页查询所有学生**/
     Page<Student> findAll(PageRequest request);
     Page<Student> findAll(Example<Student> studentExample,PageRequest request);
@@ -31,4 +33,7 @@ public interface StudentService {
     Page<Student> findAll(DataTablesRequest request, Pageable pageable);
     /** 使用ExampleMtcher构建多条件分页查询**/
     DataTablesResponse<Student> findAll(DataTablesRequest dataTablesRequest) throws ParseException;
+    List<Map<String,Object>> findStudentsInfo();
+    Integer countAllByStage(Integer stage);
+    List<Map<String,Object>> findStudentsByMark();
 }

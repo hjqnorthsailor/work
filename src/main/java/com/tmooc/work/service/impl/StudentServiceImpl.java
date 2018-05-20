@@ -1,38 +1,59 @@
 package com.tmooc.work.service.impl;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.tmooc.work.DTO.DataTablesRequest;
 import com.tmooc.work.DTO.DataTablesResponse;
+import com.tmooc.work.VO.MarkVO;
+import com.tmooc.work.VO.StudentChartVO;
 import com.tmooc.work.dao.StudentDao;
 import com.tmooc.work.entity.Student;
 import com.tmooc.work.entity.User;
 import com.tmooc.work.enums.StudentMark;
 import com.tmooc.work.enums.StudentStage;
+import com.tmooc.work.excel.Reach;
 import com.tmooc.work.service.StudentService;
 import com.tmooc.work.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * @author northsailor
+ */
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDao studentDao;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public Page<Student> findAll(Example<Student> studentExample, PageRequest request) {
         return studentDao.findAll(studentExample, request);
+    }
+
+    @Override
+    public List<Student> findAll() {
+        return studentDao.findAll();
     }
 
     @Override
@@ -159,13 +180,16 @@ public class StudentServiceImpl implements StudentService {
          * 查询匹配器
          */
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("user", m -> m.contains())//模糊匹配
-                .withMatcher("studentQQ", m -> m.contains())//精确匹配
+                //模糊匹配
+                .withMatcher("user", m -> m.contains())
+                .withMatcher("studentQQ", m -> m.contains())
+                //精确匹配
                 .withMatcher("qunName", m -> m.contains())
                 .withMatcher("qunNum", m -> m.exact())
                 .withMatcher("stage", m -> m.exact())
                 .withMatcher("mark", m -> m.exact());
-        Example<Student> studentExample = Example.of(student, matcher);//JPA Example查询
+        //JPA Example查询
+        Example<Student> studentExample = Example.of(student, matcher);
         final Page<Student> studentList = findAll(studentExample, pageRequest);
         List<Student> students;
         if (StringUtils.isNotEmpty(startTime) && StringUtils.isNotEmpty(endTime)) {
@@ -182,6 +206,65 @@ public class StudentServiceImpl implements StudentService {
         long total = studentList.getTotalElements();
         return new DataTablesResponse(dataTablesRequest.getDraw(), total, total, "", students);
     }
+
+    @Override
+    public List<Map<String, Object>> findStudentsInfo() {
+        String sql="SELECT s.`qun_name` AS qunName,COUNT(s.`studentqq`) AS countNum" +
+                " FROM student s" +
+                " WHERE s.`stage`=1" +
+                " GROUP BY s.`qun_name`";
+        Query query = entityManager.createNativeQuery(sql);
+        final List<StudentChartVO> list = query.unwrap(SQLQuery.class)
+                // 这里是设置字段的数据类型，有几点注意，首先这里的字段名要和目标实体的字段名相同，然后 sql 语句中的名称（别名）得与实体的相同
+                .addScalar("qunName", StandardBasicTypes.STRING)
+                .addScalar("countNum", StandardBasicTypes.INTEGER)
+                .setResultTransformer(Transformers.aliasToBean(StudentChartVO.class)).list();
+        List<Map<String, Object>> resultList=Lists.newArrayList();
+        list.forEach(q->{
+            Map<String,Object> qunMap=Maps.newHashMap();
+            qunMap.put("qunName",q.getQunName());
+            qunMap.put("countNum",q.getCountNum());
+           resultList.add(qunMap);
+        });
+        return resultList;
+    }
+
+    @Override
+    public Integer countAllByStage(Integer stage) {
+        return studentDao.countAllByStage(stage);
+    }
+
+    @Override
+    public List<Map<String, Object>> findStudentsByMark() {
+        String sql="SELECT COUNT(s.mark) as value,"+
+        " case s.mark"+
+        " WHEN 0 THEN '未跟进'"+
+        " WHEN 1 THEN  '正常'"+
+        " WHEN 2 THEN '未联系到'"+
+        " WHEN 3 THEN '长时间未登录'"+
+        " WHEN 4 THEN '已过期'"+
+        " WHEN 5 THEN '转脱产'"+
+        " WHEN 6 THEN '查询不到'"+
+        " WHEN 7 THEN '其他(试听/休学)'"+
+        " END AS mark"+
+        " FROM student AS s"+
+        " group by s.mark";
+        Query query = entityManager.createNativeQuery(sql);
+        final List<MarkVO> list = query.unwrap(SQLQuery.class)
+                // 这里是设置字段的数据类型，有几点注意，首先这里的字段名要和目标实体的字段名相同，然后 sql 语句中的名称（别名）得与实体的相同
+                .addScalar("mark", StandardBasicTypes.STRING)
+                .addScalar("value", StandardBasicTypes.INTEGER)
+                .setResultTransformer(Transformers.aliasToBean(MarkVO.class)).list();
+        List<Map<String, Object>> resultList=Lists.newArrayList();
+        list.forEach(q->{
+            Map<String,Object> markMap=Maps.newHashMap();
+            markMap.put("mark",q.getMark());
+            markMap.put("value",q.getValue());
+            resultList.add(markMap);
+        });
+        return resultList;
+    }
+
 
     /**
      * 拷贝参数(使用BeanUtils会拷贝空值过来，造成查询错误）

@@ -1,10 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.2/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
 <body>
 <div th:fragment="indexList">
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" height="800px"
-            src="https://datav.aliyun.com/share/d020f4e4f3e22675f4adfbcbe1032035"
-    ></iframe>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div>
+    <div class="pull-left" id="main" style="width:550px;height:400px;"></div>
+    <div class="pull-right" id="gauge" style="width:550px;height:400px;"></div>
+    </div>
+    <div>
+    <div class="pull-left" id="mark" style="width:550px;height:400px;"></div>
+    </div>
+    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/webjars/AdminLTE/2.4.2/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/echarts.min.js}"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        //查询
+        function loadBar() {
+            myChart.clear();
+            myChart.showLoading({text: '正在努力的读取数据中...'});
+            $.getJSON('/echarts/bar',function (data) {
+                if (data.status==200) {
+                    console.log(data.data);
+                    myChart.setOption(data.data,true);
+                    myChart.hideLoading();
+                } else {
+                    layer.alert('提示', data.msg);
+                }
+            });
+        }
+        // 基于准备好的dom，初始化echarts实例
+        var guageChart = echarts.init(document.getElementById('gauge'));
+        //查询
+        function loadGauge() {
+            guageChart.clear();
+            guageChart.showLoading({text: '正在努力的读取数据中...'});
+            $.getJSON('/echarts/gauge',function (data) {
+                if (data.status==200) {
+                    console.log(data.data);
+                    guageChart.setOption(data.data,true);
+                    guageChart.hideLoading();
+                } else {
+                    layer.alert('提示', data.msg);
+                }
+            });
+        }
+        // 基于准备好的dom，初始化echarts实例
+        var markChart = echarts.init(document.getElementById('mark'));
+        //查询
+        function loadMarkBar() {
+            markChart.clear();
+            markChart.showLoading({text: '正在努力的读取数据中...'});
+            $.getJSON('/echarts/markBar',function (data) {
+                if (data.status==200) {
+                    console.log(data.data);
+                    markChart.setOption(data.data,true);
+                    markChart.hideLoading();
+                } else {
+                    layer.alert('提示', data.msg);
+                }
+            });
+        }
+        //载入图表
+
+        loadBar();
+        loadGauge();
+        loadMarkBar();
+
+    </script>
 </div>
 </body>
 </html>
